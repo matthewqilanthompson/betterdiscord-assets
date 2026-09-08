@@ -38,7 +38,9 @@ Apply this pattern to every plugin that needs the Dispatcher.
 ## Performance Conventions (BD community canon + suite audits, 2026-07)
 
 > Full playbook for perf work + subagent dispatch template: [docs/PERF-CONVENTIONS.md](docs/PERF-CONVENTIONS.md)
-> (hard rules R1–R10, verification discipline, do-not-refix registry, risk grading).
+> (hard rules R1–R11, verification discipline, do-not-refix registry, risk grading). This CLAUDE.md
+> summary previously only covered R1/R3/R4/R5/R6/R9 — R7, R8, R10, and R11 are real, separately
+> important rules from that doc and are included below now too.
 
 - **Webpack module searches are resolved ONCE and cached** — at `start()` (Stealth pattern) or
   memoized in the shared acquirer (`shared/navigation.js`, `shared/discord-classes.js`,
@@ -59,6 +61,21 @@ Apply this pattern to every plugin that needs the Dispatcher.
   than aria/role-anchored DOM observation in this suite's history — keep observers.
 - **React:** memoize components in frequently-refreshing containers (FeedCard pattern); module-
   scope ref callbacks that close over nothing.
+- **R7 (timers):** every interval needs a `document.hidden` gate (unless it must run while hidden),
+  a self-stop/dirty-flag when idle, and an absolute catch-up ceiling if it processes elapsed time.
+- **R8 (IndexedDB partial tolerance):** per-item `request.onerror` must `preventDefault()` +
+  `stopPropagation()` or one bad record aborts the whole transaction; `onabort` handlers are the
+  rejection path and must never be removed; never `push(...spread)` with potentially >65k elements.
+  Measured: `abe66c3` — a silently-swallowed `request.onerror` counted a real IDB read failure as
+  "not found," producing silent 0-XP grants; `a917abc` — a bare `catch (_)` swallowed an IDB stream
+  error into an indistinguishable false "0 shadows" state. Both fixed the same day, same subsystem.
+- **R10 (fonts/CSS):** never `var(--font-primary)` (theme-poisoned); every `addStyle` needs a
+  symmetric `removeStyle`; shared CSS refcounts on `window.__SL_*`. Measured: `fff8151` — a plugin
+  injected a raw `@font-face <style>` node directly instead of through `BdApi.DOM.addStyle`, so
+  `removeStyle` couldn't reach it and the font leaked past `stop()` — contrary to BD's own documented
+  rule that `stop()` reverses every modification.
+- **R11 (Patcher safety):** every Patcher patch must wrap its body in `try...catch` and still return
+  the ORIGINAL return value, per BD's own React docs.
 
 ## BD Constraints
 
