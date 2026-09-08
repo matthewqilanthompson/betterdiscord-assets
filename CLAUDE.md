@@ -69,11 +69,12 @@ Apply this pattern to every plugin that needs the Dispatcher.
   Measured: `abe66c3` — a silently-swallowed `request.onerror` counted a real IDB read failure as
   "not found," producing silent 0-XP grants; `a917abc` — a bare `catch (_)` swallowed an IDB stream
   error into an indistinguishable false "0 shadows" state. Both fixed the same day, same subsystem.
+  **DKB**: `learnings/patterns/discord/bd-idb-bounded-queries-at-scale.md`.
 - **R10 (fonts/CSS):** never `var(--font-primary)` (theme-poisoned); every `addStyle` needs a
   symmetric `removeStyle`; shared CSS refcounts on `window.__SL_*`. Measured: `fff8151` — a plugin
   injected a raw `@font-face <style>` node directly instead of through `BdApi.DOM.addStyle`, so
   `removeStyle` couldn't reach it and the font leaked past `stop()` — contrary to BD's own documented
-  rule that `stop()` reverses every modification.
+  rule that `stop()` reverses every modification. **DKB**: `learnings/patterns/discord/bd-css-var-font-primary-poisoned.md`.
 - **R11 (Patcher safety):** every Patcher patch must wrap its body in `try...catch` and still return
   the ORIGINAL return value, per BD's own React docs.
 
@@ -85,7 +86,11 @@ Output must be a single `.plugin.js` file. `BdApi` is global (no import). Node b
 
 1. **Edit** source in `src/<PluginName>/` (migrated) or `plugins/<Name>.plugin.js` (not yet migrated)
 2. **Build** with `npm run build:plugin <PluginName>` or `npm run watch` for live dev
-3. **Test** — Ctrl+R in Discord to reload; symlink picks up output automatically
+3. **Test** — Ctrl+R in Discord to reload; symlink picks up output automatically. A dangling/broken
+   symlink silently empties BD's entire plugin list (no plugins load at all, not just this one) —
+   **DKB**: `learnings/bugs/betterdiscord/bd-dangling-symlink-kills-all-plugins.md`,
+   `learnings/bugs/betterdiscord/bd-plugins-stale-copy-vs-symlink.md` (a stale copy sitting next to
+   the symlink can shadow it and load old code instead).
 4. **Commit** the `src/` source (the `plugins/*.plugin.js` output is gitignored — it's built locally and the symlink feeds BD)
 5. **Settings panels**: `rgba(10, 10, 16, 0.98)` background, statistics + Debug Mode toggle only
 
