@@ -420,10 +420,10 @@ module.exports = {
         // gave almost nothing until ~5000 base stats, so the terminal Lv2000 reward
         // felt weak. Now the full set GUARANTEES a strong floor (+100% all stats) AND
         // keeps scaling — uncapped — as base stats climb, so it grows with the player.
-        // Effective (full set): +100% + (totalBase / 2000)*100% all stats, before the
+        // Effective (full set): +100% + (totalBase / 1000)*100% all stats, before the
         // title/shadow multipliers applied below. Per-piece proportional via setFraction.
         const SM_REGALIA_BASE = 1.0;      // +100% at full 10-piece set, before scaling
-        const SM_REGALIA_DIVISOR = 1000;  // additional fraction per point of total base stats, uncapped (grows twice as fast)
+        const SM_REGALIA_DIVISOR = 1000;  // additional fraction per point of total base stats, uncapped (5x the old 1/5000 rate)
         const setFraction = smPieces / 10;
         const setMultiplier = setFraction * (SM_REGALIA_BASE + totalBase / SM_REGALIA_DIVISOR);
         if (setMultiplier > 0) {
