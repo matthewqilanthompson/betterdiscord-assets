@@ -1506,24 +1506,38 @@ section[role="navigation"][class*="container_"] {
   border-width: 0 !important;
   box-shadow: none !important;
 }
-/* ...and neither does anything drawing it as a pseudo-element.
+/* The vertical seam at the sidebar / content boundary: covered.
 
-   The capture is what points here: hovering the line returns sidebarList_, NOT the
-   nav inside it, so the cursor is in the 49px strip ABOVE the nav's frame -- and
-   sidebarList_ carries no border of its own there. A drawn edge with no element to
-   own it is a ::before, the same shape as the white fill that survived four rounds
-   of chasing. The header's own bottom border measured oklab(... / 0.121569), a 12%
-   grey, so it was never the bright line. */
-section[role="navigation"][class*="container_"]::before,
-section[role="navigation"][class*="container_"]::after,
-div[class^="sidebarList_"]::before,
-div[class^="sidebarList_"]::after,
-div[class^="sidebar_"]::before,
-div[class^="sidebar_"]::after {
-  display: none !important;
-  content: none !important;
+   It runs down the left edge of the header bar, between the sidebar and the main
+   column, and nothing in this theme draws it -- there is no border-left or
+   border-right anywhere in the file, and none on page_, base_, content_ or sidebar_.
+   It is Discord's own divider, and it was not worth a seventh round of hunting for
+   which element owns it.
+
+   So the header bar paints over it: a black strip down its own left edge, tall as the
+   bar and wide enough to swallow a line sitting a few pixels OUTSIDE its left edge,
+   which is where it actually is: the strip runs from -8px to +6px across the seam.
+   pointer-events:none, so the bar stays fully clickable.
+
+   The bar's ::before is used, so the pseudo-element strip that used to live here is
+   gone -- it was written for the horizontal line and never had anything to do.
+   ══════════════════════════════════════════════════════════════════════════ */
+section[role="navigation"][class*="container_"] {
+  position: relative !important;
+  overflow: visible !important;
+}
+section[role="navigation"][class*="container_"]::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: -8px !important;
+  width: 14px !important;
+  background: var(--ut-black) !important;
   border: none !important;
-  background: none !important;
+  pointer-events: none !important;
+  z-index: 3 !important;
 }
 
 
