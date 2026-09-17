@@ -1528,6 +1528,44 @@ div[class^="sidebar_"]::after {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
+   The divider above the DM search: covered, not diagnosed.
+
+   Six attempts failed to name what draws it, and the captures are the reason. CSS
+   Picker on that line returns sidebarList_ three times running, and sidebarList_ has
+   no border, no background and no shadow -- exactly the contradiction in the DKB
+   entry computed-style-says-black-screen-says-white-is-a-pseudo-element: an inspector
+   reports elements, and whatever paints this is not one. Ruled out by measurement
+   along the way: the header's own bottom border (oklab(... / 0.121569), a 12% grey,
+   not white) and ::before/::after on the header, sidebar_ and sidebarList_.
+
+   So this paints over it instead. A 4px black band sits in the empty margin strip
+   directly ABOVE where the column frames begin -- it ends at --ut-toolbar-offset, so
+   the frames' own top edges are untouched and the three columns keep their shape.
+   pointer-events:none, so nothing becomes unclickable.
+
+   If the line survives this, it is AT or BELOW the offset, which means it is one of
+   the theme's own frame top edges and not a stray divider at all. That is a useful
+   answer too.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="base_"] > div[class^="content_"] {
+  position: relative !important;
+}
+div[class^="base_"] > div[class^="content_"]::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: calc(var(--ut-toolbar-offset) - 4px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 4px !important;
+  background: var(--ut-black) !important;
+  border: none !important;
+  pointer-events: none !important;
+  z-index: 3 !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
    The Quick Switcher (Cmd+K): one frame around the whole popout.
 
    Same shape as the Active Now popout -- Discord builds it as an input box and a
