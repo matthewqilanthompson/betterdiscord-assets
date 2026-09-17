@@ -277,13 +277,29 @@ li[class^="channel_"] [class*="selected_"] {
   background-color: transparent !important;
 }
 
-/* The scrollbar was the loudest thing on screen in red. It is furniture. */
-::-webkit-scrollbar-thumb {
-  background: var(--ut-grey) !important;
-  border-radius: var(--ut-radius) !important;
-  border: none !important;
+/* No scrollbars anywhere. Undertale has none -- nothing in the game admits to being
+   a scrolling viewport -- and once every panel is a flat black box with a white
+   frame, a grey rail down the inside edge is the only thing left that looks like
+   chrome.
+
+   display:none on the bar itself rather than width:0. Both hide it, but a zero-width
+   bar still occupies its slot in some of Discord's scroller layouts, which shows up
+   as a thin dead gutter inside the frame. Scrolling is untouched: the wheel, the
+   trackpad and keyboard paging all still work -- this hides the indicator, not the
+   overflow. scrollbar-width covers the standards property alongside the WebKit
+   pseudo-elements. */
+* {
+  scrollbar-width: none !important;
 }
-::-webkit-scrollbar-track { background: var(--ut-black) !important; }
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    §4  THE BATTLE BOX
