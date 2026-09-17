@@ -53,6 +53,18 @@ function parseHotkey(hotkey) {
  */
 function matchesHotkey(event, hotkey) {
   if (!event || !hotkey) return false;
+  /* A hotkey setting may list ALTERNATIVES, comma separated: "Ctrl+Alt+Y, Ctrl+Shift+Y".
+     Any one of them fires. This exists because a combination can be swallowed before it
+     ever reaches the page -- by the OS, by a remapper, or by the app itself -- and from
+     inside the plugin that is indistinguishable from a broken matcher. Listing two
+     removes the guesswork: if either arrives, the picker runs. */
+  if (String(hotkey).includes(",")) {
+    return String(hotkey)
+      .split(",")
+      .map((h) => h.trim())
+      .filter(Boolean)
+      .some((h) => matchesHotkey(event, h));
+  }
   const spec = parseHotkey(hotkey);
   if (!spec.key) return false;
   // Inclusive matching: required modifiers must be pressed,
