@@ -1061,10 +1061,18 @@ div[role="dialog"] div[class^="inner_"] div[class^="footer_"] button {
    game does it -- every menu option looks identical and the SOUL marks the choice, so
    nothing needs a louder button to say "this one".
    ══════════════════════════════════════════════════════════════════════════ */
+/* BOTH variants. A capture of two sibling buttons showed one at 2px/radius 0 and the
+   other still at 1px/radius 4px: the rule matched [class*="primary_"], and
+   "secondary_a22cb0" does not contain the substring "primary_". The outlined/secondary
+   look has to be named in its own right. */
 button[class*="lookFilled_"],
 button[class*="lookFilled_"] *,
+button[class*="lookOutlined_"],
+button[class*="lookOutlined_"] *,
 [class*="primary_"]:is(button, [role="button"]),
 [class*="primary_"]:is(button, [role="button"]) *,
+[class*="secondary_"]:is(button, [role="button"]),
+[class*="secondary_"]:is(button, [role="button"]) *,
 [class*="role_"]:is([class*="pill_"], [class*="chip_"]),
 div[class*="rolePill_"],
 div[class*="roleCircle_"] ~ * {
@@ -1077,20 +1085,28 @@ div[class*="roleCircle_"] ~ * {
 }
 /* The frame goes on the control, not on the label inside it. */
 button[class*="lookFilled_"],
+button[class*="lookOutlined_"],
 [class*="primary_"]:is(button, [role="button"]),
+[class*="secondary_"]:is(button, [role="button"]),
 [class*="rolePill_"] {
   border: var(--ut-line) solid var(--ut-white) !important;
 }
 button[class*="lookFilled_"] *,
-[class*="primary_"]:is(button, [role="button"]) * {
+button[class*="lookOutlined_"] *,
+[class*="primary_"]:is(button, [role="button"]) *,
+[class*="secondary_"]:is(button, [role="button"]) * {
   border: none !important;
   background: transparent !important;
 }
 /* Same hover as every other control in the theme. */
 button[class*="lookFilled_"]:hover,
 button[class*="lookFilled_"]:hover *,
+button[class*="lookOutlined_"]:hover,
+button[class*="lookOutlined_"]:hover *,
 [class*="primary_"]:is(button, [role="button"]):hover,
-[class*="primary_"]:is(button, [role="button"]):hover * {
+[class*="primary_"]:is(button, [role="button"]):hover *,
+[class*="secondary_"]:is(button, [role="button"]):hover,
+[class*="secondary_"]:is(button, [role="button"]):hover * {
   color: var(--ut-hover) !important;
   border-color: var(--ut-hover) !important;
   background: var(--ut-black) !important;
