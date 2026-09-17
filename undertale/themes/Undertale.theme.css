@@ -1315,3 +1315,65 @@ div[class*="barBase_"] button * {
   border: none !important;
   box-shadow: none !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Search boxes, and the popout a search opens.
+
+   The toolbar search measured as background oklab(0 0 0 / 0.121569) with a 1px border
+   at 20% alpha -- 12% black over whatever is behind it, which is why it read as
+   translucent rather than as a field. Written for searchBar_ generally so every search
+   box matches: the toolbar one, the DM one, and the Friends one.
+
+   The popout could not be captured, because the picker cannot stay active while a
+   combobox popup is open. So it is covered by role instead of by class:
+   role="listbox" is what a combobox's popup is, and autocomplete_/searchPopout_ catch
+   Discord's own naming. Each is inert if it does not match, and the menu rules above
+   already cover role="menu".
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class*="searchBar_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+/* The editor inside owns no box of its own. */
+div[class*="searchBar_"] div[role="combobox"],
+div[class*="searchBar_"] div[class*="editor_"],
+div[class*="searchBar_"] input {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+div[class*="searchBar_"] div[class*="icon_"] {
+  background: transparent !important;
+  color: var(--ut-white) !important;
+}
+
+/* The results/autocomplete popout gets the same body and frame as a context menu. */
+div[role="listbox"],
+div[class*="autocomplete_" i],
+div[class*="searchPopout_" i],
+div[class*="resultsGroup_" i] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  font-family: var(--ut-font) !important;
+}
+/* An option marks itself in yellow, like every other row in the theme. */
+div[role="listbox"] [role="option"]:hover,
+div[role="listbox"] [role="option"]:hover *,
+div[role="listbox"] [role="option"][aria-selected="true"],
+div[role="listbox"] [role="option"][aria-selected="true"] * {
+  background: transparent !important;
+  color: var(--ut-hover) !important;
+}
