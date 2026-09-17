@@ -1790,6 +1790,66 @@ div[class^="switchIndicator_"][class*="checked_"]:not(#\9):not(#\8)::after {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   BetterDiscord's own toggles, same shape as Discord's.
+
+   A different component entirely -- .bd-switch wrapping .bd-switch-body, checked
+   marked by .bd-switch-checked on the wrapper, and the on-state ships as flat blue
+   (rgb(62,130,229)), the last saturated colour left in the settings modal.
+
+   The same :not(#\9) lift is needed for the same measured reason: the popup-shell
+   flatten rule reached 315 elements in this capture, bd-addon-title among them, so
+   BetterDiscord's settings sit inside the chain that zeroes borders.
+
+   The knob is drawn as ::after on the body, so whatever BD draws there is replaced
+   rather than fought with.
+   ══════════════════════════════════════════════════════════════════════════ */
+.bd-switch:not(#\9):not(#\8) {
+  background: transparent !important;
+  outline: none !important;
+}
+.bd-switch:not(#\9):not(#\8) .bd-switch-body {
+  position: relative !important;
+  box-sizing: border-box !important;
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+.bd-switch:not(#\9):not(#\8) .bd-switch-body::after,
+.bd-switch:not(#\9):not(#\8) .bd-switch-body::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 2px !important;
+  bottom: 2px !important;
+  left: 2px !important;
+  right: auto !important;
+  width: 14px !important;
+  height: auto !important;
+  background: var(--ut-white) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: none !important;
+}
+/* Only ::after draws the knob; ::before would be a second one. */
+.bd-switch:not(#\9):not(#\8) .bd-switch-body::before {
+  display: none !important;
+}
+.bd-switch-checked:not(#\9):not(#\8) .bd-switch-body {
+  border-color: var(--ut-hover) !important;
+}
+.bd-switch-checked:not(#\9):not(#\8) .bd-switch-body::after {
+  left: auto !important;
+  right: 2px !important;
+  background: var(--ut-hover) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    User Settings: the sidebar, the content, and the content header.
 
    All three captures still computed gg sans and Discord's own greys, so this whole
