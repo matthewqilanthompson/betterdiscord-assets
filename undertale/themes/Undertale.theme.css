@@ -114,7 +114,6 @@
    3. PREFER class^= OVER class*=. It uses prefix matching 882 times against 213,
       because `*=` catches unintended elements that merely contain the substring.
    ══════════════════════════════════════════════════════════════════════════ */
-nav[aria-label="Servers sidebar"],
 nav[aria-label="Private channels"],
 div[aria-label="Channels"],
 section[aria-label="User status and settings"],
@@ -156,6 +155,32 @@ nav[aria-label="Servers sidebar"] button {
   color: var(--ut-white) !important;
   fill: var(--ut-white) !important;
   background: transparent !important;
+}
+
+/* ── The rail is still VERTICAL, and that explains all three dock problems ──
+   CSS Picker on the nav: width 80px, height 1720px, position absolute. The
+   HorizontalServerList imports TRANSFORM that tall rail into the bottom dock; the
+   element itself never becomes horizontal. So:
+
+   - A 2px border wrapped an 80x1720 box, which after the transform is the long
+     white lines running across the dock. The border is removed above: HSL owns
+     this element's geometry and the theme should not fight it.
+   - unreadMentionsIndicatorTop_/Bottom_ are furniture for a tall rail -- full-width
+     blocks pinned to its ends. Un-clipping them (the heart fix) let them render at
+     natural size, which is the big red slabs at the dock's left and right. They
+     have nowhere sensible to go in a horizontal dock, so they are hidden here.
+     Mentions are still shown by the badge on the server icon itself.
+   - Discord's own rule masks the rail with linear-gradient(black, transparent) so
+     it fades out at the bottom. Transformed into a dock, that fade eats the server
+     icons -- which is why the servers "don't show up correctly". */
+nav[aria-label="Servers sidebar"] {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+  border: none !important;
+}
+nav[aria-label="Servers sidebar"] div[class^="unreadMentionsIndicatorTop"],
+nav[aria-label="Servers sidebar"] div[class^="unreadMentionsIndicatorBottom"] {
+  display: none !important;
 }
 
 /* Selection.
@@ -237,11 +262,9 @@ div[class^="numberBadge_"], div[class^="mentionsBadge_"] {
    shape: a heart is for a count, an arrow is for a direction. */
 div[class^="unreadMentionsIndicatorTop"],
 div[class^="unreadMentionsIndicatorBottom"] {
-  clip-path: none !important;
+  clip-path: none !important;   /* never the SOUL heart: a heart is a count, these are a direction */
   background: var(--ut-soul) !important;
   border-radius: var(--ut-radius) !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
