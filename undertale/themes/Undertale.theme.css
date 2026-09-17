@@ -302,3 +302,35 @@ div[class^="unread_"]::before, div[class^="unreadMentionsBar_"] {
   background: var(--ut-save) !important;
   border-radius: var(--ut-radius) !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Chrome that is not Undertale: the title bar and ClearVision's watermark.
+
+   CSS Picker on the help icon: div[class^="trailing_"] sits in div[class^="bar_"],
+   and Discord's own rule names ".trailing_c38106, .winButtons_c38106" -- same
+   module hash, so bar_/trailing_/winButtons_ are all one title-bar module. The
+   "ClearVision 7.0.1" badge is drawn inside that same bar, so hiding the bar
+   takes the watermark with it.
+
+   The prefix "bar_" alone is too common to trust on its own (a progress bar
+   would match), so it is anchored to its parent, exactly as the picker reported
+   the chain: bar_ -> base_ -> container_.
+
+   NOTE: this removes the macOS traffic lights along with everything else in the
+   strip. Cmd+W / Cmd+M / Cmd+Q still work. To keep the window buttons and drop
+   only the rest, replace the rule below with the two commented lines under it.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="base_"] > div[class^="bar_"] {
+  display: none !important;
+}
+
+/* Keep-the-traffic-lights variant -- swap for the rule above if you want them back:
+div[class^="base_"] > div[class^="bar_"] > div[class^="trailing_"],
+div[class^="base_"] > div[class^="bar_"] > div[class^="leading_"] { display: none !important; }
+*/
+
+/* The help + link icons, hidden in their own right so they stay gone even if the
+   title bar is ever shown again. */
+div[class^="bar_"] div[class^="trailing_"] {
+  display: none !important;
+}
