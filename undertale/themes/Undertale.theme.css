@@ -828,7 +828,20 @@ div[class*="guildBoost" i],
    ══════════════════════════════════════════════════════════════════════════ */
 [class*="header_"]::before, [class*="header_"]::after,
 [class*="headerText_"]::before, [class*="headerText_"]::after,
-[class*="sectionLabel_"]::before, [class*="sectionLabel_"]::after {
+[class*="sectionLabel_"]::before, [class*="sectionLabel_"]::after,
+/* The category header's own class is name_, NOT any of the three above -- those are
+   ClearVision's other decorated headers. Found by listing every pseudo-element in its
+   stylesheet carrying flex-grow, which is the signature that stretches a dash across a
+   row. Scoped to the two sidebars: "name_" is a common stem and a bare match would
+   reach usernames. */
+nav[aria-label="Private channels"] [class*="name_"]::before,
+nav[aria-label="Private channels"] [class*="name_"]::after,
+ul[aria-label="Channels"] [class*="name_"]::before,
+ul[aria-label="Channels"] [class*="name_"]::after,
+li[class*="containerDefault_"] [class*="name_"]::before,
+li[class*="containerDefault_"] [class*="name_"]::after,
+[class*="collapsed_"] [class*="name_"]::before,
+[class*="collapsed_"] [class*="name_"]::after {
   content: none !important;
   display: none !important;
   background: none !important;
