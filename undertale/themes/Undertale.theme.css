@@ -106,6 +106,16 @@
      -selected goes too: a selected row is drawn as a battle box (black fill, white
      outline) further down, so Discord's own fill underneath it is just a second,
      conflicting highlight. */
+  /* Discord's interactive-row pair, named by CSS Picker on the Friends button:
+       .selected_f88cfd                        { background: var(--interactive-background-selected) }
+       .interactive__972a0:hover               { background: var(--interactive-background-hover) }
+       .interactive__972a0:active, .interactiveSelected__972a0 { background: var(--interactive-background-selected) }
+     Same lever as the modifier pair below, different family -- rows in the DM and
+     channel lists use these rather than --background-modifier-*. */
+  --interactive-background-hover:    transparent;
+  --interactive-background-selected: transparent;
+  --interactive-background-active:   transparent;
+
   --background-modifier-hover:    transparent;
   --background-modifier-selected: transparent;
   --background-modifier-active:   transparent;
@@ -485,5 +495,34 @@ div[role="list"] div[role="listitem"][class*="active" i],
 div[role="list"] div[role="listitem"][class*="active" i] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
 div[role="list"] div[role="listitem"]:focus-within,
 div[role="list"] div[role="listitem"]:focus-within *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]) {
+  color: var(--ut-hover) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   No outline box on a selected LIST ROW.
+
+   The battle box (black fill, white 2px outline) is right for a menu panel and
+   wrong for a row in a list: across the width of a DM entry it reads as exactly
+   the "highlight accent box across" this theme was asked to remove. CSS Picker on
+   the selected Friends button showed the white the user was pointing at was this
+   border, not a stray fill -- computed border 2px solid rgb(255,255,255), on a
+   background already black.
+
+   A selected row is marked the same way a hovered one is: yellow text, nothing
+   drawn around it. The battle box survives everywhere else the rule reaches.
+   ══════════════════════════════════════════════════════════════════════════ */
+ul[aria-label="Direct Messages"] [class*="selected_"],
+ul[aria-label="Direct Messages"] [class*="interactiveSelected_"],
+nav[aria-label="Private channels"] [class*="selected_"],
+nav[aria-label="Private channels"] [class*="interactiveSelected_"],
+div[aria-label="Channels"] [class*="selected_"],
+div[aria-label="Channels"] [class*="interactiveSelected_"],
+li[role="listitem"] [class*="selected_"],
+li[role="listitem"] [class*="interactiveSelected_"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
   color: var(--ut-hover) !important;
 }
