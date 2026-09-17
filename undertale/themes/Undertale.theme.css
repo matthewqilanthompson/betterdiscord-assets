@@ -256,14 +256,24 @@ li[class^="channel_"] [class*="selected_"] {
   background: var(--ut-black) !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
-  color: var(--ut-white) !important;
+  color: var(--ut-hover) !important;
   background-image: none !important;
 }
 
-/* Whatever CV paints a selected label with, it must not be the fill colour. */
+/* Whatever CV paints a selected label with, it must not be the fill colour.
+   YELLOW, not white. This said white for four rounds of chasing one highlight: a
+   selected row would come out yellow and its children white, because a row's text
+   lives in descendants and this rule owns all of them. Every fix was a more
+   specific selector layered on top, and the next surface always fell through the
+   gap between them.
+
+   Selection and hover mean the same thing in this theme -- "look here" -- so they
+   are the same colour, and there is nothing left to race. White survives where it
+   belongs, on the battle box's border. */
 [class*="selected_"]:not(nav[aria-label="Servers sidebar"] *) *,
 [class*="modeSelected_"]:not(nav[aria-label="Servers sidebar"] *) * {
-  color: var(--ut-white) !important;
+  color: var(--ut-hover) !important;
+  fill: var(--ut-hover) !important;
   background-color: transparent !important;
 }
 
