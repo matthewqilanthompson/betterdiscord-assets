@@ -1820,9 +1820,15 @@ div[class^="switchIndicator_"][class*="checked_"]:not(#\9):not(#\8)::after {
   color: var(--ut-white) !important;
   font-family: var(--ut-font) !important;
 }
-.bd-addon-card button,
-.bd-addon-footer button,
-.bd-button {
+/* :not() on the BLANK variants, and this is the same mistake as "View Full Bio":
+   a button that ships deliberately boxless, given a box by a rule written for the
+   boxed ones. BetterDiscord says so in the class list -- bd-button-blank and
+   bd-button-color-transparent both zero the border in BD's own stylesheet -- so the
+   exclusion follows what the component declares about ITSELF rather than a hash or a
+   guess about where it sits. */
+.bd-addon-card button:not(.bd-button-blank):not(.bd-button-color-transparent),
+.bd-addon-footer button:not(.bd-button-blank):not(.bd-button-color-transparent),
+.bd-button:not(.bd-button-blank):not(.bd-button-color-transparent) {
   background: var(--ut-black) !important;
   background-image: none !important;
   border: var(--ut-line) solid var(--ut-white) !important;
@@ -1836,12 +1842,28 @@ div[class^="switchIndicator_"][class*="checked_"]:not(#\9):not(#\8)::after {
   color: var(--ut-white) !important;
   fill: currentcolor !important;
 }
-.bd-addon-card button:hover,
-.bd-button:hover,
-.bd-addon-card button:hover svg,
-.bd-button:hover svg {
+.bd-addon-card button:not(.bd-button-blank):hover,
+.bd-button:not(.bd-button-blank):hover,
+.bd-addon-card button:not(.bd-button-blank):hover svg,
+.bd-button:not(.bd-button-blank):hover svg {
   background: var(--ut-black) !important;
   border-color: var(--ut-hover) !important;
+  color: var(--ut-hover) !important;
+}
+/* Blank buttons stay blank, and mark themselves the way every other icon does. */
+.bd-button-blank,
+.bd-button-color-transparent {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+.bd-button-blank:hover,
+.bd-button-blank:hover svg,
+.bd-button-color-transparent:hover,
+.bd-button-color-transparent:hover svg {
+  background: transparent !important;
   color: var(--ut-hover) !important;
 }
 /* Delete looks like every other button AT REST, and shows the SOUL's red only on
