@@ -404,3 +404,27 @@ div[role="tab"]:hover span {
 div[role="list"] div[role="listitem"] [aria-label="Message" i] {
   display: none !important;
 }
+
+/* Discord's own hairline between friends rows: a faint oklab grey, the only
+   colour on screen from outside this palette. Made invisible rather than
+   display:none so the row rhythm is untouched -- the divider is a flex item and
+   collapsing it would reflow the list. */
+div[role="list"] div[class*="divider_"] {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+/* The DM sidebar's storefront entries: Nitro Home, Shop and Quests. Friends is
+   deliberately kept.
+
+   Matched by href, which is what each entry MEANS, rather than by a hashed class
+   or by visible text (which CSS cannot select on anyway). Friends lives at
+   /channels/@me, so no rule here can reach it even if Discord moves the others
+   around -- the one item that must survive is safe by construction, not by
+   careful ordering. Prefix matches so /shop and /shop/something both go. */
+nav[aria-label="Private channels"] a[href^="/store"],
+nav[aria-label="Private channels"] a[href^="/shop"],
+nav[aria-label="Private channels"] a[href^="/quests"],
+nav[aria-label="Private channels"] a[href^="/nitro"] {
+  display: none !important;
+}
