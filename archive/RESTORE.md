@@ -5,9 +5,15 @@ theme. Nothing was deleted. Three archives, all tracked in git, all reversible.
 
 The single most useful fact, which was NOT obvious when archiving and makes most of this easier:
 
-> **Every archived plugin still has its `src/` directory.** Only the built `*.plugin.js` files were moved. So a
-> restore is usually `npm run build`, not a file shuffle — and the builds in the archive are a fallback, not the
-> only copy.
+> **Every archived plugin still has its `src/` directory, with ONE exception.** Only the built `*.plugin.js`
+> files were moved, so a restore is usually `npm run build` rather than a file shuffle, and the builds in the
+> archive are a fallback rather than the only copy.
+>
+> The exception is **`SoloLevelingTheme`**, whose source is in this archive at `src/SoloLevelingTheme/`. It
+> `@import`s `../../themes/variables/*.css`, so it cannot build while the theme is archived — it broke
+> `npm run build` outright until its source was moved here too. **Restore the theme FIRST** (below), put its
+> source back with `git mv archive/solo-leveling-plugins-2026-09-17/src/SoloLevelingTheme src/`, and only then
+> build.
 
 ---
 
