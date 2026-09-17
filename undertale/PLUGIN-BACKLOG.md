@@ -204,6 +204,13 @@ Papyrus's dialogue does in `sans-companion` / `pixel-home`.
 4. Respect `prefers-reduced-motion`, and skip messages already on screen at load: typing
    out a hundred-message backlog on every channel switch would be unusable.
 
-**Open question before building:** should it animate only messages that arrive WHILE you
-are watching (the companion's behaviour), or also on channel switch? The first is far
-less annoying and much cheaper.
+**DECIDED 2026-09-17 by the user: only messages that arrive WHILE WATCHING.** Not on
+channel switch, not on scrollback, not on reconnect. This matches the companion apps and
+settles the cheapest version:
+
+- The observer skips everything present at mount, and every node added within the first
+  ~500ms of a channel switch (Discord renders the backlog as additions, so "new node" is
+  not the same as "new message").
+- A message whose timestamp is older than page load is never animated.
+- If the tab is hidden (`document.hidden`), messages land instantly -- typing out what
+  arrived while you were in another app is the failure mode this decision avoids.
