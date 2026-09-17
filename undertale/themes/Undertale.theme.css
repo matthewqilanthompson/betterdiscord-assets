@@ -212,7 +212,13 @@ nav[aria-label="Servers sidebar"] div[class^="unreadMentionsIndicatorBottom"] {
 
    Undertale highlights a menu item by putting the SOUL beside it, not by
    inverting it, so black fill with a white outline is the faithful answer. */
-[class*="selected_"], [class*="modeSelected_"],
+/* Scoped out of the servers rail. A server/home button carries a "selected_"
+   class too, so the bare selector above dressed it as a menu item: black fill,
+   white outline, and background-image:none, which erased the home logo and left
+   an empty white square in the dock. The rail marks selection with its own pill;
+   it is not a menu, so the rule simply must not reach inside the nav. */
+[class*="selected_"]:not(nav[aria-label="Servers sidebar"] *),
+[class*="modeSelected_"]:not(nav[aria-label="Servers sidebar"] *),
 nav[aria-label="Private channels"] [class*="selected_"],
 div[class^="tabBar_"] [class*="selected_"],
 div[class^="topPill_"] [class*="selected_"],
@@ -225,7 +231,8 @@ li[class^="channel_"] [class*="selected_"] {
 }
 
 /* Whatever CV paints a selected label with, it must not be the fill colour. */
-[class*="selected_"] *, [class*="modeSelected_"] * {
+[class*="selected_"]:not(nav[aria-label="Servers sidebar"] *) *,
+[class*="modeSelected_"]:not(nav[aria-label="Servers sidebar"] *) * {
   color: var(--ut-white) !important;
   background-color: transparent !important;
 }
