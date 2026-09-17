@@ -95,6 +95,21 @@
      colour in the palette on every chrome element at once -- seen on screen, the
      result reads as ClearVision-in-red rather than Undertale. White is the UI
      colour in this game; red is the SOUL and appears on mentions, nowhere else. */
+  /* Discord's OWN row-highlight variables, and the reason chasing selectors kept
+     missing surfaces. ClearVision neither defines nor uses --background-modifier-hover
+     (checked: 0 occurrences in its main.css), so the filled bar under a hovered row is
+     Discord painting it directly. Every list that looked "not covered yet" -- the
+     Friends conversation column among them -- was the same variable on a different
+     element. Killing it here removes the fill everywhere at once, and the yellow-text
+     rules further down supply the highlight instead.
+
+     -selected goes too: a selected row is drawn as a battle box (black fill, white
+     outline) further down, so Discord's own fill underneath it is just a second,
+     conflicting highlight. */
+  --background-modifier-hover:    transparent;
+  --background-modifier-selected: transparent;
+  --background-modifier-active:   transparent;
+
   --main-color:      var(--ut-white);
   --hover-color:     var(--ut-grey);
   --success-color:   var(--ut-save);
