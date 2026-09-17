@@ -86,28 +86,44 @@
 
 /* ══════════════════════════════════════════════════════════════════════════════
    §3b  PANEL FRAMES
-   The battle box only framed the chat, so every other screen -- Friends, search,
-   settings -- kept ClearVision's borderless look and the theme read as a recolour.
-   Undertale draws EVERY region as a box in one weight of white line, so the
-   frame belongs on the panels, not just the message area.
+   Undertale draws every region as a box in one weight of white line, so the
+   frame belongs on the panels, not only the message area.
+
+   Three things learned from the Solo Leveling theme, which is 2,895 lines proven
+   against real Discord:
+
+   1. ANCHOR ON aria-label, NOT class hashes. Discord regenerates its class names;
+      the labels survive. That theme leans on them 29 times for the quick
+      switcher alone, and this repo has already been bitten by a server-rail DOM
+      change.
+   2. USE !important. It carries 726 of them, because ClearVision's own rules win
+      otherwise -- which is exactly why the first version of this section drew no
+      borders at all despite matching.
+   3. PREFER class^= OVER class*=. It uses prefix matching 882 times against 213,
+      because `*=` catches unintended elements that merely contain the substring.
    ══════════════════════════════════════════════════════════════════════════ */
-[class*="sidebar_"], [class*="membersWrap_"], [class*="peopleColumn_"],
-[class*="privateChannels_"], [class*="content_"] > [class*="chat_"] {
-  border: var(--ut-line) solid var(--ut-white);
-  border-radius: var(--ut-radius);
+nav[aria-label="Servers sidebar"],
+nav[aria-label="Private channels"],
+div[aria-label="Channels"],
+section[aria-label="User area"],
+div[class^="membersWrap_"],
+div[class^="peopleColumn_"] {
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  background: var(--ut-black) !important;
 }
 
 /* Selection is an inverted box, the way the game highlights a menu item: white
    outline and white text on black, never a solid fill of an accent colour. */
-[class*="selected_"], [class*="modeSelected_"] {
+div[class^="selected_"], div[class^="modeSelected_"],
+li[class^="channel_"] div[class^="selected_"] {
   background: var(--ut-black) !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
   color: var(--ut-white) !important;
 }
 
-/* The scrollbar was the loudest thing on screen in red. It is furniture: grey
-   line, square, no thumb colour of its own. */
+/* The scrollbar was the loudest thing on screen in red. It is furniture. */
 ::-webkit-scrollbar-thumb {
   background: var(--ut-grey) !important;
   border-radius: var(--ut-radius) !important;
@@ -120,11 +136,11 @@
    The single most recognisable shape in the game: a 2px white rectangle with
    nothing inside it but text. Drawn around the message area.
    ══════════════════════════════════════════════════════════════════════════ */
-[class*="chatContent_"] {
-  border: var(--ut-line) solid var(--ut-white);
-  border-radius: var(--ut-radius);
+main[class^="chatContent_"], div[class^="chatContent_"] {
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
   margin: 8px;
-  background: var(--ut-black);
+  background: var(--ut-black) !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -137,7 +153,7 @@
    message hot path. No animation here for the same reason -- a pulsing heart on
    every mention is exactly the sort of thing those audits were written about.
    ══════════════════════════════════════════════════════════════════════════ */
-[class*="numberBadge_"], [class*="mentionsBadge_"] {
+div[class^="numberBadge_"], div[class^="mentionsBadge_"], div[class^="unreadMentionsIndicator"] {
   background: var(--ut-soul) !important;
   border-radius: var(--ut-radius) !important;
   color: var(--ut-white) !important;
@@ -152,7 +168,7 @@
    §6  SAVE
    Unread is the other reserved colour: the yellow of a save point.
    ══════════════════════════════════════════════════════════════════════════ */
-[class*="unread_"]::before, [class*="unreadMentionsBar_"] {
+div[class^="unread_"]::before, div[class^="unreadMentionsBar_"] {
   background: var(--ut-save) !important;
   border-radius: var(--ut-radius) !important;
 }
