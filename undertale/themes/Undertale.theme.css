@@ -1429,8 +1429,18 @@ div[aria-label="Message Actions"] button:hover * {
   background: transparent !important;
 }
 /* Class-based separators, alongside the role-based rule further up. This one ships at
-   border-radius 100px, which is a pill and not a rule. */
-div[class*="separator_"] {
+   border-radius 100px, which is a pill and not a rule.
+
+   The :not() chain is not decoration. "separator_" is used by Discord as a MODIFIER as
+   well as a component: the Event modal's header carries
+   "header__49fc1 header_d0b769 separator__49fc1", meaning "this header has a separator
+   under it" -- and this rule painted the whole 554x34 header white, because
+   background-color on a thin rule is a line and on a header is a slab. That is the
+   seventh white slab in this theme from the same mistake: a colour meant for a 1px
+   element landing on a container.
+
+   Excluded by what the element IS, not by hash, so a renamed module stays covered. */
+div[class*="separator_"]:not([class*="header_" i]):not([class*="footer_" i]):not([class*="content_" i]):not([class*="root_" i]):not([class*="modal_" i]) {
   background: var(--ut-white) !important;
   background-color: var(--ut-white) !important;
   border: none !important;
@@ -1709,6 +1719,42 @@ form[class^="form_"] button:hover,
 form[class^="form_"] button:hover svg {
   color: var(--ut-hover) !important;
   background: transparent !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Modals (the Event modal is the one that was captured).
+
+   Shell is div[role="dialog"] > root_, header and content are siblings inside it, and
+   both were unstyled: gg sans, Discord's own radius, and a header that this theme had
+   painted solid white (see the separator note above).
+
+   One frame on the shell, flat inside -- the same shape the popup shell and Active Now
+   already use.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[role="dialog"] > div[class^="root_"],
+div[class^="layer_"] div[class^="focusLock_"] > div[class^="root_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+div[role="dialog"] > div[class^="root_"] > div[class*="header_"],
+div[role="dialog"] > div[class^="root_"] > div[class*="content_"],
+div[role="dialog"] > div[class^="root_"] > div[class*="footer_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+}
+div[role="dialog"] > div[class^="root_"] * {
+  font-family: var(--ut-font) !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
