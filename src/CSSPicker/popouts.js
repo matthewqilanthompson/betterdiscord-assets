@@ -77,8 +77,11 @@ const describe = (el, depth) => {
  */
 /* Containers Discord floats real popups in. A node inside one of these is open; a node
    that merely matches a selector may be permanently mounted app chrome. */
+/* NOT [class*="layer_"]: Discord wraps the ENTIRE APP in a layer_ div, so including it
+   made every candidate "floating" and the guard matched nothing. That is the bug this
+   list was written to fix, reintroduced by one selector that looked harmless. */
 const FLOATING_CONTAINERS =
-  '[class*="layerContainer_"], [class*="layer_"], [class*="popouts_"], [class*="popout_"], [class*="tooltips_"], [class*="notices_"]';
+  '[class*="layerContainer_"], [class*="popouts_"], [class*="tooltips_"], [class*="notices_"]';
 
 /* App chrome that no popup ever contains. A "popout" wrapping the server rail or the
    message area is a false positive, not a popup. */
@@ -96,11 +99,11 @@ const APP_CHROME =
  */
 const isFloating = (el) => {
   if (el.querySelector && el.querySelector(APP_CHROME)) return false;
-  if (el.closest && el.closest(FLOATING_CONTAINERS)) return true;
-  const s = getComputedStyle(el);
-  if (s.position !== "fixed" && s.position !== "absolute") return false;
-  const z = Number(s.zIndex);
-  return Number.isFinite(z) && z > 0;
+  /* Containment in a real popup container is the ONLY signal. The position/z-index
+     fallback that used to live here matched permanently-mounted absolute elements,
+     which is the same false-positive class. A popup Discord renders outside these
+     containers is worth missing; a false positive kills the hotkey entirely. */
+  return !!(el.closest && el.closest(FLOATING_CONTAINERS));
 };
 
 export function captureOpenPopouts(maxNodes = 120) {
@@ -143,5 +146,11 @@ export function captureOpenPopouts(maxNodes = 120) {
     };
   });
 
+  if (popouts.length) {
+    console.log(
+      "[CSSPicker] capture found:",
+      popouts.map((p) => p.root.ariaLabel || p.root.role || p.root.id || `.${p.root.classes[0] || p.root.tag}`).join(", ")
+    );
+  }
   return { at: new Date().toISOString(), count: popouts.length, popouts };
 }
