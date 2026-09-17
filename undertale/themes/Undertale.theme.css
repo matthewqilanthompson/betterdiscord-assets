@@ -1722,9 +1722,16 @@ form[class^="form_"] button:hover svg {
    Square, black, white; the row marks itself in yellow on hover and while open, the
    way every other row in the theme does. No fill on hover: this theme marks state with
    colour, never with a filled bar.
+
+   Matched on [class*="mainCard_"] with NO tag or parent, because the two forum layouts
+   put that class in different places: list view has it on a div inside li.card_, and
+   GALLERY view puts it on the <li> itself (li.container_ card_ mainCard_). A selector
+   written for the list view misses every card in the grid. Gallery also stacks a second
+   ring in box-shadow (rgba(255,255,255,0.08) 0 0 0 1px) on top of the border, which the
+   shadow reset here removes. Media containers are excluded from the inner strip so
+   thumbnails keep their own box.
    ══════════════════════════════════════════════════════════════════════════ */
-li[class^="card_"] div[class^="mainCard_"],
-li[class^="card_"] div[class^="container_"][class*="mainCard_"] {
+[class*="mainCard_"] {
   background: var(--ut-black) !important;
   background-color: var(--ut-black) !important;
   background-image: none !important;
@@ -1735,24 +1742,24 @@ li[class^="card_"] div[class^="container_"][class*="mainCard_"] {
   font-family: var(--ut-font) !important;
 }
 /* Hover AND open: yellow edge, yellow text, nothing filled. */
-li[class^="card_"] div[class^="mainCard_"]:hover,
-li[class^="card_"] div[class^="mainCard_"]:focus-within,
-li[class^="card_"] div[class^="mainCard_"][class*="selected_"],
-li[class^="card_"] div[class^="mainCard_"][class*="active_"] {
+[class*="mainCard_"]:hover,
+[class*="mainCard_"]:focus-within,
+[class*="mainCard_"][class*="selected_"],
+[class*="mainCard_"][class*="active_"] {
   background: var(--ut-black) !important;
   background-color: var(--ut-black) !important;
   border-color: var(--ut-hover) !important;
   box-shadow: none !important;
   transform: none !important;
 }
-li[class^="card_"] div[class^="mainCard_"]:hover *:not([class*="Badge" i]):not(img),
-li[class^="card_"] div[class^="mainCard_"]:focus-within *:not([class*="Badge" i]):not(img),
-li[class^="card_"] div[class^="mainCard_"][class*="selected_"] *:not([class*="Badge" i]):not(img) {
+[class*="mainCard_"]:hover *:not([class*="Badge" i]):not(img),
+[class*="mainCard_"]:focus-within *:not([class*="Badge" i]):not(img),
+[class*="mainCard_"][class*="selected_"] *:not([class*="Badge" i]):not(img) {
   color: var(--ut-hover) !important;
   background: transparent !important;
 }
 /* Nothing inside the card owns a box -- one card, rows inside it. */
-li[class^="card_"] div[class^="mainCard_"] div {
+[class*="mainCard_"] div:not([class*="mosaic" i]):not([class*="imageContent" i]) {
   background: transparent !important;
   background-color: transparent !important;
   border: none !important;
