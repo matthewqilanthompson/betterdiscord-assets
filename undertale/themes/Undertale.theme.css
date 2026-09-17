@@ -1377,3 +1377,61 @@ div[role="listbox"] [role="option"][aria-selected="true"] * {
   background: transparent !important;
   color: var(--ut-hover) !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Popovers, and the message hover toolbar.
+
+   The toolbar that appears over a hovered message measured as 70% black with a 1px
+   border at 12% alpha, an 8px radius and a drop shadow -- so it floated over the
+   messages behind it rather than sitting on the theme.
+
+   Written for popover_ generally rather than for "Message Actions" alone: Discord
+   reuses that class for other floating toolbars, and the capture shows this one
+   carries popover_ AND wrapper_ AND buttonsInner_, so the reusable name is the one
+   worth keying on. Doing otherwise is the mistake this theme has repeated all day --
+   styling the surface in front of it instead of the pattern behind it.
+
+   The separator inside is Discord's own, at border-radius 100px. Squared and turned
+   white, like every other separator in the theme.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class*="popover_"],
+div[aria-label="Message Actions"] div[class*="buttonsInner_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+/* Discord thickens the border and deepens the shadow on hover; neither belongs here. */
+div[class*="popover_"]:hover,
+div[aria-label="Message Actions"] div[class*="buttonsInner_"]:hover {
+  border: var(--ut-line) solid var(--ut-white) !important;
+  box-shadow: none !important;
+}
+/* The buttons inside own no box -- the toolbar is the box. */
+div[class*="popover_"] button,
+div[class*="popover_"] button *,
+div[aria-label="Message Actions"] button,
+div[aria-label="Message Actions"] button * {
+  background: transparent !important;
+  border: none !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+}
+div[aria-label="Message Actions"] button:hover,
+div[aria-label="Message Actions"] button:hover * {
+  color: var(--ut-hover) !important;
+  background: transparent !important;
+}
+/* Class-based separators, alongside the role-based rule further up. This one ships at
+   border-radius 100px, which is a pill and not a rule. */
+div[class*="separator_"] {
+  background: var(--ut-white) !important;
+  background-color: var(--ut-white) !important;
+  border: none !important;
+  border-radius: var(--ut-radius) !important;
+  opacity: 1 !important;
+}
