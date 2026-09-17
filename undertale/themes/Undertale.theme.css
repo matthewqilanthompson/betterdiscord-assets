@@ -1,0 +1,122 @@
+/**
+ * @name Undertale
+ * @author matthewqilanthompson
+ * @version 0.1.0
+ * @description Undertale theme for Discord, on a ClearVision v7 base. Vertical slice: tokens, the battle box, and the SOUL.
+ * @source https://github.com/matthewqilanthompson/betterdiscord-assets
+ */
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §1  IMPORTS
+   ClearVision v7 stays the base (user's call): it carries Discord's surface
+   coverage and absorbs the DOM churn, which this theme would otherwise own.
+   The HorizontalServerList imports are NOT optional -- HSLDockAutoHide,
+   HSLWheelBridge and UserPanelDockMover are live plugins that depend on that
+   layout existing.
+
+   Variables are INLINE rather than @import'ed from ./variables/. A BD theme is
+   injected into the discord.com document, so a relative url() resolves against
+   discord.com and silently 404s -- which is why the old theme pinned a GitHub
+   raw URL. Inline works with no publishing step; split it out later if it grows.
+   ══════════════════════════════════════════════════════════════════════════ */
+@import url("https://clearvision.github.io/ClearVision-v7/main.css");
+@import url("https://discordstyles.github.io/HorizontalServerList/HorizontalServerList.css");
+@import url("https://discordstyles.github.io/HorizontalServerList/bottomhsl.css");
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §2  TOKENS
+   Two groups, deliberately separate. --ut-* are ours and mean something in
+   Undertale's language. The unprefixed ones are ClearVision's contract: setting
+   those is how the base theme is steered, rather than fighting it selector by
+   selector.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* The palette is tiny on purpose. Undertale's UI is one weight of white line
+     on black; nearly all of its character comes from restraint. */
+  --ut-black:        #000000;
+  --ut-white:        #ffffff;
+  --ut-grey:         #bfbfbf;   /* inactive text: the game dims, never tints */
+  --ut-soul:         #ff0000;   /* the SOUL. Mentions, and nothing else. */
+  --ut-save:         #ffff00;   /* SAVE points. Unread, and nothing else. */
+  --ut-mercy:        #ffcc00;   /* FIGHT/ACT/ITEM/MERCY button yellow */
+  --ut-determination:#ff3f3f;
+
+  --ut-line:         2px;       /* every border in the game is the same weight */
+  --ut-radius:       0px;       /* nothing is rounded. Nothing. */
+
+  /* Pixelify Sans is installed locally and has full Unicode coverage.
+     UT-Sans/UT-Papyrus are deliberately NOT used here: measured 2026-09-17 they
+     map 124 glyphs and have no accents, curly quotes or ellipsis. That is fine
+     for Sans's own dialogue, where the text is ours, and wrong for Discord,
+     where usernames and messages are arbitrary. */
+  --ut-font:         "Pixelify Sans", "Determination Mono", system-ui, sans-serif;
+  --ut-font-code:    "Pixel Code Regular", "PixelCode", ui-monospace, monospace;
+
+  /* ClearVision's own contract */
+  --main-color:      var(--ut-soul);
+  --hover-color:     var(--ut-white);
+  --success-color:   var(--ut-save);
+  --danger-color:    var(--ut-determination);
+  --font-primary:    var(--ut-font);
+  --font-display:    var(--ut-font);
+  --font-headline:   var(--ut-font);
+  --font-code:       var(--ut-font-code);
+  --background-image: none;                 /* flat black; no wallpaper */
+  --background-overlay: var(--ut-black);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §3  FLATTEN
+   ClearVision is glassy by default and Undertale is not. This is the one broad
+   override in the slice, and it is why keeping CV as a base is still cheap:
+   the coverage stays, the finish changes.
+   ══════════════════════════════════════════════════════════════════════════ */
+.theme-dark, .theme-light {
+  --background-primary:   var(--ut-black);
+  --background-secondary: var(--ut-black);
+  --background-tertiary:  var(--ut-black);
+  --text-normal:          var(--ut-white);
+  --text-muted:           var(--ut-grey);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §4  THE BATTLE BOX
+   The single most recognisable shape in the game: a 2px white rectangle with
+   nothing inside it but text. Drawn around the message area.
+   ══════════════════════════════════════════════════════════════════════════ */
+[class*="chatContent_"] {
+  border: var(--ut-line) solid var(--ut-white);
+  border-radius: var(--ut-radius);
+  margin: 8px;
+  background: var(--ut-black);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §5  THE SOUL
+   Mentions are the one place red is allowed. The badge becomes the SOUL heart
+   rather than a rounded pill.
+
+   Deliberately a CSS shape, not an SVG asset: this renders on every mention in
+   view, and the repo's own TYPING_LAG_AUDIT and PERFORMANCE_AUDIT are about the
+   message hot path. No animation here for the same reason -- a pulsing heart on
+   every mention is exactly the sort of thing those audits were written about.
+   ══════════════════════════════════════════════════════════════════════════ */
+[class*="numberBadge_"], [class*="mentionsBadge_"] {
+  background: var(--ut-soul) !important;
+  border-radius: var(--ut-radius) !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font);
+  clip-path: polygon(50% 100%, 0% 38%, 9% 12%, 28% 4%, 50% 18%,
+                     72% 4%, 91% 12%, 100% 38%);
+  min-width: 18px;
+  min-height: 18px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §6  SAVE
+   Unread is the other reserved colour: the yellow of a save point.
+   ══════════════════════════════════════════════════════════════════════════ */
+[class*="unread_"]::before, [class*="unreadMentionsBar_"] {
+  background: var(--ut-save) !important;
+  border-radius: var(--ut-radius) !important;
+}
