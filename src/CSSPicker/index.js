@@ -260,8 +260,29 @@ module.exports = class CSSPicker {
 
     this.injectLauncher();
 
+    /* TEMPORARY INSTRUMENTATION -- remove once the hotkey is confirmed.
+       Prints to the console, which BetterDiscord mirrors into its debug.log, so the
+       question "does the handler run at all" can be answered from outside Discord. */
+    console.log("[CSSPicker] listener attached, hotkey =", JSON.stringify(this.settings?.hotkey));
+
     this.onGlobalHotkeyDown = (event) => {
       const settings = this.settings || loadSettings();
+      if (event.ctrlKey || event.altKey) {
+        console.log(
+          "[CSSPicker] keydown",
+          JSON.stringify({
+            key: event.key,
+            code: event.code,
+            ctrl: event.ctrlKey,
+            alt: event.altKey,
+            shift: event.shiftKey,
+            meta: event.metaKey,
+            enabled: !!settings.hotkeyEnabled,
+            hotkey: settings.hotkey,
+            matched: matchesHotkey(event, settings.hotkey),
+          })
+        );
+      }
       if (!settings.hotkeyEnabled) return;
       /* The hotkey is matched BEFORE the editable-target guard. The guard exists so the
          picker does not fire while typing a message -- but the popups worth capturing
@@ -436,7 +457,11 @@ module.exports = class CSSPicker {
       found = captureOpenPopouts();
     } catch (err) {
       this._toast(`Popout capture failed: ${err && err.message ? err.message : err}`, "error");
-      return true;   // it WAS attempted; do not open pick mode on top of the error
+      /* Return FALSE, so a throw here cannot swallow the hotkey. This used to return
+         true -- "it was attempted" -- which meant any error in capture silently made
+         the key unable to start pick mode. The primary action must survive a failure
+         in the secondary one. */
+      return false;
     }
     if (!found || !found.count) return false;
 

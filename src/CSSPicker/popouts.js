@@ -75,13 +75,44 @@ const describe = (el, depth) => {
  * @param {number} maxNodes per popout, so one huge modal cannot produce an unreadable report
  * @returns {{ at: string, count: number, popouts: object[] }}
  */
+/* Containers Discord floats real popups in. A node inside one of these is open; a node
+   that merely matches a selector may be permanently mounted app chrome. */
+const FLOATING_CONTAINERS =
+  '[class*="layerContainer_"], [class*="layer_"], [class*="popouts_"], [class*="popout_"], [class*="tooltips_"], [class*="notices_"]';
+
+/* App chrome that no popup ever contains. A "popout" wrapping the server rail or the
+   message area is a false positive, not a popup. */
+const APP_CHROME =
+  'nav[aria-label="Servers sidebar"], [class*="chatContent_"], [class*="sidebarList_"]';
+
+/**
+ * Is this a floating popup, or just a permanently mounted element that happens to match?
+ *
+ * This guard is the difference between the feature working and the HOTKEY BEING DEAD.
+ * captureOpenPopouts runs before pick mode, and the handler treats a non-zero count as
+ * "a popup is open, capture it instead of picking" -- so ONE always-present false
+ * positive makes the hotkey unable to start pick mode, for ever, while still being able
+ * to cancel it. That is exactly how this was found.
+ */
+const isFloating = (el) => {
+  if (el.querySelector && el.querySelector(APP_CHROME)) return false;
+  if (el.closest && el.closest(FLOATING_CONTAINERS)) return true;
+  const s = getComputedStyle(el);
+  if (s.position !== "fixed" && s.position !== "absolute") return false;
+  const z = Number(s.zIndex);
+  return Number.isFinite(z) && z > 0;
+};
+
 export function captureOpenPopouts(maxNodes = 120) {
   const roots = new Set();
   for (const sel of POPOUT_SELECTORS) {
     for (const el of document.querySelectorAll(sel)) {
       const r = el.getBoundingClientRect();
       if (r.width < 2 || r.height < 2) continue;          // closed or collapsed
-      if (getComputedStyle(el).visibility === "hidden") continue;
+      const cs = getComputedStyle(el);
+      if (cs.visibility === "hidden" || cs.display === "none") continue;
+      if (cs.opacity === "0") continue;
+      if (!isFloating(el)) continue;                      // mounted chrome, not a popup
       roots.add(el);
     }
   }
