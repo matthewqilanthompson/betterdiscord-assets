@@ -430,13 +430,15 @@ div[role="tab"]:hover span {
 /* The friends list's per-row Message button. Clicking the row already opens the
    DM, so the icon is a second control for the same action.
 
-   Matched by its aria-label rather than a hashed class -- and deliberately so
-   that a WRONG guess is harmless: if Discord labels it something else, this rule
-   simply matches nothing and the button stays. It does not hide the row, the
-   overflow menu, or anything structural. (An earlier guess in this theme -- that
-   the user panel was labelled "User area" when it is "User status and settings"
-   -- is why the failure mode is worth designing for.) */
-div[role="list"] div[role="listitem"] [aria-label="Message" i] {
+   The first attempt matched [aria-label="Message"] exactly and hit nothing. CSS
+   Picker shows why: the label carries the username -- aria-label="Message 064415"
+   -- so it is a PREFIX, never an exact string. Written to fail inert, which is
+   the only reason a wrong guess cost nothing but a round trip.
+
+   The prefix also keeps the overflow button: that one is labelled "More options
+   for <name>", which cannot match "Message ". Scoped to the row so nothing
+   elsewhere with a similar label is touched. */
+div[class^="rowContent_"] div[aria-label^="Message " i] {
   display: none !important;
 }
 
@@ -557,4 +559,29 @@ li[role="listitem"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge
   color: var(--ut-hover) !important;
   fill: var(--ut-hover) !important;
   background-color: transparent !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   The Friends button keeps its battle box.
+
+   Everything else in a list drops the outline (a border across a DM row reads as
+   the "accent box across"), but Friends is not a conversation -- it is the one
+   standing destination at the top of the sidebar, and a box around it is the
+   Undertale way of showing which screen you are on. Asked for deliberately.
+
+   div[class^="friendsButtonContainer_"] is from CSS Picker's ancestry for that
+   button and reaches nothing else. Specificity ties with the list-row rule that
+   removed the border (0,2,1), so this wins by sitting after it -- which is why it
+   is at the end of the file and must stay there.
+
+   Text stays yellow: selected still means "look here", and yellow on black inside
+   a white frame is the battle box as the game draws it.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="friendsButtonContainer_"] [class*="selected_"],
+div[class^="friendsButtonContainer_"] [class*="interactiveSelected_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
 }
