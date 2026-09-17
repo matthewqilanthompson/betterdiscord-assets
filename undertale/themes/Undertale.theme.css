@@ -461,8 +461,20 @@ div[role="list"] div[class*="divider_"] {
    careful ordering. Prefix matches so /shop and /shop/something both go. */
 nav[aria-label="Private channels"] a[href^="/store"],
 nav[aria-label="Private channels"] a[href^="/shop"],
-nav[aria-label="Private channels"] a[href^="/quests"],
 nav[aria-label="Private channels"] a[href^="/nitro"] {
+  display: none !important;
+}
+
+/* Quests survived the href rule above -- /store and /shop went, it did not, so its
+   entry is not an <a href="/quests">. Several hooks are listed because the live one
+   is unconfirmed, and each is inert when it does not match: a wrong guess here hides
+   nothing rather than hiding the wrong row. Scoped to the DM sidebar throughout, and
+   none of these can match Friends (/channels/@me) or a conversation row. */
+nav[aria-label="Private channels"] a[href*="quest" i],
+nav[aria-label="Private channels"] [aria-label="Quests" i],
+nav[aria-label="Private channels"] [data-list-item-id*="quest" i],
+nav[aria-label="Private channels"] li:has(a[href*="quest" i]),
+nav[aria-label="Private channels"] li:has([aria-label="Quests" i]) {
   display: none !important;
 }
 
