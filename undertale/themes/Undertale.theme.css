@@ -1143,7 +1143,13 @@ button[class*="lookLink_"],
 button[class*="lookLink_"] *,
 [class*="lookLink_"]:is(button, [role="button"]),
 [class*="lookLink_"]:is(button, [role="button"]) *,
-a[class*="anchor_"]:not([class*="button" i]) {
+a[class*="anchor_"]:not([class*="button" i]),
+/* "View Full Bio" is not a lookLink_ button either -- a capture shows it is
+   div[class*="viewFullBio_"] inside section_/body_, so the rule above could never have
+   reached it. Named directly, along with anything it wraps. */
+div[class*="viewFullBio_" i],
+div[class*="viewFullBio_" i] *,
+div[class*="viewFullBio_" i] :is(button, [role="button"], a) {
   background: transparent !important;
   background-image: none !important;
   border: none !important;
@@ -1157,7 +1163,9 @@ a[class*="anchor_"]:not([class*="button" i]) {
 }
 button[class*="lookLink_"]:hover,
 button[class*="lookLink_"]:hover *,
-a[class*="anchor_"]:not([class*="button" i]):hover {
+a[class*="anchor_"]:not([class*="button" i]):hover,
+div[class*="viewFullBio_" i]:hover,
+div[class*="viewFullBio_" i]:hover * {
   color: var(--ut-hover) !important;
   background: transparent !important;
   border: none !important;
