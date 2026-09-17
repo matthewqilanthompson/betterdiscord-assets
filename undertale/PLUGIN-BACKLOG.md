@@ -134,3 +134,42 @@ will not.
 Add `image-rendering: pixelated` so the upscale stays crisp — the same property that does
 nothing for avatars (item 1) works perfectly here, because this image genuinely IS small
 and genuinely IS being scaled up.
+
+---
+
+## Asset routes — both proven in this repo
+
+Relevant to the Home icon above, and to any future artwork. A BD theme is injected into
+the discord.com document, so a **relative `url()` resolves against discord.com and 404s**.
+Two routes work around that, and the Solo Leveling theme used the first in production:
+
+1. **GitHub raw URL.** What the archived theme did:
+
+   ```css
+   ul[aria-label="Channels"] [class*="link_"] {
+     background-image: url('https://raw.githubusercontent.com/<user>/betterdiscord-assets/main/themes/svg/Shadowbannerv1.1.svg') !important;
+   }
+   ```
+
+   Needs the asset committed and pushed before it renders, and fetches over the network.
+
+2. **base64 `data:` URI inline in the CSS.** Self-contained, no publishing step, no network.
+   Better for something small like a 40x40 icon; worse for anything large, since it inflates
+   the theme file every reload.
+
+**A drawn SVG is therefore a real option, not a last resort** — the previous theme drew
+per-state channel artwork this way. The archived library is at
+`archive/solo-leveling-theme-2026-09-17/repo-themes/svg/`, and includes
+`channel-selected.svg`, `channel-unread.svg`, `Selected_channel.svg`, `Shadowbannerv1.1.svg`,
+`hand.svg`, `person.svg`, `Arisefont.svg`, `dataflow.svg`. `themes/svg/` is no longer in the
+live working tree — it went with the archive.
+
+The Undertale equivalent would be battle-box framing rather than banners, but the mechanism
+is identical and already validated here.
+
+Also worth lifting from that theme when channels are revisited:
+
+```css
+/* channel row spacing -- a double gap made the list far easier to scan */
+ul[aria-label="Channels"] li[class*="containerDefault_"] { margin-bottom: 8px !important; }
+```
