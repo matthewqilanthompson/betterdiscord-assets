@@ -1065,14 +1065,14 @@ div[role="dialog"] div[class^="inner_"] div[class^="footer_"] button {
    other still at 1px/radius 4px: the rule matched [class*="primary_"], and
    "secondary_a22cb0" does not contain the substring "primary_". The outlined/secondary
    look has to be named in its own right. */
-button[class*="lookFilled_"],
-button[class*="lookFilled_"] *,
-button[class*="lookOutlined_"],
-button[class*="lookOutlined_"] *,
-[class*="primary_"]:is(button, [role="button"]),
-[class*="primary_"]:is(button, [role="button"]) *,
-[class*="secondary_"]:is(button, [role="button"]),
-[class*="secondary_"]:is(button, [role="button"]) *,
+button[class*="lookFilled_"]:not([class*="textButton_" i]),
+button[class*="lookFilled_"]:not([class*="textButton_" i]) *,
+button[class*="lookOutlined_"]:not([class*="textButton_" i]),
+button[class*="lookOutlined_"]:not([class*="textButton_" i]) *,
+[class*="primary_"]:not([class*="textButton_" i]):is(button, [role="button"]),
+[class*="primary_"]:not([class*="textButton_" i]):is(button, [role="button"]) *,
+[class*="secondary_"]:not([class*="textButton_" i]):is(button, [role="button"]),
+[class*="secondary_"]:not([class*="textButton_" i]):is(button, [role="button"]) *,
 [class*="role_"]:is([class*="pill_"], [class*="chip_"]),
 div[class*="rolePill_"],
 div[class*="roleCircle_"] ~ * {
@@ -1084,29 +1084,29 @@ div[class*="roleCircle_"] ~ * {
   box-shadow: none !important;
 }
 /* The frame goes on the control, not on the label inside it. */
-button[class*="lookFilled_"],
-button[class*="lookOutlined_"],
-[class*="primary_"]:is(button, [role="button"]),
-[class*="secondary_"]:is(button, [role="button"]),
+button[class*="lookFilled_"]:not([class*="textButton_" i]),
+button[class*="lookOutlined_"]:not([class*="textButton_" i]),
+[class*="primary_"]:not([class*="textButton_" i]):is(button, [role="button"]),
+[class*="secondary_"]:not([class*="textButton_" i]):is(button, [role="button"]),
 [class*="rolePill_"] {
   border: var(--ut-line) solid var(--ut-white) !important;
 }
-button[class*="lookFilled_"] *,
-button[class*="lookOutlined_"] *,
-[class*="primary_"]:is(button, [role="button"]) *,
-[class*="secondary_"]:is(button, [role="button"]) * {
+button[class*="lookFilled_"]:not([class*="textButton_" i]) *,
+button[class*="lookOutlined_"]:not([class*="textButton_" i]) *,
+[class*="primary_"]:not([class*="textButton_" i]):is(button, [role="button"]) *,
+[class*="secondary_"]:not([class*="textButton_" i]):is(button, [role="button"]) * {
   border: none !important;
   background: transparent !important;
 }
 /* Same hover as every other control in the theme. */
-button[class*="lookFilled_"]:hover,
-button[class*="lookFilled_"]:hover *,
-button[class*="lookOutlined_"]:hover,
-button[class*="lookOutlined_"]:hover *,
-[class*="primary_"]:is(button, [role="button"]):hover,
-[class*="primary_"]:is(button, [role="button"]):hover *,
-[class*="secondary_"]:is(button, [role="button"]):hover,
-[class*="secondary_"]:is(button, [role="button"]):hover * {
+button[class*="lookFilled_"]:not([class*="textButton_" i]):hover,
+button[class*="lookFilled_"]:not([class*="textButton_" i]):hover *,
+button[class*="lookOutlined_"]:not([class*="textButton_" i]):hover,
+button[class*="lookOutlined_"]:not([class*="textButton_" i]):hover *,
+[class*="primary_"]:not([class*="textButton_" i]):is(button, [role="button"]):hover,
+[class*="primary_"]:not([class*="textButton_" i]):is(button, [role="button"]):hover *,
+[class*="secondary_"]:not([class*="textButton_" i]):is(button, [role="button"]):hover,
+[class*="secondary_"]:not([class*="textButton_" i]):is(button, [role="button"]):hover * {
   color: var(--ut-hover) !important;
   border-color: var(--ut-hover) !important;
   background: var(--ut-black) !important;
@@ -1166,6 +1166,44 @@ button[class*="lookLink_"]:hover *,
 a[class*="anchor_"]:not([class*="button" i]):hover,
 div[class*="viewFullBio_" i]:hover,
 div[class*="viewFullBio_" i]:hover * {
+  color: var(--ut-hover) !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   textButton_ is a text control, never a box.
+
+   "View Full Bio" stayed boxed through two attempts at unboxing it, and the reason is
+   in its own class list: button.textButton__7a01b.secondary__7a01b. The
+   [class*="secondary_"] rule -- added to make Store and "+ Add App" match -- claimed
+   it at (0,2,0), while the viewFullBio_ rule aimed at it was only (0,1,1) and lost.
+
+   So the button rules now exclude textButton_ outright rather than being out-argued
+   afterwards, and this block sets the link look with enough specificity to be
+   decisive either way.
+   ══════════════════════════════════════════════════════════════════════════ */
+button[class*="textButton_" i],
+button[class*="textButton_" i] *,
+[class*="viewFullBio_" i] button,
+[class*="viewFullBio_" i] button * {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  border-width: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: var(--ut-white) !important;
+  text-decoration: underline !important;
+  font-family: var(--ut-font) !important;
+}
+button[class*="textButton_" i]:hover,
+button[class*="textButton_" i]:hover *,
+[class*="viewFullBio_" i] button:hover,
+[class*="viewFullBio_" i] button:hover * {
   color: var(--ut-hover) !important;
   background: transparent !important;
   border: none !important;
