@@ -762,3 +762,27 @@ div[class^="nowPlayingColumn_"] button:hover {
    changes nothing. It needs a plugin to rewrite the avatar src to Discord's small
    CDN size -- measured: ?size=16 returns 791 bytes against 33,715 for ?size=128 --
    and then image-rendering: pixelated on the upscale does the rest. */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   One frame per selected thing, never two.
+
+   A selected channel row drew a double outline. CSS Picker on it reports the
+   selection rule matching TWO elements -- li.containerDefault_ (which carries
+   "selected_") and div.iconVisibility_ inside it (which carries
+   "selectedChannel_"). Both matched [class*="selected_"], so both got the 2px
+   frame, one nested inside the other.
+
+   That is the hazard of a contains-match on a state class: Discord names several
+   nested elements after the same state, and a substring selector cannot tell the
+   row from its own innards. The row keeps the frame; anything selected INSIDE a
+   selected thing loses it.
+
+   Specificity is deliberate. The rule that draws the border is (0,2,1) and matches
+   the child too, so this must exceed it, not tie: the extra compound makes it
+   (0,3,1). Ordering alone would not be enough if the file is ever reshuffled.
+   ══════════════════════════════════════════════════════════════════════════ */
+[class*="selected_"]:not(nav[aria-label="Servers sidebar"] *) [class*="selected" i],
+[class*="modeSelected_"]:not(nav[aria-label="Servers sidebar"] *) [class*="selected" i] {
+  border: none !important;
+  box-shadow: none !important;
+}
