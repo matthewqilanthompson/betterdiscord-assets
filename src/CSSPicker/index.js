@@ -27,7 +27,7 @@ import {
 import { captureOpenPopouts } from "./popouts.js";
 const { loadBdModuleFromPlugins } = require("../shared/bd-module-loader");
 const { createToast } = require("../shared/toast");
-const { isEditableTarget, matchesHotkey } = require("../shared/hotkeys");
+const { matchesHotkey } = require("../shared/hotkeys");
 const { loadSettings: _sharedLoadSettings, saveSettings: _sharedSaveSettings } = require("../shared/settings");
 const { onKeydown } = require("../shared/dom-bus");
 
@@ -294,6 +294,7 @@ module.exports = class CSSPicker {
       if (!matchesHotkey(event, settings.hotkey)) return;
 
       if (this.isActive) {
+        console.log("[CSSPicker] matched -> deactivating");
         event.preventDefault();
         event.stopPropagation();
         this.deactivatePickMode();
@@ -305,15 +306,24 @@ module.exports = class CSSPicker {
          the click dismisses the popup. So when something is open, the key captures all
          of it directly -- no pointer, nothing to dismiss. This runs even from an
          editable target, because that is where the popups live. */
+      console.log("[CSSPicker] matched -> trying popout capture");
       if (typeof this._capturePopouts === "function" && this._capturePopouts()) {
         event.preventDefault();
         event.stopPropagation();
         return;
       }
 
-      /* Nothing open: pick mode, and NOW the typing guard applies -- starting a pick
-         mid-message is the thing it was protecting against. */
-      if (isEditableTarget(event.target)) return;
+      /* The typing guard USED TO LIVE HERE and it is why the hotkey could cancel pick
+         mode but never start it. Discord keeps focus in the message box almost all the
+         time, so event.target was an editable field on virtually every press: the key
+         matched (proved in the log), capture found nothing, and then this returned
+         silently. The cancel path sits above it, which is exactly why cancelling kept
+         working -- the asymmetry was the guard, not the matcher.
+
+         It is gone. Its purpose was to stop a bare key firing mid-sentence, but every
+         hotkey here carries modifiers, so it was protecting against something that
+         cannot happen while breaking the only thing the key does. */
+      console.log("[CSSPicker] activating pick mode");
       event.preventDefault();
       event.stopPropagation();
       this.activatePickMode();
