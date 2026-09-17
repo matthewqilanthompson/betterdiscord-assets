@@ -105,12 +105,45 @@
 nav[aria-label="Servers sidebar"],
 nav[aria-label="Private channels"],
 div[aria-label="Channels"],
-section[aria-label="User area"],
+section[aria-label="User status and settings"],
 div[class^="membersWrap_"],
+div[class^="nowPlayingColumn_"],
 div[class^="peopleColumn_"] {
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
   background: var(--ut-black) !important;
+}
+
+/* The user panel kept a lavender gradient because the first version guessed
+   aria-label="User area". The real label is "User status and settings" -- taken
+   from the archived theme, which uses it seven times. Its children carry the
+   gradient too, so they are flattened explicitly rather than inherited. */
+section[aria-label="User status and settings"],
+section[aria-label="User status and settings"] > div,
+div[class^="panels_"], div[class^="panels_"] > div {
+  background: var(--ut-black) !important;
+  background-image: none !important;
+}
+
+/* The bottom dock band. The HorizontalServerList imports move the guild list
+   down there, and its inner scroll containers keep their own fills, so the whole
+   chain is flattened -- not just the nav. The scroll arrows were rendering
+   maroon; in this theme every control is a white line. */
+nav[aria-label="Servers sidebar"] ul[role="tree"],
+nav[aria-label="Servers sidebar"] [data-list-id="guildsnav"],
+nav[aria-label="Servers sidebar"] div[class^="itemsContainer_"],
+nav[aria-label="Servers sidebar"] div[class^="scroller_"],
+nav[aria-label="Servers sidebar"] div[class^="none_"] {
+  background: var(--ut-black) !important;
+  background-image: none !important;
+  border: none !important;
+}
+nav[aria-label="Servers sidebar"] svg,
+nav[aria-label="Servers sidebar"] [class*="arrow" i],
+nav[aria-label="Servers sidebar"] button {
+  color: var(--ut-white) !important;
+  fill: var(--ut-white) !important;
+  background: transparent !important;
 }
 
 /* Selection is an inverted box, the way the game highlights a menu item: white
