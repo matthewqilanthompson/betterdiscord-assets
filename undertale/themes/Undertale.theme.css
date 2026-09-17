@@ -1850,13 +1850,34 @@ div[class^="switchIndicator_"][class*="checked_"]:not(#\9):not(#\8)::after {
   border-color: var(--ut-hover) !important;
   color: var(--ut-hover) !important;
 }
-/* The Changelog button is hidden outright. Hiding the BUTTON rather than its icon:
-   an invisible icon leaves a live 52x24 click target in the sidebar label, which is
-   worse than the thing being visible. Matched by aria-label and by BD's own class,
-   so either one surviving a rename keeps it hidden. */
-button[aria-label="Changelog"],
-.bd-changelog-button {
+/* The Changelog button keeps its place; only the drawn icon is replaced.
+
+   Lucide's history glyph is a curved arrow around a clock face -- vector line art at
+   16px, which is the one thing that cannot be made to look pixelled: it is smooth
+   curves at any scale, and image-rendering does nothing for a drawn path. So the svg
+   goes and the button gets an asterisk instead, the mark Undertale puts in front of
+   every line of dialogue, set in the theme's own font.
+
+   TO HIDE THE BUTTON ENTIRELY INSTEAD, this is the whole change:
+     button[aria-label="Changelog"], .bd-changelog-button { display: none !important; }
+   Hide the BUTTON, never just the svg -- an invisible icon leaves a live 52x24 click
+   target sitting in the sidebar label. */
+button[aria-label="Changelog"] svg,
+.bd-changelog-button svg {
   display: none !important;
+}
+button[aria-label="Changelog"] .bd-button-content::after,
+.bd-changelog-button .bd-button-content::after {
+  content: "*" !important;
+  display: block !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+  font-size: 16px !important;
+  line-height: 16px !important;
+}
+button[aria-label="Changelog"]:hover .bd-button-content::after,
+.bd-changelog-button:hover .bd-button-content::after {
+  color: var(--ut-hover) !important;
 }
 
 /* Blank buttons stay blank, and mark themselves the way every other icon does. */
