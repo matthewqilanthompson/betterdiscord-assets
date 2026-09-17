@@ -672,7 +672,7 @@ div[class^="friendsButtonContainer_"] li[role="listitem"] {
    pixels BELOW the other two -- the measurement is of the elements, and the frames are
    drawn on their borders, so the visible edges do not land in quite the same place.
    Trimmed to what lines up by eye. One variable, so it is a one-token nudge either way. */
-:root { --ut-toolbar-offset: 47px; }
+:root { --ut-toolbar-offset: 49px; }
 
 nav[aria-label="Private channels"] {
   margin-top: var(--ut-toolbar-offset) !important;
@@ -704,19 +704,33 @@ div[class^="nowPlayingColumn_"] div[class^="activitySection_"] {
   box-shadow: none !important;
 }
 
-/* Undertale marks every line of dialogue with an asterisk; these are rows now, so
-   the card gets one. On the card, not the section -- one bullet per entry. */
-div[class^="nowPlayingColumn_"] div[class^="itemCard_"]::before {
-  content: "*";
-  color: var(--ut-white);
-  font-family: var(--ut-font);
-  position: absolute;
-  left: 2px;
-  top: 16px;
-}
+/* The asterisk is dropped: absolutely positioned against a 150px card it read as a
+   stray character floating at the column edge rather than a list marker.
+
+   Stripping Discord's card chrome left the rows with no shape at all -- de-chromed is
+   not the same as styled. The game separates menu entries with a rule, not a box, so
+   each entry after the first gets a white line above it. That gives the column
+   structure without putting a frame inside a frame, which is what treatment B was
+   chosen to avoid.
+
+   The pixel font is set explicitly: the card still computed as "gg sans" (seen in a
+   capture), because the font rules elsewhere never reach this subtree. */
 div[class^="nowPlayingColumn_"] div[class^="itemCard_"] {
   position: relative !important;
-  padding-left: 14px !important;
+  padding: 12px 0 12px 4px !important;
+  margin: 0 !important;
+}
+div[class^="nowPlayingColumn_"] div[class^="itemCard_"] + div[class^="itemCard_"] {
+  border-top: var(--ut-line) solid var(--ut-white) !important;
+}
+div[class^="nowPlayingColumn_"] div[class^="itemCard_"],
+div[class^="nowPlayingColumn_"] div[class^="itemCard_"] * {
+  font-family: var(--ut-font) !important;
+}
+/* Hovering an entry marks it the way every other row in this theme is marked. */
+div[class^="nowPlayingColumn_"] div[class^="itemCard_"]:hover,
+div[class^="nowPlayingColumn_"] div[class^="itemCard_"]:hover *:not([class*="Badge" i]) {
+  color: var(--ut-hover) !important;
 }
 
 /* The Connect Account button -- the last saturated colour on the screen. */
