@@ -1506,6 +1506,25 @@ section[role="navigation"][class*="container_"] {
   border-width: 0 !important;
   box-shadow: none !important;
 }
+/* ...and neither does anything drawing it as a pseudo-element.
+
+   The capture is what points here: hovering the line returns sidebarList_, NOT the
+   nav inside it, so the cursor is in the 49px strip ABOVE the nav's frame -- and
+   sidebarList_ carries no border of its own there. A drawn edge with no element to
+   own it is a ::before, the same shape as the white fill that survived four rounds
+   of chasing. The header's own bottom border measured oklab(... / 0.121569), a 12%
+   grey, so it was never the bright line. */
+section[role="navigation"][class*="container_"]::before,
+section[role="navigation"][class*="container_"]::after,
+div[class^="sidebarList_"]::before,
+div[class^="sidebarList_"]::after,
+div[class^="sidebar_"]::before,
+div[class^="sidebar_"]::after {
+  display: none !important;
+  content: none !important;
+  border: none !important;
+  background: none !important;
+}
 
 
 /* ══════════════════════════════════════════════════════════════════════════
