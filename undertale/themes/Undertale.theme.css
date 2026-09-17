@@ -41,11 +41,17 @@
 
        --ut-bg-image: url("https://raw.githubusercontent.com/<you>/<repo>/main/x.png");
 
+     The art in use is undertale/assets/waterfall-sans.png in this repo, served over
+     raw.githubusercontent (verified 200). It is 595x336, so it is being upscaled a long
+     way -- flat illustrative art survives that far better than a photo would, and it is
+     left to scale SMOOTHLY on purpose: image-rendering:pixelated only helps art that
+     was pixel art to begin with, and on a soft-shaded drawing it just produces blocks.
+
      --ut-bg-dim is how much black is laid over the art (0 = raw image, 1 = invisible).
      --ut-panel-alpha is how solid the panels are on top of it: 1 is the old flat-black
      theme exactly, lower lets the art through every surface. Two numbers, and they are
      the only things to touch when it is too dark or too busy. */
-  --ut-bg-image:     none;
+  --ut-bg-image:     url("https://raw.githubusercontent.com/matthewqilanthompson/betterdiscord-assets/main/undertale/assets/waterfall-sans.png");
   --ut-bg-dim:       0.72;
   --ut-panel-alpha:  0.78;
 
