@@ -361,6 +361,7 @@ nav[aria-label="Private channels"] li:hover,
 nav[aria-label="Private channels"] a:hover,
 div[aria-label="Channels"] li:hover,
 div[aria-label="Channels"] a:hover,
+div[role="list"] div[role="listitem"]:hover,
 div[class^="membersWrap_"] div[role="listitem"]:hover,
 div[role="menuitem"]:hover,
 div[role="tab"]:hover {
@@ -380,6 +381,8 @@ div[aria-label="Channels"] li:hover,
 div[aria-label="Channels"] li:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
 div[aria-label="Channels"] a:hover,
 div[aria-label="Channels"] a:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[role="list"] div[role="listitem"]:hover,
+div[role="list"] div[role="listitem"]:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
 div[class^="membersWrap_"] div[role="listitem"]:hover,
 div[class^="membersWrap_"] div[role="listitem"]:hover span,
 div[role="menuitem"]:hover,
@@ -387,4 +390,17 @@ div[role="menuitem"]:hover span,
 div[role="tab"]:hover,
 div[role="tab"]:hover span {
   color: var(--ut-hover) !important;
+}
+
+/* The friends list's per-row Message button. Clicking the row already opens the
+   DM, so the icon is a second control for the same action.
+
+   Matched by its aria-label rather than a hashed class -- and deliberately so
+   that a WRONG guess is harmless: if Discord labels it something else, this rule
+   simply matches nothing and the button stays. It does not hide the row, the
+   overflow menu, or anything structural. (An earlier guess in this theme -- that
+   the user panel was labelled "User area" when it is "User status and settings"
+   -- is why the failure mode is worth designing for.) */
+div[role="list"] div[role="listitem"] [aria-label="Message" i] {
+  display: none !important;
 }
