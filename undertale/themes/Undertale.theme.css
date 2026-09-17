@@ -1601,6 +1601,55 @@ div[class^="toolbar_"] div[aria-label]:hover svg[class^="icon_"] {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
+   Forum post cards.
+
+   Measured: radius 12px, a 2px grey border (srgb 0.749) and a soft drop shadow, on a
+   30%-black fill. Discord styles the card in two places -- mainCard_ sets the resting
+   look, container_:hover swaps background, border-colour and shadow -- so both states
+   need answering or the card snaps back to grey chrome under the pointer.
+
+   Square, black, white; the row marks itself in yellow on hover and while open, the
+   way every other row in the theme does. No fill on hover: this theme marks state with
+   colour, never with a filled bar.
+   ══════════════════════════════════════════════════════════════════════════ */
+li[class^="card_"] div[class^="mainCard_"],
+li[class^="card_"] div[class^="container_"][class*="mainCard_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  font-family: var(--ut-font) !important;
+}
+/* Hover AND open: yellow edge, yellow text, nothing filled. */
+li[class^="card_"] div[class^="mainCard_"]:hover,
+li[class^="card_"] div[class^="mainCard_"]:focus-within,
+li[class^="card_"] div[class^="mainCard_"][class*="selected_"],
+li[class^="card_"] div[class^="mainCard_"][class*="active_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  border-color: var(--ut-hover) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+li[class^="card_"] div[class^="mainCard_"]:hover *:not([class*="Badge" i]):not(img),
+li[class^="card_"] div[class^="mainCard_"]:focus-within *:not([class*="Badge" i]):not(img),
+li[class^="card_"] div[class^="mainCard_"][class*="selected_"] *:not([class*="Badge" i]):not(img) {
+  color: var(--ut-hover) !important;
+  background: transparent !important;
+}
+/* Nothing inside the card owns a box -- one card, rows inside it. */
+li[class^="card_"] div[class^="mainCard_"] div {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    Discord's shared popup shell: one frame around the whole thing.
 
    The Quick Switcher and the Channel Topic popup captured as the SAME module --
