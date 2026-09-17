@@ -1045,45 +1045,53 @@ div[role="dialog"] div[class^="inner_"] div[class^="footer_"] button {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Filled buttons were white on white.
+   Every button and tag is the same box.
 
    ClearVision fills the primary/brand variants with the universal accent:
 
      .lookFilled__201d5:is(.colorBrand__201d5,.colorPrimary__201d5) { background-color: var(--hsl-main-color) }
-     .primary_a22cb0 { background: var(--hsl-main-color); border-color: rgba(0,0,0,0) }
+     .primary_a22cb0 { background: var(--hsl-main-color) }
 
-   --hsl-main-color comes from --main-color, which is white here, and the label is
-   white too -- so a filled button was a blank white slab. The outlined variants beside
-   them ("+ Add App") were already correct, which is what made it obvious.
+   --hsl-main-color is --main-color, white here, on a white label -- so "Store" was a
+   blank slab while "+ Add App" beside it was already correct.
 
-   INVERTED rather than flattened: white fill, black label. Making them black-on-white
-   like every other control would have read correctly but erased the difference between
-   a primary action and a secondary one -- and on a confirm dialog that difference is
-   the one thing a button needs to carry. Inverted keeps the emphasis and is the
-   highest contrast pairing available in this palette.
+   These were briefly INVERTED (white fill, black label) to preserve the primary vs
+   secondary distinction. On screen that just looked like two unrelated controls sitting
+   next to each other, so it is reverted: one box for everything. That is also how the
+   game does it -- every menu option looks identical and the SOUL marks the choice, so
+   nothing needs a louder button to say "this one".
    ══════════════════════════════════════════════════════════════════════════ */
-button[class*="lookFilled_"]:is([class*="colorBrand_"], [class*="colorPrimary_"]),
-button[class*="lookFilled_"]:is([class*="colorBrand_"], [class*="colorPrimary_"]) *,
-[class*="primary_"]:not([class*="critical" i]):is(button, [role="button"]),
-[class*="primary_"]:not([class*="critical" i]):is(button, [role="button"]) * {
-  background: var(--ut-white) !important;
+button[class*="lookFilled_"],
+button[class*="lookFilled_"] *,
+[class*="primary_"]:is(button, [role="button"]),
+[class*="primary_"]:is(button, [role="button"]) *,
+[class*="role_"]:is([class*="pill_"], [class*="chip_"]),
+div[class*="rolePill_"],
+div[class*="roleCircle_"] ~ * {
+  background: var(--ut-black) !important;
   background-image: none !important;
-  border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
-  color: var(--ut-black) !important;
+  color: var(--ut-white) !important;
   font-family: var(--ut-font) !important;
   box-shadow: none !important;
 }
-/* The label must not repaint its own box inside the button's. */
+/* The frame goes on the control, not on the label inside it. */
+button[class*="lookFilled_"],
+[class*="primary_"]:is(button, [role="button"]),
+[class*="rolePill_"] {
+  border: var(--ut-line) solid var(--ut-white) !important;
+}
 button[class*="lookFilled_"] *,
 [class*="primary_"]:is(button, [role="button"]) * {
-  background: transparent !important;
   border: none !important;
+  background: transparent !important;
 }
-/* Hover inverts back, so it still reads as a press target. */
-button[class*="lookFilled_"]:is([class*="colorBrand_"], [class*="colorPrimary_"]):hover,
-button[class*="lookFilled_"]:is([class*="colorBrand_"], [class*="colorPrimary_"]):hover * {
-  background: var(--ut-black) !important;
+/* Same hover as every other control in the theme. */
+button[class*="lookFilled_"]:hover,
+button[class*="lookFilled_"]:hover *,
+[class*="primary_"]:is(button, [role="button"]):hover,
+[class*="primary_"]:is(button, [role="button"]):hover * {
   color: var(--ut-hover) !important;
   border-color: var(--ut-hover) !important;
+  background: var(--ut-black) !important;
 }
