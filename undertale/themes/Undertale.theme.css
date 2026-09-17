@@ -1043,3 +1043,47 @@ div[role="dialog"] div[class^="inner_"] div[class^="footer_"],
 div[role="dialog"] div[class^="inner_"] div[class^="footer_"] button {
   font-family: var(--ut-font) !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Filled buttons were white on white.
+
+   ClearVision fills the primary/brand variants with the universal accent:
+
+     .lookFilled__201d5:is(.colorBrand__201d5,.colorPrimary__201d5) { background-color: var(--hsl-main-color) }
+     .primary_a22cb0 { background: var(--hsl-main-color); border-color: rgba(0,0,0,0) }
+
+   --hsl-main-color comes from --main-color, which is white here, and the label is
+   white too -- so a filled button was a blank white slab. The outlined variants beside
+   them ("+ Add App") were already correct, which is what made it obvious.
+
+   INVERTED rather than flattened: white fill, black label. Making them black-on-white
+   like every other control would have read correctly but erased the difference between
+   a primary action and a secondary one -- and on a confirm dialog that difference is
+   the one thing a button needs to carry. Inverted keeps the emphasis and is the
+   highest contrast pairing available in this palette.
+   ══════════════════════════════════════════════════════════════════════════ */
+button[class*="lookFilled_"]:is([class*="colorBrand_"], [class*="colorPrimary_"]),
+button[class*="lookFilled_"]:is([class*="colorBrand_"], [class*="colorPrimary_"]) *,
+[class*="primary_"]:not([class*="critical" i]):is(button, [role="button"]),
+[class*="primary_"]:not([class*="critical" i]):is(button, [role="button"]) * {
+  background: var(--ut-white) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  color: var(--ut-black) !important;
+  font-family: var(--ut-font) !important;
+  box-shadow: none !important;
+}
+/* The label must not repaint its own box inside the button's. */
+button[class*="lookFilled_"] *,
+[class*="primary_"]:is(button, [role="button"]) * {
+  background: transparent !important;
+  border: none !important;
+}
+/* Hover inverts back, so it still reads as a press target. */
+button[class*="lookFilled_"]:is([class*="colorBrand_"], [class*="colorPrimary_"]):hover,
+button[class*="lookFilled_"]:is([class*="colorBrand_"], [class*="colorPrimary_"]):hover * {
+  background: var(--ut-black) !important;
+  color: var(--ut-hover) !important;
+  border-color: var(--ut-hover) !important;
+}

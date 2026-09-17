@@ -42,11 +42,16 @@ const DEFAULT_SETTINGS = {
   toastRuleCount: 3,
   toastMaxChars: 260,
   hotkeyEnabled: true,
-  hotkey: "Ctrl+Shift+P",
+  /* Was Ctrl+Shift+P, which collided on this machine. matchesHotkey() matches
+     INCLUSIVELY -- extra modifiers are allowed, deliberately, so a Hyper key works --
+     so a Karabiner Hyper+P (Ctrl+Alt+Shift+Cmd+P) also satisfies "Ctrl+Shift+P" and
+     fired the picker alongside whatever else was bound to it. Moved to a letter that
+     is not doubling as a Hyper binding here. */
+  hotkey: "Ctrl+Shift+Y",
   autoUpdateTheme: true,
   verifyWithDOM: true,
   verifyWithGitHub: true,
-  themePath: "SoloLeveling-ClearVision.theme.css",
+  themePath: "Undertale.theme.css",
 };
 
 const loadSettings = () => _sharedLoadSettings(PLUGIN_NAME, DEFAULT_SETTINGS);
@@ -356,7 +361,7 @@ module.exports = class CSSPicker {
           <input id="css-picker-hotkey" type="text" value="${escapeHtml(
             settings.hotkey
           )}" style="width: 200px; padding: 6px 8px; border-radius: 2px; border: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.25); color: var(--text-normal, #dcddde);" />
-          <span style="opacity: 0.7;">Example: Ctrl+Shift+P</span>
+          <span style="opacity: 0.7;">Example: Ctrl+Shift+Y</span>
         </label>
       </div>
     `;
