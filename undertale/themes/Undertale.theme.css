@@ -129,7 +129,18 @@
   --background-modifier-selected: transparent;
   --background-modifier-active:   transparent;
 
-  --main-color:      var(--ut-white);
+  /* WAS var(--ut-white). Six surfaces were lost to that: two "mystery boxes", the
+     Friends row, the BOT tag, filled buttons and the unread bar -- every one a place
+     ClearVision uses this as a BACKGROUND, where white-on-white is invisible. Each was
+     found by the user noticing, never by a rule catching it, so the class was closed at
+     the variable instead of one surface at a time.
+
+     The trade-off, stated because it is the thing to judge and not obvious from here:
+     CV also uses this for accent LINES and ICONS, which now go yellow too. That reads
+     against this theme's own reservation of yellow for unread. If the chrome looks too
+     yellow, put --ut-white back on this line and nothing else needs touching -- every
+     per-surface override above still stands on its own. */
+  --main-color:      var(--ut-save);
   --hover-color:     var(--ut-grey);
   --success-color:   var(--ut-save);
   --danger-color:    var(--ut-determination);
