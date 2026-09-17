@@ -263,20 +263,39 @@ module.exports = class CSSPicker {
     this.onGlobalHotkeyDown = (event) => {
       const settings = this.settings || loadSettings();
       if (!settings.hotkeyEnabled) return;
-      if (isEditableTarget(event.target)) return;
+      /* The hotkey is matched BEFORE the editable-target guard. The guard exists so the
+         picker does not fire while typing a message -- but the popups worth capturing
+         (the search autocomplete, the quick switcher, any combobox) are opened BY
+         typing, so their event target is always an editable field. Checking the guard
+         first meant the key returned early in exactly the case this feature was built
+         for, while still working everywhere else -- which is why it looked like the
+         hotkey worked and only the popout path was dead. */
       if (!matchesHotkey(event, settings.hotkey)) return;
 
-      event.preventDefault();
-      event.stopPropagation();
-      if (this.isActive) { this.deactivatePickMode(); return; }
+      if (this.isActive) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.deactivatePickMode();
+        return;
+      }
 
       /* ONE hotkey, doing whichever thing is possible right now.
          A popup cannot be picked: pick mode resolves elementFromPoint from a click, and
          the click dismisses the popup. So when something is open, the key captures all
-         of it directly -- no pointer, nothing to dismiss. With nothing open it toggles
-         pick mode exactly as before, so the old behaviour is unchanged. */
-      const found = typeof this._capturePopouts === "function" && this._capturePopouts();
-      if (!found) this.activatePickMode();
+         of it directly -- no pointer, nothing to dismiss. This runs even from an
+         editable target, because that is where the popups live. */
+      if (typeof this._capturePopouts === "function" && this._capturePopouts()) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+
+      /* Nothing open: pick mode, and NOW the typing guard applies -- starting a pick
+         mid-message is the thing it was protecting against. */
+      if (isEditableTarget(event.target)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      this.activatePickMode();
     };
     this._unsubGlobalHotkey = onKeydown(this.onGlobalHotkeyDown, { capture: true });
 
