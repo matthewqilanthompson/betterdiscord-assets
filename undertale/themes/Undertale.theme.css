@@ -1440,3 +1440,31 @@ div[class*="separator_"] {
   border-radius: var(--ut-radius) !important;
   opacity: 1 !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   The Friends row carries no frame. Final word.
+
+   Its border has come back twice from different rules, because that row satisfies
+   several of them at once: it is a list row, it carries a "selected_" class when
+   active, and it sits inside a framed nav. Chasing whichever rule won this time is how
+   it came back the second time.
+
+   So the whole subtree is stripped instead, pseudo-elements included -- ::before is
+   where the fill hid the first time, and there is no reason to assume a border cannot
+   hide in the same place. The blast radius is one row: friendsButtonContainer_ reaches
+   nothing else in the app.
+
+   Placed last deliberately. It must lose to nothing, and anything added below it that
+   frames this row will silently undo it.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="friendsButtonContainer_"],
+div[class^="friendsButtonContainer_"] *,
+div[class^="friendsButtonContainer_"] *::before,
+div[class^="friendsButtonContainer_"] *::after,
+div[class^="friendsButtonContainer_"]::before,
+div[class^="friendsButtonContainer_"]::after {
+  border: none !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
