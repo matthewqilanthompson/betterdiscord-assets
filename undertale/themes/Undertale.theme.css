@@ -1601,6 +1601,76 @@ div[class^="toolbar_"] div[aria-label]:hover svg[class^="icon_"] {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
+   The composer -- and this is where the battle box goes.
+
+   §4 used to frame the whole message area, and that came off because the framed
+   columns already bounded it. The composer is the shape the game actually uses: a
+   single bounded strip with text in it, nothing nested around it. So the 2px white
+   rectangle lives here now.
+
+   The capture named one thing no element inspection would have: the form's own
+   ::before paints a linear-gradient fade over the bottom of the message list
+   (transparent -> --background-base-low). It is a pseudo-element, so nothing written
+   for elements ever touched it, and against a black ground it is a grey smear above
+   the composer. Killed explicitly.
+
+   The frame goes on the scroll container rather than the form: the form carries the
+   10px side padding, so framing it would sit the line against the column edges.
+   ══════════════════════════════════════════════════════════════════════════ */
+form[class^="form_"]::before,
+form[class^="form_"]::after {
+  background: none !important;
+  background-image: none !important;
+  content: none !important;
+  display: none !important;
+}
+form[class^="form_"] div[class*="scrollableContainer_"],
+form[class^="form_"] div[class*="channelTextArea_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+/* One box: everything inside the strip is flat. */
+form[class^="form_"] div[class*="scrollableContainer_"] div,
+form[class^="form_"] div[class*="channelTextArea_"] div,
+form[class^="form_"] div[class*="inner_"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* The text being typed, and the placeholder, in the theme's font and colour. */
+form[class^="form_"] div[class*="textArea_"],
+form[class^="form_"] div[role="textbox"],
+form[class^="form_"] div[role="textbox"] * {
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+form[class^="form_"] [class*="placeholder_"] {
+  color: var(--ut-white) !important;
+  opacity: 0.55 !important;
+  font-family: var(--ut-font) !important;
+}
+/* Composer buttons own no box, and mark themselves in yellow like every other icon. */
+form[class^="form_"] button,
+form[class^="form_"] button svg {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+}
+form[class^="form_"] button:hover,
+form[class^="form_"] button:hover svg {
+  color: var(--ut-hover) !important;
+  background: transparent !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    Forum post cards.
 
    Measured: radius 12px, a 2px grey border (srgb 0.749) and a soft drop shadow, on a
