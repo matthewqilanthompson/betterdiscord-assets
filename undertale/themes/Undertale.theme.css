@@ -668,7 +668,11 @@ div[class^="friendsButtonContainer_"] li[role="listitem"] {
    margin takes the height with it and the value stays correct at any window size.
    A hardcoded height would not.
    ══════════════════════════════════════════════════════════════════════════ */
-:root { --ut-toolbar-offset: 53px; }
+/* 53px was the measured height difference, but on screen it pushed the sidebar a few
+   pixels BELOW the other two -- the measurement is of the elements, and the frames are
+   drawn on their borders, so the visible edges do not land in quite the same place.
+   Trimmed to what lines up by eye. One variable, so it is a one-token nudge either way. */
+:root { --ut-toolbar-offset: 47px; }
 
 nav[aria-label="Private channels"] {
   margin-top: var(--ut-toolbar-offset) !important;
