@@ -52,6 +52,18 @@
   --ut-font:         "Pixelify Sans", "Determination Mono", system-ui, sans-serif;
   --ut-font-code:    "Pixel Code Regular", "PixelCode", ui-monospace, monospace;
 
+  /* The HSLDockAutoHide plugin injects its own stylesheet with Solo Leveling
+     purple baked in, so no theme CSS could reach it. Those values are now tokens
+     in the plugin whose FALLBACK is the original purple, which means the plugin
+     is unchanged for anyone without this theme. Defining them here is how the
+     dock joins the theme. */
+  --ut-dock-accent:        rgba(255, 255, 255, 0.96);
+  --ut-dock-accent-bright: rgba(255, 255, 255, 1);
+  --ut-dock-accent-68:     rgba(255, 255, 255, 0.68);
+  --ut-dock-accent-42:     rgba(255, 255, 255, 0.42);
+  --ut-dock-accent-40:     rgba(255, 255, 255, 0.40);
+  --ut-dock-accent-22:     rgba(255, 255, 255, 0.22);
+
   /* ClearVision's own contract.
      --main-color is CV's UNIVERSAL accent: selected items, tab highlights, the
      scrollbar, section headers. Setting it to SOUL red put the most reserved
@@ -146,14 +158,31 @@ nav[aria-label="Servers sidebar"] button {
   background: transparent !important;
 }
 
-/* Selection is an inverted box, the way the game highlights a menu item: white
-   outline and white text on black, never a solid fill of an accent colour. */
-div[class^="selected_"], div[class^="modeSelected_"],
-li[class^="channel_"] div[class^="selected_"] {
+/* Selection.
+   ClearVision FILLS the selected item with var(--main-color). Setting that to
+   SOUL red put red on everything; setting it to white then filled selections
+   white with white text on top -- unreadable, which is worse. The variable has to
+   stay white for CV's lines and icons, so the fill is overridden here instead,
+   with selectors specific enough to beat CV's own.
+
+   Undertale highlights a menu item by putting the SOUL beside it, not by
+   inverting it, so black fill with a white outline is the faithful answer. */
+[class*="selected_"], [class*="modeSelected_"],
+nav[aria-label="Private channels"] [class*="selected_"],
+div[class^="tabBar_"] [class*="selected_"],
+div[class^="topPill_"] [class*="selected_"],
+li[class^="channel_"] [class*="selected_"] {
   background: var(--ut-black) !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
   color: var(--ut-white) !important;
+  background-image: none !important;
+}
+
+/* Whatever CV paints a selected label with, it must not be the fill colour. */
+[class*="selected_"] *, [class*="modeSelected_"] * {
+  color: var(--ut-white) !important;
+  background-color: transparent !important;
 }
 
 /* The scrollbar was the loudest thing on screen in red. It is furniture. */

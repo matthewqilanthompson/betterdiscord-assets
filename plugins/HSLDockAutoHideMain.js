@@ -830,8 +830,8 @@ class DockEngine {
     rail.style.cssText = [
       "position: fixed", "left: 0px", "top: 0px", "width: 0px",
       `height: ${this.railHeightPx}px`, "pointer-events: none", "opacity: 0", "z-index: 40",
-      "background: linear-gradient(90deg, rgba(138,43,226,0.96), rgba(167,139,250,0.96))",
-      "box-shadow: 0 0 18px rgba(138,43,226,0.68), 0 0 34px rgba(138,43,226,0.42)",
+      "background: linear-gradient(90deg, var(--ut-dock-accent, rgba(138,43,226,0.96)), var(--ut-dock-accent-bright, rgba(167,139,250,0.96)))",
+      "box-shadow: 0 0 18px var(--ut-dock-accent-68, rgba(138,43,226,0.68)), 0 0 34px var(--ut-dock-accent-42, rgba(138,43,226,0.42))",
       "transform: none",
       "transition: opacity 180ms ease, top 120ms cubic-bezier(0.2, 0.75, 0.25, 1)",
     ].join(";");
@@ -1338,7 +1338,7 @@ module.exports = class HSLDockAutoHide {
         border-radius: 0 !important;
         background: rgba(8, 10, 20, 0.96) !important;
         background-image: none !important;
-        border-left: 1px solid rgba(138, 43, 226, 0.22) !important;
+        border-left: 1px solid var(--ut-dock-accent-22, rgba(138, 43, 226, 0.22)) !important;
         box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3) !important;
         gap: 10px !important;
         min-width: 0 !important;
