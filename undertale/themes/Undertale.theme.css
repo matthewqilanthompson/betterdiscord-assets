@@ -1208,3 +1208,47 @@ button[class*="textButton_" i]:hover *,
   background: transparent !important;
   border: none !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Context menus.
+
+   Reported as "transparent a bit", and the capture confirms it: the menu's own
+   background is in defaultStyles, i.e. never set, so whatever is behind it shows
+   through. Written generically -- div[role="menu"] plus any menu_ that actually
+   contains menu structure -- because every context menu in Discord is built this way
+   and fixing only "Profile Actions" would leave the rest see-through.
+
+   Discord already draws div[role="separator"] between groups; like the popout's
+   ::before, it only needs recolouring to a white hairline rather than adding anything.
+
+   No highlight fill on the items: the modifier and interactive background variables
+   are already transparent theme-wide, and menuitem hover is in the yellow-text rules
+   further up. A menu entry marks itself the same way a channel row does.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[role="menu"],
+div[class*="menu_"]:has([role="menuitem"]),
+div[class*="menu_"]:has([role="separator"]) {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  font-family: var(--ut-font) !important;
+}
+
+/* The scroller inside must not paint over the frame. */
+div[role="menu"] div[class*="scroller_"],
+div[class*="menu_"] > div[class*="scroller_"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Discord's own group separator, recoloured rather than replaced. */
+div[role="separator"] {
+  background: var(--ut-white) !important;
+  background-color: var(--ut-white) !important;
+  border: none !important;
+  opacity: 1 !important;
+}
