@@ -173,3 +173,37 @@ Also worth lifting from that theme when channels are revisited:
 /* channel row spacing -- a double gap made the list far easier to scan */
 ul[aria-label="Channels"] li[class*="containerDefault_"] { margin-bottom: 8px !important; }
 ```
+
+## Undertale typing animation for messages
+
+**Status:** not started. Requested 2026-09-17, alongside the dialogue-box message styling.
+
+**What is wanted:** messages type themselves out character by character, the way Sans's and
+Papyrus's dialogue does in `sans-companion` / `pixel-home`.
+
+**Why this is NOT CSS, stated precisely so it is not attempted again:**
+
+- The usual CSS trick is `width` animated in `ch` units with `overflow: hidden`, plus
+  `steps(n)`. It needs the character count **in the stylesheet**, one keyframe set per
+  length. Message text is arbitrary and unknown at author time.
+- It also only works on a **single line**. Any message that wraps breaks it -- the clip
+  is horizontal, so wrapped lines appear all at once, fully formed, above a line that is
+  still typing.
+- Per-line asterisks have the same root cause: CSS `::before` attaches to an ELEMENT.
+  The visual lines produced by wrapping are not elements and do not exist until layout
+  runs, so there is nothing to attach to. One asterisk per message is the CSS ceiling,
+  and that is what the theme ships.
+
+**What the plugin would do**, reusing the approach already working in the companion apps:
+
+1. `MutationObserver` on the message list, firing only for newly added nodes.
+2. For each new node, take `textContent`, blank it, then write it back on a timer
+   (the companions use ~28ms/char, with a longer pause on `.`, `!` and `?`).
+3. Split on line breaks and insert `* ` per line at that point -- trivial in JS, and the
+   thing CSS cannot reach.
+4. Respect `prefers-reduced-motion`, and skip messages already on screen at load: typing
+   out a hundred-message backlog on every channel switch would be unusable.
+
+**Open question before building:** should it animate only messages that arrive WHILE you
+are watching (the companion's behaviour), or also on channel switch? The first is far
+less annoying and much cheaper.

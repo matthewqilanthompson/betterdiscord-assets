@@ -1731,6 +1731,69 @@ div[class^="tagsContainer_"] div[class^="pill_"][class*="selected_"] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   MESSAGES AS DIALOGUE BOXES.
+
+   Undertale's dialogue box is a white rectangle, a portrait on the left, and every
+   line led by an asterisk. Discord's message row is the closest thing in the app, so
+   each one becomes a box: portrait left, text right, asterisk in front.
+
+   The asterisk is ONE PER MESSAGE, not one per line. CSS can insert content at the
+   start of an element; it cannot address the visual lines that text wrapping produces,
+   because those are not elements and do not exist until layout runs. Per-line
+   asterisks are a plugin, and they are in PLUGIN-BACKLOG.md with the reason.
+
+   The message panel is cleared to transparent here so exactly ONE translucent layer
+   sits over the wallpaper. Every stacked layer multiplies: three at 0.78 is 0.99, and
+   the art disappears while every individual rule still looks correct.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="messagesWrapper_"],
+ol[class^="scrollerInner_"],
+div[class^="scrollerContent_"],
+main[class^="chatContent_"] > div[class*="scroller_"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* The box itself. */
+li[class*="messageListItem_"] > div[role="article"] {
+  background: transparent !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  margin: 8px 16px !important;
+  padding: 12px 16px 12px 78px !important;
+  min-height: 60px !important;
+}
+/* Hovering a box does not fill it; the text goes yellow, as everywhere else. */
+li[class*="messageListItem_"] > div[role="article"]:hover {
+  background: transparent !important;
+  border-color: var(--ut-white) !important;
+}
+
+/* The portrait: square, pixelated, sitting inside the box's left margin. */
+li[class*="messageListItem_"] img[class*="avatar_"] {
+  border-radius: 0 !important;
+  image-rendering: pixelated !important;
+  left: 16px !important;
+  top: 12px !important;
+  width: 48px !important;
+  height: 48px !important;
+}
+
+/* The asterisk. Undertale leads every line of dialogue with it. */
+li[class*="messageListItem_"] div[class^="messageContent_"]::before {
+  content: "* " !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+  white-space: pre !important;
+}
+li[class*="messageListItem_"] div[class^="messageContent_"] {
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    The composer -- and this is where the battle box goes.
 
    §4 used to frame the whole message area, and that came off because the framed
