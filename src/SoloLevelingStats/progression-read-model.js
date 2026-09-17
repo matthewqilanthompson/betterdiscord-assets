@@ -402,8 +402,9 @@ module.exports = {
     // title and shadow multipliers are designed for base stats and must not apply here.
     const baseCombatKeys = new Set(['attack', 'defense', 'critChance', 'critDamage']);
 
-    // SHADOW MONARCH PERK (H1 — Shadow Monarch's Regalia): the SM gear has NO fixed bonus.
-    // Its power scales with the player's OWN base stats and grows over time as those grow
+    // SHADOW MONARCH PERK (H1 — Shadow Monarch's Regalia): on TOP of the set's high fixed
+    // stats (it's the strongest gear in the game), this perk layers extra power that scales
+    // with the player's OWN base stats and grows over time as those grow
     // (mob defeats -> Kandiaru's Favor). Each equipped regalia piece contributes; the
     // full 10-piece set scales hardest. Computed here (not the cached equipment path) so
     // it stays fresh as base stats climb. Treated as a flat base-stat addition, like other
@@ -415,8 +416,16 @@ module.exports = {
       if (smPieces > 0) {
         const coreKeys = ['strength', 'agility', 'intelligence', 'vitality', 'perception'];
         const totalBase = coreKeys.reduce((s, k) => s + (Number(baseStats[k]) || 0), 0);
-        const SM_REGALIA_DIVISOR = 5000; // full set ≈ +100% all stats per 5000 base stats, uncapped
-        const setMultiplier = (smPieces / 10) * (totalBase / SM_REGALIA_DIVISOR);
+        // Buffed 2026-08-10: the old formula (setMultiplier = pieces/10 * base/5000)
+        // gave almost nothing until ~5000 base stats, so the terminal Lv2000 reward
+        // felt weak. Now the full set GUARANTEES a strong floor (+100% all stats) AND
+        // keeps scaling — uncapped — as base stats climb, so it grows with the player.
+        // Effective (full set): +100% + (totalBase / 1000)*100% all stats, before the
+        // title/shadow multipliers applied below. Per-piece proportional via setFraction.
+        const SM_REGALIA_BASE = 1.0;      // +100% at full 10-piece set, before scaling
+        const SM_REGALIA_DIVISOR = 1000;  // additional fraction per point of total base stats, uncapped (5x the old 1/5000 rate)
+        const setFraction = smPieces / 10;
+        const setMultiplier = setFraction * (SM_REGALIA_BASE + totalBase / SM_REGALIA_DIVISOR);
         if (setMultiplier > 0) {
           for (const k of coreKeys) {
             smSetBonus[k] = Math.floor((Number(baseStats[k]) || 0) * setMultiplier);

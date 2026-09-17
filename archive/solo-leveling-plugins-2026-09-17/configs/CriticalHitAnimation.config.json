@@ -1,0 +1,21 @@
+{
+    "settings": {
+        "enabled": true,
+        "animationDuration": 4000,
+        "floatDistance": 100,
+        "fontSize": 50,
+        "screenShake": true,
+        "shakeIntensity": 5,
+        "shakeDuration": 300,
+        "cooldown": 500,
+        "showCombo": true,
+        "maxCombo": 30,
+        "ownUserId": "164568266730242048",
+        "debugMode": false
+    },
+    "userCombo": {
+        "userId": "164568266730242048",
+        "comboCount": 0,
+        "lastCritTime": 0
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "settings": {
+        "enabled": true,
+        "debugMode": false,
+        "animationDuration": 2500,
+        "scale": 1,
+        "showRankAndRole": true
+    }
+}

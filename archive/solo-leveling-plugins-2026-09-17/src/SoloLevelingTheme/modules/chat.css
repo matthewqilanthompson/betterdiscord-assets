@@ -1,0 +1,145 @@
+/* Module: Chat & Messages (§11)
+
+   SELECTOR DURABILITY NOTE (audited 2026-08-03)
+   ---------------------------------------------
+   Discord's hashed classes regenerate "whenever new class names that would
+   normally conflict are added or when significant changes to that part of the
+   UI occur" (docs.betterdiscord.app/themes/introduction/environment) — not on
+   a schedule, so breakage arrives without warning and SILENTLY: a renamed
+   class means the rule simply stops matching. No error, no console warning.
+
+   Two mitigations are already in place and must not be broken by edits here:
+     1. shared/class-substitution.js rewrites `[class*="stem_"]` /
+        `[class^="stem_"]` into exact hash-fast classes at load, but ONLY for
+        stems it can prove unique (dual-gated). It matches that exact literal
+        shape — preserve it. Of the stems below, embedFull_, repliedMessage_
+        and timestampInline_ are allowlisted and DO get substituted;
+        messagesWrapper_, scroller_, embed_, gridContainer_, mentioned_,
+        message_ and timestamp_ are ambiguous (container_ alone has 693
+        distinct hashes) and correctly stay as substring matches.
+     2. Where a genuinely stable anchor exists it is listed ALONGSIDE the
+        hashed form rather than replacing it, so the rule survives whichever
+        one Discord changes.
+
+   Stable anchors available in the message list, all verified in live use by
+   plugins in this suite: `li[data-list-item-id^="chat-messages-"]` (virtual
+   list key), `div[role="article"]` (the message), and the plain `time` and
+   `article` elements.
+
+   KNOWN-UNFIXABLE IN PURE CSS: the mentioned-message rules (§11c) key off
+   `mentioned_`, for which Discord exposes no aria/role/data equivalent. The
+   durable solution is JS classification — SystemWindow already does exactly
+   this with `li.sw-mentioned` after hitting the same wall. Do not "fix" §11c
+   with :has(); a substring :has() argument on the message list is the single
+   hottest selector shape in the client (see build-styles.js in SystemWindow
+   for the measured reasoning). */
+
+/* ═══════════════════════════════════════════════════════════════════════
+   §11  CHATBOX (Message area styling)
+   UNVERIFIED
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* §11a — Chatbox scroller: hide scrollbar (keep scroll functional)
+   The message scroller is div[class^="messagesWrapper_"] div[class^="scroller_"]
+   which is the main chat message list. Hide scrollbar across all browsers. */
+div[class^="messagesWrapper_"] div[class^="scroller_"] {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+div[class^="messagesWrapper_"] div[class^="scroller_"]::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+/* §11b — Embed cards: solid dark bg + purple left-border accent
+   Discord default: background: var(--background-surface-high) → rgba(0,0,0,0.3)
+   and border-left: 4px solid white. Override to theme-matched solid dark bg
+   with purple left accent. Targets all embed types (link previews, rich embeds). */
+article[class^="embedFull_"],
+article[class^="embed_"] {
+  background: var(--sl-bg-surface) !important;
+  background-image: none !important;
+  border: 1px solid rgba(var(--sl-color-primary-rgb), 0.3) !important;
+  border-left: 4px solid var(--sl-color-primary) !important;
+  border-radius: 2px !important;
+}
+/* Embed inner grid container: transparent so parent bg shows through */
+article[class^="embedFull_"] div[class^="gridContainer_"],
+article[class^="embed_"] div[class^="gridContainer_"] {
+  background: transparent !important;
+}
+
+/* §11c — Mentioned messages: purple tint bg + purple left bar
+   Discord default: bg var(--message-mentioned-background-default) (yellowish)
+   and ::before bar uses var(--icon-feedback-warning) (yellow/orange).
+   Override both to purple to match Solo Leveling theme. */
+div[class*="mentioned_"][class*="message_"],
+div[class^="message_"][class*="mentioned_"] {
+  background: rgba(var(--sl-color-primary-rgb), 0.08) !important;
+}
+/* Mentioned ::before left accent bar: purple instead of yellow */
+div[class*="mentioned_"][class*="message_"]::before,
+div[class^="message_"][class*="mentioned_"]::before {
+  background: var(--sl-color-primary) !important;
+}
+/* Mentioned hover: slightly brighter purple tint */
+div[class*="mentioned_"][class*="message_"]:hover,
+div[class^="message_"][class*="mentioned_"]:hover {
+  background: rgba(var(--sl-color-primary-rgb), 0.12) !important;
+}
+
+/* §11c (continued) — Inline @mention and #channel pills: bigger padding
+   Default Discord: padding 0 4px.  Bump to 2px 6px for a chunkier pill.
+
+   REMOVED (2026-08-03): `span[class*="wrapper_f61d60"]`. That was a HARDCODED
+   BUILD HASH, not a stem — the substring form `[class*="stem_"]` survives a
+   rehash, but a baked-in hash matches exactly one Discord build and silently
+   stops matching after any rebuild of that module. It also can't be resolved
+   by shared/class-substitution.js, whose CLASS_ATTR_RE only recognises the
+   `[class*="name_"]` stem shape. The two selectors kept below are Discord's
+   UNHASHED semantic classes and already cover the same pills. */
+span.channelMention,
+span[class*="roleMention"] {
+  padding: 2px 6px !important;
+  border-radius: 2px !important;
+}
+
+/* §11d — Reply context bar: purple spine connector
+   The repliedMessage_ div has a ::before pseudo that draws the reply
+   connector line (the L-shaped pipe). Override its color to purple. */
+div[class^="repliedMessage_"]::before {
+  border-color: rgba(var(--sl-color-primary-rgb), 0.5) !important;
+}
+
+/* §11e — Timestamps: muted purple tone
+   Both inline timestamps (next to username in header) and hover timestamps
+   (compact left-margin times). Default is grey ~srgb(0.58, 0.58, 0.61).
+   Override to a muted purple that fits the Solo Leveling palette. */
+div[class^="messagesWrapper_"] span[class^="timestamp_"],
+div[class^="messagesWrapper_"] span[class*="timestampInline_"],
+div[class^="messagesWrapper_"] time {
+  color: rgba(180, 140, 255, 0.5) !important;
+}
+
+/* §11e (hover) — Brighten timestamps when hovering the message row.
+
+   The row is anchored on `li[data-list-item-id^="chat-messages-"]` rather than
+   on a hashed class. That attribute is Discord's own virtual-list key and is
+   verified in use at runtime by three plugins in this suite
+   (MessageEditHistory decorator.js, CriticalHit MESSAGE_SELECTORS,
+   SystemWindow) — i.e. it is empirically live in this client, not inferred.
+   The hashed `li[class*="message_"]` form is kept alongside it so the rule
+   survives whichever of the two Discord changes. */
+div[class^="messagesWrapper_"] li[data-list-item-id^="chat-messages-"]:hover span[class^="timestamp_"],
+div[class^="messagesWrapper_"] li[data-list-item-id^="chat-messages-"]:hover span[class*="timestampInline_"],
+div[class^="messagesWrapper_"] li[data-list-item-id^="chat-messages-"]:hover time,
+div[class^="messagesWrapper_"] li[class*="message_"]:hover span[class^="timestamp_"],
+div[class^="messagesWrapper_"] li[class*="message_"]:hover span[class*="timestampInline_"],
+div[class^="messagesWrapper_"] li[class*="message_"]:hover time {
+  color: rgba(200, 170, 255, 0.9) !important;
+}
+
+/* §11f — Message hover highlight: REMOVED
+   Disabled — conflicts with SystemWindow codeblock hover glow.
+   Was: soft purple radial-gradient wash on message hover. */

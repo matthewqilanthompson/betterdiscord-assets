@@ -1,0 +1,36 @@
+timestamp=2026-02-12T03:25:14.543Z
+candidates=27
+removedSelectors=27
+removedWholeRules=0
+partialRuleEdits=6
+
+#channels div._629e4c86564a4ee7-sectionDivider::after
+#channels div._629e4c86564a4ee7-sectionDivider::before
+#channels ul[aria-label='Channels'] li._29444ba32c7fbeab-containerDefault *
+._160d8e55254637e5-app
+div#channels._629e4c86564a4ee7-scroller
+div#channels._629e4c86564a4ee7-scroller::after
+div#channels._629e4c86564a4ee7-scroller::before
+div._5e434347c823b592-sidebar::after
+div._5e434347c823b592-sidebar::before
+div._5e434347c823b592-sidebarList
+div._5e434347c823b592-sidebarList::after
+div._5e434347c823b592-sidebarList::before
+div._5e434347c823b592-sidebarListRounded
+div._5e434347c823b592-sidebarListRounded::after
+div._5e434347c823b592-sidebarListRounded::before
+nav._2637a2609f343032-container
+nav._2637a2609f343032-container::after
+nav._2637a2609f343032-container::before
+nav[aria-label='Private channels']
+  div[class*='-interactive'][class*='_972a0d22c8afa7f0-interactive']
+nav[aria-label='Private channels']
+  div[class*='-interactive'][class*='_972a0d22c8afa7f0-interactive']:hover
+nav[aria-label='Private channels']
+  div[class*='-interactiveSelected'][class*='_972a0d22c8afa7f0-interactiveSelected']
+nav[aria-label='Private channels'] div[class*='_972a0d22c8afa7f0-interactiveSelected']
+nav[aria-label='Private channels'] div[class*='bf202d63ad53e289-selected']
+section[role='navigation'][class*='_9293f6b2fc12398a-themed']
+ul.d125d22cdfd32cfe-content
+ul.d125d22cdfd32cfe-content::after
+ul.d125d22cdfd32cfe-content::before

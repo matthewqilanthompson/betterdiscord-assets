@@ -1,0 +1,236 @@
+/**
+ * @name Undertale
+ * @author matthewqilanthompson
+ * @version 0.1.0
+ * @description Undertale theme for Discord, on a ClearVision v7 base. Vertical slice: tokens, the battle box, and the SOUL.
+ * @source https://github.com/matthewqilanthompson/betterdiscord-assets
+ */
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §1  IMPORTS
+   ClearVision v7 stays the base (user's call): it carries Discord's surface
+   coverage and absorbs the DOM churn, which this theme would otherwise own.
+   The HorizontalServerList imports are NOT optional -- HSLDockAutoHide,
+   HSLWheelBridge and UserPanelDockMover are live plugins that depend on that
+   layout existing.
+
+   Variables are INLINE rather than @import'ed from ./variables/. A BD theme is
+   injected into the discord.com document, so a relative url() resolves against
+   discord.com and silently 404s -- which is why the old theme pinned a GitHub
+   raw URL. Inline works with no publishing step; split it out later if it grows.
+   ══════════════════════════════════════════════════════════════════════════ */
+@import url("https://clearvision.github.io/ClearVision-v7/main.css");
+@import url("https://discordstyles.github.io/HorizontalServerList/HorizontalServerList.css");
+@import url("https://discordstyles.github.io/HorizontalServerList/bottomhsl.css");
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §2  TOKENS
+   Two groups, deliberately separate. --ut-* are ours and mean something in
+   Undertale's language. The unprefixed ones are ClearVision's contract: setting
+   those is how the base theme is steered, rather than fighting it selector by
+   selector.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* The palette is tiny on purpose. Undertale's UI is one weight of white line
+     on black; nearly all of its character comes from restraint. */
+  --ut-black:        #000000;
+  --ut-white:        #ffffff;
+  --ut-grey:         #bfbfbf;   /* inactive text: the game dims, never tints */
+  --ut-soul:         #ff0000;   /* the SOUL. Mentions, and nothing else. */
+  --ut-save:         #ffff00;   /* SAVE points. Unread, and nothing else. */
+  --ut-mercy:        #ffcc00;   /* FIGHT/ACT/ITEM/MERCY button yellow */
+  --ut-determination:#ff3f3f;
+
+  --ut-line:         2px;       /* every border in the game is the same weight */
+  --ut-radius:       0px;       /* nothing is rounded. Nothing. */
+
+  /* Pixelify Sans is installed locally and has full Unicode coverage.
+     UT-Sans/UT-Papyrus are deliberately NOT used here: measured 2026-09-17 they
+     map 124 glyphs and have no accents, curly quotes or ellipsis. That is fine
+     for Sans's own dialogue, where the text is ours, and wrong for Discord,
+     where usernames and messages are arbitrary. */
+  --ut-font:         "Pixelify Sans", "Determination Mono", system-ui, sans-serif;
+  --ut-font-code:    "Pixel Code Regular", "PixelCode", ui-monospace, monospace;
+
+  /* The HSLDockAutoHide plugin injects its own stylesheet with Solo Leveling
+     purple baked in, so no theme CSS could reach it. Those values are now tokens
+     in the plugin whose FALLBACK is the original purple, which means the plugin
+     is unchanged for anyone without this theme. Defining them here is how the
+     dock joins the theme. */
+  --ut-dock-accent:        rgba(255, 255, 255, 0.96);
+  --ut-dock-accent-bright: rgba(255, 255, 255, 1);
+  --ut-dock-accent-68:     rgba(255, 255, 255, 0.68);
+  --ut-dock-accent-42:     rgba(255, 255, 255, 0.42);
+  --ut-dock-accent-40:     rgba(255, 255, 255, 0.40);
+  --ut-dock-accent-22:     rgba(255, 255, 255, 0.22);
+
+  /* ClearVision's own contract.
+     --main-color is CV's UNIVERSAL accent: selected items, tab highlights, the
+     scrollbar, section headers. Setting it to SOUL red put the most reserved
+     colour in the palette on every chrome element at once -- seen on screen, the
+     result reads as ClearVision-in-red rather than Undertale. White is the UI
+     colour in this game; red is the SOUL and appears on mentions, nowhere else. */
+  --main-color:      var(--ut-white);
+  --hover-color:     var(--ut-grey);
+  --success-color:   var(--ut-save);
+  --danger-color:    var(--ut-determination);
+  --font-primary:    var(--ut-font);
+  --font-display:    var(--ut-font);
+  --font-headline:   var(--ut-font);
+  --font-code:       var(--ut-font-code);
+  --background-image: none;                 /* flat black; no wallpaper */
+  --background-overlay: var(--ut-black);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §3  FLATTEN
+   ClearVision is glassy by default and Undertale is not. This is the one broad
+   override in the slice, and it is why keeping CV as a base is still cheap:
+   the coverage stays, the finish changes.
+   ══════════════════════════════════════════════════════════════════════════ */
+.theme-dark, .theme-light {
+  --background-primary:   var(--ut-black);
+  --background-secondary: var(--ut-black);
+  --background-tertiary:  var(--ut-black);
+  --text-normal:          var(--ut-white);
+  --text-muted:           var(--ut-grey);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §3b  PANEL FRAMES
+   Undertale draws every region as a box in one weight of white line, so the
+   frame belongs on the panels, not only the message area.
+
+   Three things learned from the Solo Leveling theme, which is 2,895 lines proven
+   against real Discord:
+
+   1. ANCHOR ON aria-label, NOT class hashes. Discord regenerates its class names;
+      the labels survive. That theme leans on them 29 times for the quick
+      switcher alone, and this repo has already been bitten by a server-rail DOM
+      change.
+   2. USE !important. It carries 726 of them, because ClearVision's own rules win
+      otherwise -- which is exactly why the first version of this section drew no
+      borders at all despite matching.
+   3. PREFER class^= OVER class*=. It uses prefix matching 882 times against 213,
+      because `*=` catches unintended elements that merely contain the substring.
+   ══════════════════════════════════════════════════════════════════════════ */
+nav[aria-label="Servers sidebar"],
+nav[aria-label="Private channels"],
+div[aria-label="Channels"],
+section[aria-label="User status and settings"],
+div[class^="membersWrap_"],
+div[class^="nowPlayingColumn_"],
+div[class^="peopleColumn_"] {
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  background: var(--ut-black) !important;
+}
+
+/* The user panel kept a lavender gradient because the first version guessed
+   aria-label="User area". The real label is "User status and settings" -- taken
+   from the archived theme, which uses it seven times. Its children carry the
+   gradient too, so they are flattened explicitly rather than inherited. */
+section[aria-label="User status and settings"],
+section[aria-label="User status and settings"] > div,
+div[class^="panels_"], div[class^="panels_"] > div {
+  background: var(--ut-black) !important;
+  background-image: none !important;
+}
+
+/* The bottom dock band. The HorizontalServerList imports move the guild list
+   down there, and its inner scroll containers keep their own fills, so the whole
+   chain is flattened -- not just the nav. The scroll arrows were rendering
+   maroon; in this theme every control is a white line. */
+nav[aria-label="Servers sidebar"] ul[role="tree"],
+nav[aria-label="Servers sidebar"] [data-list-id="guildsnav"],
+nav[aria-label="Servers sidebar"] div[class^="itemsContainer_"],
+nav[aria-label="Servers sidebar"] div[class^="scroller_"],
+nav[aria-label="Servers sidebar"] div[class^="none_"] {
+  background: var(--ut-black) !important;
+  background-image: none !important;
+  border: none !important;
+}
+nav[aria-label="Servers sidebar"] svg,
+nav[aria-label="Servers sidebar"] [class*="arrow" i],
+nav[aria-label="Servers sidebar"] button {
+  color: var(--ut-white) !important;
+  fill: var(--ut-white) !important;
+  background: transparent !important;
+}
+
+/* Selection.
+   ClearVision FILLS the selected item with var(--main-color). Setting that to
+   SOUL red put red on everything; setting it to white then filled selections
+   white with white text on top -- unreadable, which is worse. The variable has to
+   stay white for CV's lines and icons, so the fill is overridden here instead,
+   with selectors specific enough to beat CV's own.
+
+   Undertale highlights a menu item by putting the SOUL beside it, not by
+   inverting it, so black fill with a white outline is the faithful answer. */
+[class*="selected_"], [class*="modeSelected_"],
+nav[aria-label="Private channels"] [class*="selected_"],
+div[class^="tabBar_"] [class*="selected_"],
+div[class^="topPill_"] [class*="selected_"],
+li[class^="channel_"] [class*="selected_"] {
+  background: var(--ut-black) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  color: var(--ut-white) !important;
+  background-image: none !important;
+}
+
+/* Whatever CV paints a selected label with, it must not be the fill colour. */
+[class*="selected_"] *, [class*="modeSelected_"] * {
+  color: var(--ut-white) !important;
+  background-color: transparent !important;
+}
+
+/* The scrollbar was the loudest thing on screen in red. It is furniture. */
+::-webkit-scrollbar-thumb {
+  background: var(--ut-grey) !important;
+  border-radius: var(--ut-radius) !important;
+  border: none !important;
+}
+::-webkit-scrollbar-track { background: var(--ut-black) !important; }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §4  THE BATTLE BOX
+   The single most recognisable shape in the game: a 2px white rectangle with
+   nothing inside it but text. Drawn around the message area.
+   ══════════════════════════════════════════════════════════════════════════ */
+main[class^="chatContent_"], div[class^="chatContent_"] {
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  margin: 8px;
+  background: var(--ut-black) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §5  THE SOUL
+   Mentions are the one place red is allowed. The badge becomes the SOUL heart
+   rather than a rounded pill.
+
+   Deliberately a CSS shape, not an SVG asset: this renders on every mention in
+   view, and the repo's own TYPING_LAG_AUDIT and PERFORMANCE_AUDIT are about the
+   message hot path. No animation here for the same reason -- a pulsing heart on
+   every mention is exactly the sort of thing those audits were written about.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="numberBadge_"], div[class^="mentionsBadge_"], div[class^="unreadMentionsIndicator"] {
+  background: var(--ut-soul) !important;
+  border-radius: var(--ut-radius) !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font);
+  clip-path: polygon(50% 100%, 0% 38%, 9% 12%, 28% 4%, 50% 18%,
+                     72% 4%, 91% 12%, 100% 38%);
+  min-width: 18px;
+  min-height: 18px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §6  SAVE
+   Unread is the other reserved colour: the yellow of a save point.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="unread_"]::before, div[class^="unreadMentionsBar_"] {
+  background: var(--ut-save) !important;
+  border-radius: var(--ut-radius) !important;
+}

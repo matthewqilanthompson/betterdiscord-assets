@@ -1,0 +1,118 @@
+{
+    "bonuses": {
+        "xpBonus": 2.199992762647072,
+        "critBonus": 0.34999999995949826,
+        "critDamageBonus": 1.316357833474571,
+        "questBonus": 0.6499928832055439,
+        "allStatBonus": 0.35,
+        "attackCooldownReduction": 0.27913345665465356,
+        "daggerThrowDamageBonus": 1.0583432978718286,
+        "hpRegenBonus": 1.0935046902790546,
+        "manaRegenBonus": 1.0935046902790546,
+        "debuffDurationReduction": 0.16,
+        "debuffResistChance": 0.064,
+        "debuffCleanseChance": 0.1056,
+        "flatMana": 100000,
+        "manaCostReduction": 0.75,
+        "tenacityThreshold": 1,
+        "tenacityDamageReduction": 0.99,
+        "ariseChanceOverride": 1,
+        "shadowGrowthMultiplier": 3
+    },
+    "settings": {
+        "enabled": true,
+        "debugMode": false,
+        "visibleTiers": [
+            "tier1",
+            "tier2",
+            "tier3",
+            "tier4",
+            "tier5",
+            "tier6"
+        ],
+        "currentTierPage": "tier6",
+        "skillPoints": 35,
+        "unlockedSkills": [],
+        "skillLevels": {
+            "will_to_recover": 10,
+            "sprint": 15,
+            "vital_points_targeting": 15,
+            "advanced_dagger_techniques": 15,
+            "stealth": 15,
+            "dagger_throw": 15,
+            "mutilation": 15,
+            "shadow_preservation": 1,
+            "shadow_extraction": 1,
+            "shadow_army_expansion": 1,
+            "shadow_senses": 1,
+            "shadow_exchange": 5,
+            "rulers_authority": 3,
+            "domain_of_the_monarch": 25,
+            "black_heart_awakened": 1,
+            "ashborns_will": 30,
+            "dragons_fear": 1,
+            "eternal_shadow_monarch": 1
+        },
+        "lastLevel": 2001,
+        "totalEarnedSP": 36264,
+        "totalSpentSP": 36229,
+        "currentMana": 2693290,
+        "maxMana": 2693340,
+        "activeSkillStates": {
+            "stealth_technique": {
+                "active": true,
+                "expiresAt": 0,
+                "cooldownUntil": 1774762253104,
+                "chargesLeft": 0
+            }
+        },
+        "combatSkillStates": {
+            "domain_expansion": {
+                "cooldownUntil": 1786511273624,
+                "lastUsedAt": 1786511143868
+            },
+            "bloodlust_aura": {
+                "cooldownUntil": 1785995261507,
+                "lastUsedAt": 1785995175003
+            },
+            "dagger_throw": {
+                "cooldownUntil": 1786511170236,
+                "lastUsedAt": 1786511148610
+            },
+            "rulers_authority_force": {
+                "cooldownUntil": 1785995262825,
+                "lastUsedAt": 1785995176321
+            },
+            "sprint_burst": {
+                "cooldownUntil": 1785995382529,
+                "lastUsedAt": 1785995166269
+            },
+            "mutilation": {
+                "cooldownUntil": 1786511215640,
+                "lastUsedAt": 1786511150762
+            },
+            "dagger_rush": {
+                "cooldownUntil": 1786511204477,
+                "lastUsedAt": 1786511161225
+            },
+            "dragons_fear_roar": {
+                "cooldownUntil": 1786511254084,
+                "lastUsedAt": 1786511145954
+            }
+        },
+        "manaRegenRate": 1,
+        "lastManaRegen": 1788026954461
+    },
+    "activeBuffs": {
+        "xpMultiplier": 1.15,
+        "critChanceBonus": 0.2,
+        "guaranteedCrit": false,
+        "allStatMultiplier": 1,
+        "globalMultiplier": 1
+    },
+    "hiddenBlessings": {
+        "sourceRank": "E",
+        "xpBonus": 0.03,
+        "naturalGrowthMultiplier": 1.08
+    }
+}

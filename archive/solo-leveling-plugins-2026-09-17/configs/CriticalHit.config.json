@@ -1,0 +1,2904 @@
+{
+    "settings": {
+        "enabled": true,
+        "critChance": 10,
+        "critColor": "#8000ff",
+        "critGradient": true,
+        "critFont": "",
+        "animationFont": "Metal Mania",
+        "useLocalFonts": true,
+        "critAnimation": true,
+        "critGlow": true,
+        "filterReplies": true,
+        "filterSystemMessages": true,
+        "filterBotMessages": true,
+        "filterEmptyMessages": true,
+        "historyRetentionDays": 10,
+        "autoCleanupHistory": true,
+        "maxHistorySize": 2000,
+        "maxCritHistory": 1000,
+        "maxHistoryPerChannel": 500,
+        "animationEnabled": true,
+        "cssEnabled": true,
+        "animationDuration": 4000,
+        "floatDistance": 150,
+        "fontSize": 36,
+        "screenShake": true,
+        "shakeIntensity": 3,
+        "shakeDuration": 250,
+        "screenFlash": true,
+        "cooldown": 500,
+        "showCombo": true,
+        "maxCombo": 999,
+        "ownUserId": "164568266730242048",
+        "debugMode": false,
+        "diagnosticLogs": false,
+        "glowPulse": true
+    },
+    "messageHistory": [
+        {
+            "messageId": "1541932902709723136",
+            "authorId": "164568266730242048",
+            "channelId": "1524135119454212268",
+            "guildId": "1524135118829256745",
+            "timestamp": 1787695851955,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1541932903385145374",
+            "authorId": "164568266730242048",
+            "channelId": "1524135119454212268",
+            "guildId": "1524135118829256745",
+            "timestamp": 1787695852079,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1541933789540777984",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787696063412,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1541933790983889039",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787696063760,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1541939679786434560",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787697467517,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1541939680432361533",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787697467987,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1541939697675141120",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787697471781,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1541939698207957052",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787697472609,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1541939811189784576",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787697498845,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1541939811873460359",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787697499448,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1541942525936271360",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787698146093,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1541942526452306032",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787698150151,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1541942582735536128",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787698159634,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1541942583549239306",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787698161563,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542221760227704832",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787764721048,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542221760848597082",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787764721254,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542269401749782528",
+            "authorId": "164568266730242048",
+            "channelId": "1524135119454212268",
+            "guildId": "1524135118829256745",
+            "timestamp": 1787776079359,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542269402676731924",
+            "authorId": "164568266730242048",
+            "channelId": "1524135119454212268",
+            "guildId": "1524135118829256745",
+            "timestamp": 1787776079846,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542283871125504000",
+            "authorId": "164568266730242048",
+            "channelId": "1524135119454212268",
+            "guildId": "1524135118829256745",
+            "timestamp": 1787779529127,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542283871926878269",
+            "authorId": "164568266730242048",
+            "channelId": "1524135119454212268",
+            "guildId": "1524135118829256745",
+            "timestamp": 1787779529525,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542297123465199616",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787782688731,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542297124409180200",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787782689132,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542297134278115328",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787782691648,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542297135381348352",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787782691771,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542297162950377472",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787782698622,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542297163797757992",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787782698745,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542297195582062592",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787782705924,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542297195930324993",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787782706367,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542297583269969920",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787782798359,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542297584066887700",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787782798997,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542298165074460672",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787782937567,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542298165816987728",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787782937688,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542298561385857024",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787783032088,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542298562547814490",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787783033426,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542299057760763904",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787783150559,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542299058515746856",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787783151124,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542299310333362176",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787783210684,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542299311876874282",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787783211624,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542300191409831936",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787783421111,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542300192223535164",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787783421352,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542300220853846016",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787783427206,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542300221462290564",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787783429116,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542303028814544896",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787784097550,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542303030140076114",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787784098352,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542303392162906112",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787784184268,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542303393547161621",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787784184941,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542317941553364992",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787787652150,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542317943155589210",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787787652636,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542318008645451776",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787787669303,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542318009723396177",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787787669577,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542325520530669568",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787789459119,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542325522112057344",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787789460152,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542325888249495552",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787789547583,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542325890443387021",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787789547756,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542325983170789376",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787789570155,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542325983884091393",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787789570677,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542326038002925568",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787789583335,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542326039827714048",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787789583570,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542328805622808576",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790242345,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542328806566662224",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790243633,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542328827340914688",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790247524,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542328828053946369",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790248074,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542328916813807616",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790269730,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542328918101598208",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790269914,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542328931535814656",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790273236,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542328932341121124",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790274062,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542329500639952896",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790408051,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542329501508173976",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790409719,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542330520669786254",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790651939,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542330675015712768",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790689367,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542330675938730014",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790689601,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542330828976029696",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790724751,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542330829689327657",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787790726042,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542332508119498752",
+            "authorId": "164568266730242048",
+            "channelId": "1524135119454212268",
+            "guildId": "1524135118829256745",
+            "timestamp": 1787791126134,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542332508857962546",
+            "authorId": "164568266730242048",
+            "channelId": "1524135119454212268",
+            "guildId": "1524135118829256745",
+            "timestamp": 1787791126384,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542334541958479872",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787791609995,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542334543514828973",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787791612644,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542335840607272960",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787791919616,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542335841475764366",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787791920851,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542336478569299968",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787792073041,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542336479165026305",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787792074690,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542336582067945472",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787792097560,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542336582923583540",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787792097775,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542339662150893568",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787792830743,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542339662809538600",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787792832017,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542339689774579712",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787792838228,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542339690613571645",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787792838436,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542363579515142144",
+            "authorId": "164568266730242048",
+            "channelId": "1488231547088666664",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787798533088,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542373471806554203",
+            "authorId": "164568266730242048",
+            "channelId": "1488231547088666664",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787800892793,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542389097291845682",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787804618183,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542389402511081472",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787804690812,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542583362789572608",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787850933504,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542583363565785188",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787850933866,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542583410977931264",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787850945228,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542583411888234548",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787850945643,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542583575390453760",
+            "authorId": "164568266730242048",
+            "channelId": "1524135119454212268",
+            "guildId": "1524135118829256745",
+            "timestamp": 1787850984481,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542583576028250233",
+            "authorId": "164568266730242048",
+            "channelId": "1524135119454212268",
+            "guildId": "1524135118829256745",
+            "timestamp": 1787850984656,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542588319354060911",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852115798,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542588354971828315",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852125800,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542589100287066112",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852301769,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542589101147164682",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852302163,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542589126186893312",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852307604,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542589126866378884",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852308347,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542591313533206528",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852829109,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542591314154098778",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852829654,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542591386623148032",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852846945,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542591387210350603",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852847646,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542591532475875328",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852881308,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542591533566394448",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852881691,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542591938367062016",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852978545,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542591939080364112",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852978686,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542592008634236928",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852995278,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542592009183694958",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787852995997,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542940139586584576",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787935995720,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542940140245094592",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787935996010,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542940164492361728",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787936001658,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542940165587337256",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787936002105,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542947051443060806",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787937644449,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542954430935072768",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787939403043,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542954432512401630",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787939403522,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542954597058871296",
+            "authorId": "164568266730242048",
+            "channelId": "1518352519653363752",
+            "guildId": "1452386367526010975",
+            "timestamp": 1787939443056,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542954598971605052",
+            "authorId": "164568266730242048",
+            "channelId": "1518352519653363752",
+            "guildId": "1452386367526010975",
+            "timestamp": 1787939443554,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542954674372476928",
+            "authorId": "164568266730242048",
+            "channelId": "1518352519653363752",
+            "guildId": "1452386367526010975",
+            "timestamp": 1787939461082,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542954675429445632",
+            "authorId": "164568266730242048",
+            "channelId": "1518352519653363752",
+            "guildId": "1452386367526010975",
+            "timestamp": 1787939461516,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542955068351840256",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787939555016,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542955069337764010",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787939555443,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542960092243042358",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787940754488,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542960206688813056",
+            "authorId": "164568266730242048",
+            "channelId": "1518352519653363752",
+            "guildId": "1452386367526010975",
+            "timestamp": 1787940780608,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542960207666094080",
+            "authorId": "164568266730242048",
+            "channelId": "1518352519653363752",
+            "guildId": "1452386367526010975",
+            "timestamp": 1787940780745,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542962748432842752",
+            "authorId": "164568266730242048",
+            "channelId": "1516946683504758914",
+            "guildId": "1452386367526010975",
+            "timestamp": 1787941386288,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542962749988929670",
+            "authorId": "164568266730242048",
+            "channelId": "1516946683504758914",
+            "guildId": "1452386367526010975",
+            "timestamp": 1787941386822,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542967096365944833",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787942423469,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542967106981593088",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787942425249,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542967107694764084",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787942426606,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542967275093491712",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787942467035,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542967276301590650",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787942467443,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542967359659048960",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787942485492,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542967360548249650",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787942486285,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1542968631808229376",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787942789488,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542968632995487866",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787942790940,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542971216313188352",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787943406268,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542971216988475613",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787943407503,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542971265411710976",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787943417644,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1542971266036662293",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787943417869,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543067941283561472",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787966466496,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543067942630199337",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787966466842,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543068374408364032",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787966569285,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543068376732008488",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1787966570337,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543302030712373248",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022277573,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543302031681519818",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022277649,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543302083111813120",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022290250,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543302083803873300",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022290379,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543302504610004992",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022390795,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543302505512050801",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022390904,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543302728955199608",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022443852,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543302728208351232",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022443856,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543302884957880320",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022480957,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543302885675376751",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022481483,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543302941555818496",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022494851,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543302942197555282",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022495128,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543303275397251092",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022574167,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543303274558390272",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022574170,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543303302563758080",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022581074,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543303303742488707",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022581455,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543303322146963456",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022585829,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543303323183095918",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022585996,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543303417122783232",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022607835,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543303417848537109",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022608292,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543303454405951488",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022616723,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543303454741495839",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022617493,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543303568759455744",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022644500,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543303569468559400",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022644628,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543303991247503360",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022744716,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543303992661245962",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788022745966,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543304390109036544",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788022840227,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543304390834917417",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788022840520,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543304628660080700",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788022896904,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543304627980599296",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788022896907,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543304713452126208",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788022917404,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543304714182197428",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788022917791,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543304735048597504",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788022922052,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543304735816159394",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788022922768,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543304820142637056",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788022942340,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543304820771790868",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788022942720,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543305151576539136",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023021828,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543305152671387759",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023022177,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543305200746364928",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023033083,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543305201383907498",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023034224,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543305283810361344",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023052887,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543305284716470343",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023053962,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543305650518360064",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023140317,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543305651185385512",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023141112,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543305803241357312",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023176729,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543305803925159937",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023177419,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543305850116898816",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023188593,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543305851006357525",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023188755,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543305898510778368",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023200251,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543305900041703534",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023200876,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543306109186473984",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023250476,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543306109937254441",
+            "authorId": "164568266730242048",
+            "channelId": "1528228927674515566",
+            "guildId": "1524135118829256745",
+            "timestamp": 1788023251076,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543314894110064640",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788025344830,
+            "isCrit": true,
+            "critSettings": {
+                "color": "#8000ff",
+                "gradient": true,
+                "font": "",
+                "animation": true,
+                "glow": true
+            }
+        },
+        {
+            "messageId": "1543314894781423776",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788025344985,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543318476934873088",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788026198373,
+            "isCrit": false,
+            "critSettings": null
+        },
+        {
+            "messageId": "1543318477706756186",
+            "authorId": "164568266730242048",
+            "channelId": "1485441666625179689",
+            "guildId": "1311948619091284009",
+            "timestamp": 1788026199244,
+            "isCrit": false,
+            "critSettings": null
+        }
+    ],
+    "persistentCrits": {
+        "1311948619678613568": [
+            "chat-messages-1311948619678613568-1444552724682379324",
+            "chat-messages-1311948619678613568-1444552901912563854",
+            "chat-messages-1311948619678613568-1444553670984466579",
+            "chat-messages-1311948619678613568-1444554249731051581",
+            "chat-messages-1311948619678613568-1444558185179512986",
+            "chat-messages-1311948619678613568-1444558292138590279",
+            "chat-messages-1311948619678613568-1444558412699406346",
+            "chat-messages-1311948619678613568-1444558600545767516",
+            "chat-messages-1311948619678613568-1444559161236127848",
+            "chat-messages-1311948619678613568-1444559871142793458",
+            "chat-messages-1311948619678613568-1444561507869265981",
+            "chat-messages-1311948619678613568-1444561657161322627",
+            "chat-messages-1311948619678613568-1444563003784822946",
+            "chat-messages-1311948619678613568-1444563113306361867",
+            "chat-messages-1311948619678613568-1444490319868596327",
+            "chat-messages-1311948619678613568-1444490402139738186",
+            "chat-messages-1311948619678613568-1444490433026719948",
+            "chat-messages-1311948619678613568-1444491256276455647",
+            "chat-messages-1311948619678613568-1444491265617166397",
+            "chat-messages-1311948619678613568-1444491291630243960",
+            "chat-messages-1311948619678613568-1444491341819150479",
+            "chat-messages-1311948619678613568-1444491379018567731",
+            "chat-messages-1311948619678613568-1444492027512361021",
+            "chat-messages-1311948619678613568-1444494794075279380",
+            "chat-messages-1311948619678613568-1444494884265263177",
+            "chat-messages-1311948619678613568-1444494930805395668",
+            "chat-messages-1311948619678613568-1444550174587486230",
+            "chat-messages-1311948619678613568-1444550220565319832",
+            "chat-messages-1311948619678613568-1444552023289893017",
+            "chat-messages-1311948619678613568-1444552187836502150",
+            "message-content-1444490319868596327",
+            "message-content-1444490402139738186",
+            "message-content-1444490433026719948",
+            "message-content-1444491256276455647",
+            "message-content-1444491265617166397",
+            "message-content-1444491291630243960",
+            "message-content-1444491341819150479",
+            "message-content-1444491379018567731",
+            "message-content-1444492027512361021",
+            "message-content-1444494794075279380",
+            "message-content-1444494884265263177",
+            "message-content-1444494930805395668",
+            "message-content-1444550174587486230",
+            "message-content-1444550220565319832",
+            "message-content-1444552023289893017",
+            "message-content-1444552187836502150",
+            "message-content-1444552724682379324",
+            "message-content-1444552901912563854",
+            "message-content-1444553670984466579",
+            "message-content-1444554249731051581",
+            "message-content-1444558185179512986",
+            "message-content-1444558292138590279",
+            "message-content-1444558412699406346",
+            "message-content-1444558600545767516",
+            "message-content-1444559161236127848",
+            "message-content-1444559871142793458",
+            "message-content-1444561507869265981",
+            "message-content-1444561657161322627",
+            "message-content-1444563003784822946",
+            "message-content-1444563113306361867",
+            "chat-messages-1311948619678613568-1444552575461625979",
+            "chat-messages-1311948619678613568-1444552697784303667",
+            "chat-messages-1311948619678613568-1444552785659166862",
+            "chat-messages-1311948619678613568-1444552801995984896",
+            "chat-messages-1311948619678613568-1444553633176879268",
+            "chat-messages-1311948619678613568-1444553646502056061",
+            "chat-messages-1311948619678613568-1444554279905001682",
+            "chat-messages-1311948619678613568-1444554359454302300",
+            "chat-messages-1311948619678613568-1444558170251984967",
+            "chat-messages-1311948619678613568-1444558213008592937",
+            "chat-messages-1311948619678613568-1444558431104139284",
+            "chat-messages-1311948619678613568-1444558667256168458",
+            "chat-messages-1311948619678613568-1444558680027566130",
+            "chat-messages-1311948619678613568-1444558732544573524",
+            "chat-messages-1311948619678613568-1444558741918847030",
+            "chat-messages-1311948619678613568-1444558854737367141",
+            "chat-messages-1311948619678613568-1444558873372524659",
+            "chat-messages-1311948619678613568-1444558949545414677",
+            "chat-messages-1311948619678613568-1444559102150705232",
+            "chat-messages-1311948619678613568-1444559853765791835",
+            "chat-messages-1311948619678613568-1444559898615484467",
+            "chat-messages-1311948619678613568-1444560004089643038",
+            "chat-messages-1311948619678613568-1444560014931923004",
+            "chat-messages-1311948619678613568-1444560195299577896",
+            "chat-messages-1311948619678613568-1444561518745358396",
+            "chat-messages-1311948619678613568-1444561547165958195",
+            "chat-messages-1311948619678613568-1444562946507407514",
+            "chat-messages-1311948619678613568-1444562954312876052",
+            "chat-messages-1311948619678613568-1444563022478704720",
+            "chat-messages-1311948619678613568-1444563036038889574",
+            "chat-messages-1311948619678613568-1444563050538471485",
+            "chat-messages-1311948619678613568-1444563079315722281",
+            "chat-messages-1311948619678613568-1444563097229725878",
+            "chat-messages-1311948619678613568-1444563123947442341",
+            "chat-messages-1311948619678613568-1444563130515460127",
+            "chat-messages-1311948619678613568-1444563132490977402",
+            "chat-messages-1311948619678613568-1444490350096814200",
+            "chat-messages-1311948619678613568-1444490354433851563",
+            "chat-messages-1311948619678613568-1444490408288718939",
+            "chat-messages-1311948619678613568-1444490477977079900",
+            "chat-messages-1311948619678613568-1444490505948758151",
+            "chat-messages-1311948619678613568-1444490516866662582",
+            "chat-messages-1311948619678613568-1444490528707317822",
+            "chat-messages-1311948619678613568-1444491318888763625",
+            "chat-messages-1311948619678613568-1444492016141598892",
+            "chat-messages-1311948619678613568-1444493136108716042",
+            "chat-messages-1311948619678613568-1444493543132369076",
+            "chat-messages-1311948619678613568-1444494449873916090",
+            "chat-messages-1311948619678613568-1444494638827438200",
+            "chat-messages-1311948619678613568-1444494765973311508",
+            "chat-messages-1311948619678613568-1444494858352984145",
+            "chat-messages-1311948619678613568-1444495253989232681",
+            "chat-messages-1311948619678613568-1444497607706673223",
+            "chat-messages-1311948619678613568-1444544279065137232",
+            "chat-messages-1311948619678613568-1444544393859043470",
+            "chat-messages-1311948619678613568-1444545183470584061",
+            "chat-messages-1311948619678613568-1444545359828353064",
+            "chat-messages-1311948619678613568-1444547578879545524",
+            "chat-messages-1311948619678613568-1444547756042620948",
+            "chat-messages-1311948619678613568-1444547789433602068",
+            "chat-messages-1311948619678613568-1444547840373162014",
+            "chat-messages-1311948619678613568-1444550170304843920",
+            "chat-messages-1311948619678613568-1444550178790178916",
+            "chat-messages-1311948619678613568-1444551317434667139",
+            "chat-messages-1311948619678613568-1444552018479022202",
+            "chat-messages-1311948619678613568-1444552163631042792",
+            "chat-messages-1311948619678613568-1444552462181732528",
+            "chat-messages-1311948619678613568-1444552514266726452",
+            "chat-messages-1311948619678613568-1444552542599249980",
+            "chat-messages-1311948619678613568-1444552543257628824",
+            "chat-messages-1311948619678613568-1444475615884480632",
+            "chat-messages-1311948619678613568-1444475679327522918",
+            "chat-messages-1311948619678613568-1444475883065835641",
+            "chat-messages-1311948619678613568-1444475919833235537",
+            "chat-messages-1311948619678613568-1444475931644395573",
+            "chat-messages-1311948619678613568-1444475949029658704",
+            "chat-messages-1311948619678613568-1444476082743939152",
+            "chat-messages-1311948619678613568-1444476967117390036",
+            "chat-messages-1311948619678613568-1444476975354740756",
+            "chat-messages-1311948619678613568-1444476985077403681",
+            "chat-messages-1311948619678613568-1444477006124286043",
+            "chat-messages-1311948619678613568-1444482661358899331",
+            "chat-messages-1311948619678613568-1444483879997018162",
+            "chat-messages-1311948619678613568-1444485804758925372",
+            "chat-messages-1311948619678613568-1444485946786447403",
+            "chat-messages-1311948619678613568-1444485986477150283",
+            "chat-messages-1311948619678613568-1444486104584818688",
+            "chat-messages-1311948619678613568-1444486173807345724",
+            "chat-messages-1311948619678613568-1444486558634868736",
+            "chat-messages-1311948619678613568-1444486616637902848",
+            "chat-messages-1311948619678613568-1444486866282741842",
+            "chat-messages-1311948619678613568-1444488022484848740",
+            "chat-messages-1311948619678613568-1444488051861487638",
+            "chat-messages-1311948619678613568-1444488101207609355",
+            "chat-messages-1311948619678613568-1444488228987076709",
+            "chat-messages-1311948619678613568-1444488254715068582",
+            "chat-messages-1311948619678613568-1444488307202457651",
+            "chat-messages-1311948619678613568-1444488351951622266",
+            "chat-messages-1311948619678613568-1444488383538794527",
+            "chat-messages-1311948619678613568-1444488414014738472",
+            "chat-messages-1311948619678613568-1444488752776085514",
+            "chat-messages-1311948619678613568-1444488774967890050",
+            "chat-messages-1311948619678613568-1444488792827494470",
+            "chat-messages-1311948619678613568-1444489692996174017",
+            "chat-messages-1311948619678613568-1444489693675786252",
+            "chat-messages-1311948619678613568-1444489700336337047",
+            "chat-messages-1311948619678613568-1444489716635402260",
+            "chat-messages-1311948619678613568-1444489735769817228",
+            "chat-messages-1311948619678613568-1444489745156673588",
+            "chat-messages-1311948619678613568-1444489802618507436",
+            "chat-messages-1311948619678613568-1444489821211856926",
+            "chat-messages-1311948619678613568-1444489946533593119",
+            "chat-messages-1311948619678613568-1444489956075770096",
+            "chat-messages-1311948619678613568-1444489986165444659",
+            "chat-messages-1311948619678613568-1444490002846318754",
+            "chat-messages-1311948619678613568-1444490033703948471",
+            "chat-messages-1311948619678613568-1444490045187686472",
+            "chat-messages-1311948619678613568-1444490074300612658",
+            "chat-messages-1311948619678613568-1444490273878184077",
+            "chat-messages-1311948619678613568-1444490292282654720",
+            "chat-messages-1311948619678613568-1444212589801508875",
+            "chat-messages-1311948619678613568-1444420252451733638",
+            "chat-messages-1311948619678613568-1444422696526938175",
+            "chat-messages-1311948619678613568-1444448084221231235",
+            "chat-messages-1311948619678613568-1444459892998930452",
+            "message-content-1444475615884480632",
+            "message-content-1444475679327522918",
+            "message-content-1444475883065835641",
+            "message-content-1444475919833235537",
+            "message-content-1444475931644395573",
+            "message-content-1444475949029658704",
+            "message-content-1444476082743939152",
+            "message-content-1444476967117390036",
+            "message-content-1444476975354740756",
+            "message-content-1444476985077403681",
+            "message-content-1444477006124286043",
+            "message-content-1444482661358899331",
+            "message-content-1444483879997018162",
+            "message-content-1444485804758925372",
+            "message-content-1444485946786447403",
+            "message-content-1444485986477150283",
+            "message-content-1444486104584818688",
+            "message-content-1444486173807345724",
+            "message-content-1444486558634868736",
+            "message-content-1444486616637902848",
+            "message-content-1444486866282741842",
+            "message-content-1444488022484848740",
+            "message-content-1444488051861487638",
+            "message-content-1444488101207609355",
+            "message-content-1444488228987076709",
+            "message-content-1444488254715068582",
+            "message-content-1444488307202457651",
+            "message-content-1444488351951622266",
+            "message-content-1444488383538794527",
+            "message-content-1444488414014738472",
+            "message-content-1444488752776085514",
+            "message-content-1444488774967890050",
+            "message-content-1444488792827494470",
+            "message-content-1444489692996174017",
+            "message-content-1444489693675786252",
+            "message-content-1444489700336337047",
+            "message-content-1444489716635402260",
+            "message-content-1444489735769817228",
+            "message-content-1444489745156673588",
+            "message-content-1444489802618507436",
+            "message-content-1444489821211856926",
+            "message-content-1444489946533593119",
+            "message-content-1444489956075770096",
+            "message-content-1444489986165444659",
+            "message-content-1444490002846318754",
+            "message-content-1444490033703948471",
+            "message-content-1444490045187686472",
+            "message-content-1444490074300612658",
+            "message-content-1444490273878184077",
+            "message-content-1444490292282654720",
+            "message-content-1444490350096814200",
+            "message-content-1444490354433851563",
+            "message-content-1444490408288718939",
+            "message-content-1444490477977079900",
+            "message-content-1444490505948758151",
+            "message-content-1444490516866662582",
+            "message-content-1444490528707317822",
+            "message-content-1444491318888763625",
+            "message-content-1444492016141598892",
+            "message-content-1444493136108716042",
+            "message-content-1444493543132369076",
+            "message-content-1444494449873916090",
+            "message-content-1444494638827438200",
+            "message-content-1444494765973311508",
+            "message-content-1444494858352984145",
+            "message-content-1444495253989232681",
+            "message-content-1444497607706673223",
+            "message-content-1444544279065137232",
+            "message-content-1444544393859043470",
+            "message-content-1444545183470584061",
+            "message-content-1444545359828353064",
+            "message-content-1444547578879545524",
+            "message-content-1444547756042620948",
+            "message-content-1444547789433602068",
+            "message-content-1444547840373162014",
+            "message-content-1444550170304843920",
+            "message-content-1444550178790178916",
+            "message-content-1444551317434667139",
+            "message-content-1444552018479022202",
+            "message-content-1444552163631042792",
+            "message-content-1444552462181732528",
+            "message-content-1444552514266726452",
+            "message-content-1444552542599249980",
+            "message-content-1444552543257628824",
+            "message-content-1444552575461625979",
+            "message-content-1444552697784303667",
+            "message-content-1444552785659166862",
+            "message-content-1444552801995984896",
+            "message-content-1444553633176879268",
+            "message-content-1444553646502056061",
+            "message-content-1444554279905001682",
+            "message-content-1444554359454302300",
+            "message-content-1444558170251984967",
+            "message-content-1444558213008592937",
+            "message-content-1444558431104139284",
+            "message-content-1444558667256168458",
+            "message-content-1444558680027566130",
+            "message-content-1444558732544573524",
+            "message-content-1444558741918847030",
+            "message-content-1444558854737367141",
+            "message-content-1444558873372524659",
+            "message-content-1444558949545414677",
+            "message-content-1444559102150705232",
+            "message-content-1444559853765791835",
+            "message-content-1444559898615484467",
+            "message-content-1444560004089643038",
+            "message-content-1444560014931923004",
+            "message-content-1444560195299577896",
+            "message-content-1444561518745358396",
+            "message-content-1444561547165958195",
+            "message-content-1444562946507407514",
+            "message-content-1444562954312876052",
+            "message-content-1444563022478704720",
+            "message-content-1444563036038889574",
+            "message-content-1444563050538471485",
+            "message-content-1444563079315722281",
+            "message-content-1444563097229725878",
+            "message-content-1444563123947442341",
+            "message-content-1444563130515460127",
+            "message-content-1444563132490977402"
+        ],
+        "1429280770840854612": [
+            "chat-messages-1429280770840854612-1444657568659013632",
+            "chat-messages-1429280770840854612-1444658033958322176",
+            "chat-messages-1429280770840854612-1444658034654707772",
+            "message-content-1444658034654707772",
+            "chat-messages-1429280770840854612-1444658634490380288",
+            "chat-messages-1429280770840854612-1444658635367125104",
+            "chat-messages-1429280770840854612-1444658643797540864",
+            "chat-messages-1429280770840854612-1444658644372160553",
+            "message-content-1444658635367125104",
+            "message-content-1444658644372160553",
+            "chat-messages-1429280770840854612-1444663267883483136",
+            "chat-messages-1429280770840854612-1444663268437393441",
+            "chat-messages-1429280770840854612-1444663316117979136",
+            "chat-messages-1429280770840854612-1444663316764164127",
+            "chat-messages-1429280770840854612-1444663662915616768",
+            "chat-messages-1429280770840854612-1444663663507275817",
+            "chat-messages-1429280770840854612-1444663704212733952",
+            "chat-messages-1429280770840854612-1444663704972165200",
+            "chat-messages-1429280770840854612-1444666529000980480",
+            "chat-messages-1429280770840854612-1444666529718468648",
+            "message-content-1444663268437393441",
+            "message-content-1444663316764164127",
+            "message-content-1444663663507275817",
+            "message-content-1444663704972165200",
+            "message-content-1444666529718468648",
+            "chat-messages-1429280770840854612-1444676536627236997",
+            "chat-messages-1429280770840854612-1444676541882564608",
+            "chat-messages-1429280770840854612-1444676676670718024",
+            "chat-messages-1429280770840854612-1444676689559945287",
+            "message-content-1444676536627236997",
+            "message-content-1444676676670718024",
+            "message-content-1444676689559945287",
+            "chat-messages-1429280770840854612-1444680268332924928",
+            "chat-messages-1429280770840854612-1444680269205344370",
+            "chat-messages-1429280770840854612-1444680874066186395",
+            "chat-messages-1429280770840854612-1444681133039026176",
+            "chat-messages-1429280770840854612-1444681133433557024",
+            "chat-messages-1429280770840854612-1444682320366796800",
+            "chat-messages-1429280770840854612-1444682321339879475",
+            "chat-messages-1429280770840854612-1444682860618448977",
+            "chat-messages-1429280770840854612-1444683441005396100",
+            "chat-messages-1429280770840854612-1444683948125982911",
+            "chat-messages-1429280770840854612-1444684314347307008",
+            "chat-messages-1429280770840854612-1444684314938834954",
+            "chat-messages-1429280770840854612-1444684663166599168",
+            "chat-messages-1429280770840854612-1444684663875567677",
+            "chat-messages-1429280770840854612-1444685247307452508",
+            "chat-messages-1429280770840854612-1444686499067990147",
+            "chat-messages-1429280770840854612-1444687335177322496",
+            "chat-messages-1429280770840854612-1444687335810662422",
+            "chat-messages-1429280770840854612-1444687693362495488",
+            "chat-messages-1429280770840854612-1444687694683836426",
+            "chat-messages-1429280770840854612-1444688462438731856",
+            "chat-messages-1429280770840854612-1444688631741546496",
+            "chat-messages-1429280770840854612-1444688632328753274",
+            "chat-messages-1429280770840854612-1444689494119809024",
+            "chat-messages-1429280770840854612-1444689494795358258",
+            "chat-messages-1429280770840854612-1444692595539181568",
+            "chat-messages-1429280770840854612-1444692596650807296"
+        ]
+    },
+    "lastCritBurst": {
+        "messageId": "1543314894110064640",
+        "userId": "164568266730242048",
+        "burstHits": 2197,
+        "perception": 4776,
+        "extraHitChance": 0.92,
+        "maxHits": 2389,
+        "jackpotChance": 0.02,
+        "timestamp": 1788025344831
+    }
+}

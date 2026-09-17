@@ -1,0 +1,19 @@
+{
+    "moduleStates": {
+        "imports": true,
+        "wallpaper": true,
+        "home": true,
+        "quickswitcher": true,
+        "dm-sidebar": true,
+        "dialogs": true,
+        "user-panel": true,
+        "server-list": true,
+        "guild": true,
+        "chat": true,
+        "profile": true,
+        "discover": true,
+        "settings": true,
+        "snippets": true
+    },
+    "animatedWallpaper": true
+}

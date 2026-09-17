@@ -1,0 +1,11 @@
+{
+    "settings": {
+        "enabled": true,
+        "debugMode": false,
+        "animationDuration": 3000,
+        "floatDistance": 150,
+        "particleCount": 30,
+        "glowIntensity": 1.5,
+        "fontSize": 48
+    }
+}

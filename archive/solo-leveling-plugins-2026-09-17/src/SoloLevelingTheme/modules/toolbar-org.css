@@ -1,0 +1,258 @@
+/* Module: Channel Header Toolbar Organization (§14)
+
+   Pure-CSS reordering of the channel header toolbar icons into logical
+   groups via flexbox `order`, with a thin violet `|` separator between
+   groups via left-border on the canonical leading wrapper of each group.
+
+   Why pure CSS:
+     - Does NOT modify any plugin's injection logic
+     - Does NOT modify any plugin's visibility / hide rules
+     - Idempotent — Discord re-rendering the toolbar doesn't break order
+     - Applies everywhere section[aria-label="Channel header"] mounts:
+       text, voice, stage, forum, thread chat, VC chat overlay
+
+   IMPORTANT — flexbox `order` only applies to DIRECT children of the
+   flex container. Discord wraps its native icons in unnamed container
+   divs (so [aria-label*="..." i] matches the inner button, NOT the
+   direct toolbar child). Some of our SL plugin icons inject as direct
+   children (Equipment, ItemVault, Dungeons, ShadowExchange, RA all
+   appendChild into the toolbar) but a few may also be wrapped.
+
+   Solution (perf-audit 2026-07-13): every group rule uses TWO
+   comma-separated selectors:
+     > #icon-id                direct-child case (most SL icons); also
+                               the no-JS fallback — ID matching is cheap
+     > [data-sl-tb="…"]        wrapped case — shared/toolbar-tags.js
+                               stamps the identity on the actual flex
+                               child once per toolbar render
+   The previous wrapped-case forms — `> :has(#icon-id)` and
+   `> :has([aria-label*="…" i])` — were the theme's most expensive
+   selectors: universal child anchors plus substring arguments that the
+   style engine re-checked during invalidation on ordinary DOM churn.
+   The JS tagger does that matching once per render instead.
+
+   Group layout (left → right):
+
+     [Stats] | [Gameplay] | [Inventory] | [Discord native] | [Layout]
+       SLS   |  SS, Dung  | Eq, IV, SE  | threads, notif,  | RA
+                                          pins, members,
+                                          search
+
+   Default `order` for any new / unknown icon is 60 so unmatched items
+   sit at the right end without blocking the established groups. */
+
+/* Ensure the toolbar is a flex row so `order` actually applies.
+   Discord typically already sets display:flex here; this is a
+   guarantee, not a behavioral change. */
+section[aria-label="Channel header"] [class*="toolbar_"] {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  /* Pack the icon cluster to the RIGHT edge (Discord's native placement).
+     The toolbar is given a wide width by Discord's layout (~720px), so the
+     default flex-start left-packs the icons and leaves a large empty space on
+     the right. flex-end flushes the whole ordered cluster to the right, where
+     these header icons normally live. `order:` still controls the sequence. */
+  justify-content: flex-end !important;
+}
+
+/* Default position for any unrecognized direct child + force vertical
+   center alignment on the cross-axis. Some plugin icons inject a button
+   without setting their own align-self and end up sitting at the top
+   or bottom of the flex track instead of the centre line. */
+section[aria-label="Channel header"] [class*="toolbar_"] > * {
+  order: 60;
+  align-self: center !important;
+  /* Don't let any toolbar child grow into the free space. Discord's search
+     component (div[class^="search_"]) is flex:1 and expands to fill the whole
+     right side of the toolbar — that expansion IS the large empty area on the
+     right. Pinning every child to its content width leaves real free space for
+     justify-content:flex-end to collapse, so the icon cluster + search pack
+     tight to the right edge (Discord's native placement). */
+  flex: 0 0 auto !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Collapse the channel-header SEARCH box to its icon by default.
+
+   Discord's search component (div[class^="search_"]) reserves a fixed
+   ~244px input box in the toolbar at ALL times — that is the large empty
+   void to the right of the icon cluster. Collapse it to icon width so the
+   void only opens up WHILE the search is in use (on hover, or while the
+   input is focused via :focus-within), then springs back when you leave.
+   Matches both the outer toolbar-child wrapper and the inner searchBar. */
+section[aria-label="Channel header"] [class*="toolbar_"] [class*="search_"] {
+  width: 32px !important;
+  min-width: 32px !important;
+  flex: 0 0 32px !important;
+  overflow: hidden !important;
+  transition: width 0.18s ease, min-width 0.18s ease, flex-basis 0.18s ease !important;
+}
+/* Expand ONLY when the search is actually clicked/focused (:focus-within),
+   not on hover. overflow:visible so the expanded input + results aren't
+   clipped — it becomes a real, usable search box. */
+section[aria-label="Channel header"] [class*="toolbar_"] [class*="search_"]:focus-within {
+  width: 240px !important;
+  min-width: 240px !important;
+  flex: 0 0 240px !important;
+  overflow: visible !important;
+}
+
+/* Center the SVG/IMG content inside each toolbar button. A plain
+   <button> without explicit display defaults to inline-block, which
+   leaves the icon baseline-aligned (visually shifted up/down depending
+   on font). inline-flex + center forces every icon to sit in the
+   middle of its button box. */
+section[aria-label="Channel header"] [class*="toolbar_"] button,
+section[aria-label="Channel header"] [class*="toolbar_"] [role="button"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Group 0: Safety toggles (CallButtonGuard etc.) — leftmost.
+   Sits before everything so the call-collapse toggle is the first
+   thing the user sees and can't be visually buried by other icons. */
+section[aria-label="Channel header"] [class*="toolbar_"] > #cbg-toggle-button,
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="cbg"] {
+  order: 1 !important;
+}
+
+/* Group 0b (DM ONLY): Pin Voice Call + Video Call right next to
+   the CallButtonGuard toggle so the three call-related icons read
+   as one cluster. Discord normally drops them mid-toolbar amongst
+   pins/search/profile; in DMs we want them adjacent to their guard.
+   Scope is `body[data-sl-in-dm="true"]` so this never affects guild
+   text channels (which don't have these buttons anyway, but the
+   gate keeps the rule minimal and intentional).
+
+   Both forms covered: aria-label on the wrapper div directly
+   (current Discord build) and aria-label deeper inside a wrapping
+   flex container (defensive against future re-wraps). */
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > [aria-label="Start Voice Call"],
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="voice-call"] {
+  order: 2 !important;
+}
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > [aria-label="Start Video Call"],
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="video-call"] {
+  order: 3 !important;
+}
+
+/* Group 1: Stats */
+section[aria-label="Channel header"] [class*="toolbar_"] > #sls-header-stats-button,
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="sls"] {
+  order: 10 !important;
+}
+
+/* Group 2: Gameplay */
+section[aria-label="Channel header"] [class*="toolbar_"] > #shadow-senses-header-icon,
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="senses"] {
+  order: 20 !important;
+}
+section[aria-label="Channel header"] [class*="toolbar_"] > #dungeons-header-widget,
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="dungeons"] {
+  order: 21 !important;
+}
+
+/* Group 3: Inventory / Economy */
+section[aria-label="Channel header"] [class*="toolbar_"] > #eq-header-icon,
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="eq"] {
+  order: 30 !important;
+}
+section[aria-label="Channel header"] [class*="toolbar_"] > #itemvault-header-icon,
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="itemvault"] {
+  order: 31 !important;
+}
+section[aria-label="Channel header"] [class*="toolbar_"] > #se-swirl-icon,
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="se"] {
+  order: 32 !important;
+}
+
+/* Group 4: Discord native — identified by shared/toolbar-tags.js, which
+   scans each toolbar child's aria-labels (own + descendants) once per
+   toolbar render and stamps the identity on the actual flex child.
+   Replaces per-mutation [aria-label*="…" i] substring matching. */
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="threads"] {
+  order: 40 !important;
+}
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="notifications"] {
+  order: 41 !important;
+}
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="pins"] {
+  order: 42 !important;
+}
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="members"] {
+  order: 43 !important;
+}
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="search"] {
+  order: 44 !important;
+}
+
+/* Group 3b: RulersAuthority — clustered with the SL inventory/economy group.
+   Previously order 50 ("Layout" group at the far RIGHT, after every Discord-
+   native icon), which left a large visible gap between RA's hand and the rest
+   of the SL icons. Order 33 places it right after ShadowExchange (32), as the
+   last SL icon before the Discord natives (40+), so it reads as one cluster. */
+section[aria-label="Channel header"] [class*="toolbar_"] > #ra-toolbar-icon,
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="ra"] {
+  order: 33 !important;
+}
+
+/* Visual `|` separators between groups.
+   Apply a thin violet left-border + small padding/margin to the
+   canonical leading element of each group except the first. Both
+   forms (direct child IS the icon OR contains the icon) get the
+   border so it works whether the SL icon is direct or wrapped, and
+   for Discord natives it always lands on the wrapper. */
+section[aria-label="Channel header"] [class*="toolbar_"] > #shadow-senses-header-icon,
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="senses"],
+section[aria-label="Channel header"] [class*="toolbar_"] > #eq-header-icon,
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="eq"],
+section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="threads"] {
+  border-left: 1px solid rgba(167, 139, 250, 0.3) !important;
+  padding-left: 6px !important;
+  margin-left: 6px !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Context-based hide rules — driven by the body-attribute watcher in
+   shared/channel-context.js (installed by SoloLevelingTheme.start).
+
+   IN A DM: hide every SL toolbar icon. None of them apply to DM chats
+   (Equipment / ItemVault inventory, Shadow Senses presence-monitoring,
+   Active Dungeons, Shadow Exchange currency widget, Solo Leveling
+   Stats sidebar, RulersAuthority panel toggle). Both direct-child and
+   :has-wrapped forms covered.
+
+   IN HOME / FRIENDS / NON-CHANNEL VIEW: additionally hide RA. The
+   `header [class*="toolbar_"]` fallback selector RA uses for icon
+   placement matches Discord's Friends-page header too, so RA was
+   surfacing there. The body[data-sl-in-home="true"] gate now
+   suppresses it everywhere outside an actual channel view. */
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > #sls-header-stats-button,
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="sls"],
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > #shadow-senses-header-icon,
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="senses"],
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > #dungeons-header-widget,
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="dungeons"],
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > #eq-header-icon,
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="eq"],
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > #itemvault-header-icon,
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="itemvault"],
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > #se-swirl-icon,
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="se"],
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > #ra-toolbar-icon,
+body[data-sl-in-dm="true"] section[aria-label="Channel header"] [class*="toolbar_"] > [data-sl-tb="ra"] {
+  display: none !important;
+}
+
+/* Hide the RA icon ANYWHERE on the page when in Home / Friends / non-
+   channel view. RA's TOOLBAR_FALLBACKS include `header [class*="toolbar_"]`
+   which can match Discord's Friends-page header — so this rule stays
+   unscoped to section[aria-label="Channel header"]. The tagger covers the
+   same TOOLBAR_FALLBACKS list, so a wrapped RA icon carries data-sl-tb="ra";
+   the direct #ra-toolbar-icon form hides the icon itself as fallback. */
+body[data-sl-in-home="true"] #ra-toolbar-icon,
+body[data-sl-in-home="true"] [data-sl-tb="ra"] {
+  display: none !important;
+}
