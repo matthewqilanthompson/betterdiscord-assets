@@ -1,0 +1,55 @@
+{
+    "settings": {
+        "enabled": true,
+        "debugMode": false,
+        "transitionSpeed": 250,
+        "animationsEnabled": true,
+        "panels": {
+            "sidebar": {
+                "pushed": true,
+                "hotkey": "Ctrl+Shift+R",
+                "hoverExpand": true,
+                "width": 296
+            },
+            "members": {
+                "pushed": true,
+                "hotkey": "",
+                "hoverExpand": true,
+                "width": 276
+            },
+            "profile": {
+                "pushed": false,
+                "hotkey": "",
+                "hoverExpand": true,
+                "width": 340
+            },
+            "search": {
+                "pushed": false,
+                "hotkey": "",
+                "width": 0
+            }
+        },
+        "defaultWidths": {
+            "sidebar": 240,
+            "members": 240,
+            "profile": 340,
+            "search": 400
+        },
+        "hoverFudgePx": 15,
+        "guilds": {
+            "1444318088718844147": {
+                "hiddenChannels": [],
+                "crushedCategories": [
+                    {
+                        "id": "1474855195799195874",
+                        "name": "◆ GAME NIGHTS ◆"
+                    }
+                ],
+                "_hiddenIdSet": []
+            }
+        },
+        "grippedDMs": [],
+        "hoverRevealDelayMs": 1000,
+        "hoverHideDelayMs": 500
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "settings": {
+        "enabled": true,
+        "debugMode": false,
+        "position": "top",
+        "showLevel": true,
+        "showRank": true,
+        "showXP": true,
+        "compact": true,
+        "integratedLevelUpAnimation": true,
+        "showShimmer": true,
+        "opacity": 0.85,
+        "updateInterval": 5000,
+        "_metadata": {
+            "lastSave": "2026-05-10T01:11:23.410Z",
+            "version": "1.5.0"
+        }
+    }
+}

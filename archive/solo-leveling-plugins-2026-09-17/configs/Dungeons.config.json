@@ -1,0 +1,412 @@
+{
+    "settings": {
+        "enabled": true,
+        "debug": false,
+        "autoDeploy": true,
+        "spawnChance": 12,
+        "dungeonDuration": 600000,
+        "maxDungeonsPercentage": 0.15,
+        "minDungeonsAllowed": 3,
+        "maxDungeonsAllowed": 20,
+        "channelSpawnCooldown": 300000,
+        "globalSpawnCooldown": 60000,
+        "shadowAttackInterval": 3000,
+        "userAttackCooldown": 2000,
+        "mobKillNotificationInterval": 30000,
+        "mobMaxActiveCap": null,
+        "mobWaveBaseCount": 200,
+        "mobWaveVariancePercent": 0.2,
+        "mobTierNormalShare": 0.7,
+        "mobTierEliteShare": 0.25,
+        "mobTierChampionShare": 0.05,
+        "userParticipationDamageBonus": 0.25,
+        "shadowDamageScalar": 2,
+        "monarchsWillMultiplier": 1.25,
+        "performanceMode": true,
+        "performanceAliveMobCap": 800,
+        "warfrontEnabled": true,
+        "gmLeadershipEnabled": true,
+        "gmLeadershipOffenseBonus": 0.2,
+        "gmLeadershipCasualtyCut": 0.4,
+        "gmLeadershipFrontlineBonus": 0.1,
+        "warfrontKillRatePerShadow": 0.015,
+        "warfrontMaxKillsPerTick": 5000,
+        "warGateCullPercent": 0.1,
+        "bossGateMaxWaitMs": 600000,
+        "shadowHealerRestorationEnabled": true,
+        "roleDiversityGuaranteeEnabled": true,
+        "minSupportTankShare": 0.12,
+        "shadowMobTargetShare": 0.5,
+        "shadowBossTargetShareLowBossHp": 0.85,
+        "shadowBossFocusLowHpThreshold": 0.4,
+        "bossGateEnabled": true,
+        "bossGateMinDurationMs": 60000,
+        "bossGateRequiredMobKills": 40,
+        "shadowPressureScalingEnabled": false,
+        "shadowPressureMobScaleStep": 0.12,
+        "shadowPressureBossScaleStep": 0.18,
+        "shadowPressureScaleMax": 2.75,
+        "staticBossHpBaseMultiplier": 2.3,
+        "staticBossHpRankGrowth": 1.25,
+        "rankAllocationDeployPoolShare": 0.8,
+        "rankAllocationPreferredPairShare": 0.8,
+        "rankAllocationSameRankShare": 0.75,
+        "roleCombatModelEnabled": true,
+        "roleCombatModelVersion": 1,
+        "combatStatusEffectsEnabled": true,
+        "combatStatusTickMs": 1000,
+        "combatStatusMaxTrackedMobs": 600,
+        "dungeonRanks": [
+            "E",
+            "D",
+            "C",
+            "B",
+            "A",
+            "S",
+            "SS",
+            "SSS",
+            "SSS+",
+            "NH",
+            "Monarch",
+            "Monarch+",
+            "Shadow Monarch"
+        ],
+        "userActiveDungeon": null,
+        "lastSpawnTime": {},
+        "lastDungeonEndTime": {
+            "1311948619091284009_1498930233431167097": 1788026164632
+        },
+        "mobKillNotifications": {
+            "1457895113337340120_1458703985149083839": {
+                "count": 0,
+                "lastNotification": 1784166010485
+            },
+            "1452386367526010975_1523069347692675164": {
+                "count": 596,
+                "lastNotification": 1784402132666
+            },
+            "1524135118829256745_1524378344353824778": {
+                "count": 1251,
+                "lastNotification": 1785402881908
+            },
+            "1524135118829256745_1525162887994150983": {
+                "count": 0,
+                "lastNotification": 1785404022060
+            },
+            "1429280769418858499_1462331496709886112": {
+                "count": 4,
+                "lastNotification": 1785408027184
+            },
+            "1452386367526010975_1515057488918220932": {
+                "count": 800,
+                "lastNotification": 1785981867559
+            },
+            "1452386367526010975_1509981476643405944": {
+                "count": 800,
+                "lastNotification": 1785990472780
+            },
+            "1452386367526010975_1510070406055460924": {
+                "count": 800,
+                "lastNotification": 1786064587263
+            },
+            "1452386367526010975_1510075488482230344": {
+                "count": 800,
+                "lastNotification": 1786066428895
+            },
+            "1452386367526010975_1525542120998305923": {
+                "count": 800,
+                "lastNotification": 1786067689981
+            },
+            "1452386367526010975_1509422092670472272": {
+                "count": 800,
+                "lastNotification": 1786068329285
+            },
+            "1452386367526010975_1452386372248928257": {
+                "count": 800,
+                "lastNotification": 1786068715093
+            },
+            "1452386367526010975_1533236296237973534": {
+                "count": 800,
+                "lastNotification": 1786069118936
+            },
+            "1452386367526010975_1519126441520926863": {
+                "count": 800,
+                "lastNotification": 1786070987925
+            },
+            "1452386367526010975_1520498063464992788": {
+                "count": 800,
+                "lastNotification": 1786071489556
+            },
+            "1452386367526010975_1452386372416438342": {
+                "count": 800,
+                "lastNotification": 1786072205208
+            },
+            "1452386367526010975_1452386371879567467": {
+                "count": 800,
+                "lastNotification": 1786072455533
+            },
+            "1452386367526010975_1527746003363565629": {
+                "count": 400,
+                "lastNotification": 1786075840991
+            },
+            "1452386367526010975_1509673825153843291": {
+                "count": 800,
+                "lastNotification": 1786086811719
+            },
+            "1534135579934064791_1534137448047579136": {
+                "count": 144,
+                "lastNotification": 1786089876141
+            },
+            "1452386367526010975_1452386371707863078": {
+                "count": 800,
+                "lastNotification": 1786324243741
+            },
+            "1524135118829256745_1524316631692607538": {
+                "count": 800,
+                "lastNotification": 1786491249524
+            },
+            "1311948619091284009_1487616396199198915": {
+                "count": 800,
+                "lastNotification": 1786573466478
+            },
+            "1311948619091284009_1311948619980738590": {
+                "count": 0,
+                "lastNotification": 1786687316378
+            },
+            "story_demon_castle": {
+                "count": 2493,
+                "lastNotification": 1787697498333
+            },
+            "1311948619091284009_1311948619678613569": {
+                "count": 1600,
+                "lastNotification": 1787804727994
+            },
+            "1311948619091284009_1485441666625179689": {
+                "count": 0,
+                "lastNotification": 1787789589042
+            },
+            "1311948619091284009_1311948619980738599": {
+                "count": 0,
+                "lastNotification": 1787966709519
+            }
+        },
+        "userHP": 2498260,
+        "userMaxHP": 2498260,
+        "userMana": 2693340,
+        "userMaxMana": 2693340,
+        "userRankHpLinearStep": 50,
+        "userRankHpCurveStep": 35,
+        "userHpPerShadowBase": 8,
+        "userHpPerShadowRankStep": 0.6,
+        "userHpShadowSoftCapCount": 500,
+        "userHpShadowSoftCapMultiplier": 0.12,
+        "shadowCombatStatPivotScale": 3.5,
+        "shadowCombatStatCompressionExp": 0.68,
+        "settingsVersion": 5
+    },
+    "settings_backup": {
+        "enabled": true,
+        "debug": false,
+        "autoDeploy": true,
+        "spawnChance": 12,
+        "dungeonDuration": 600000,
+        "maxDungeonsPercentage": 0.15,
+        "minDungeonsAllowed": 3,
+        "maxDungeonsAllowed": 20,
+        "channelSpawnCooldown": 300000,
+        "globalSpawnCooldown": 60000,
+        "shadowAttackInterval": 3000,
+        "userAttackCooldown": 2000,
+        "mobKillNotificationInterval": 30000,
+        "mobMaxActiveCap": null,
+        "mobWaveBaseCount": 200,
+        "mobWaveVariancePercent": 0.2,
+        "mobTierNormalShare": 0.7,
+        "mobTierEliteShare": 0.25,
+        "mobTierChampionShare": 0.05,
+        "userParticipationDamageBonus": 0.25,
+        "shadowDamageScalar": 2,
+        "monarchsWillMultiplier": 1.25,
+        "performanceMode": true,
+        "performanceAliveMobCap": 800,
+        "warfrontEnabled": true,
+        "gmLeadershipEnabled": true,
+        "gmLeadershipOffenseBonus": 0.2,
+        "gmLeadershipCasualtyCut": 0.4,
+        "gmLeadershipFrontlineBonus": 0.1,
+        "warfrontKillRatePerShadow": 0.015,
+        "warfrontMaxKillsPerTick": 5000,
+        "warGateCullPercent": 0.1,
+        "bossGateMaxWaitMs": 600000,
+        "shadowHealerRestorationEnabled": true,
+        "roleDiversityGuaranteeEnabled": true,
+        "minSupportTankShare": 0.12,
+        "shadowMobTargetShare": 0.5,
+        "shadowBossTargetShareLowBossHp": 0.85,
+        "shadowBossFocusLowHpThreshold": 0.4,
+        "bossGateEnabled": true,
+        "bossGateMinDurationMs": 60000,
+        "bossGateRequiredMobKills": 40,
+        "shadowPressureScalingEnabled": false,
+        "shadowPressureMobScaleStep": 0.12,
+        "shadowPressureBossScaleStep": 0.18,
+        "shadowPressureScaleMax": 2.75,
+        "staticBossHpBaseMultiplier": 2.3,
+        "staticBossHpRankGrowth": 1.25,
+        "rankAllocationDeployPoolShare": 0.8,
+        "rankAllocationPreferredPairShare": 0.8,
+        "rankAllocationSameRankShare": 0.75,
+        "roleCombatModelEnabled": true,
+        "roleCombatModelVersion": 1,
+        "combatStatusEffectsEnabled": true,
+        "combatStatusTickMs": 1000,
+        "combatStatusMaxTrackedMobs": 600,
+        "dungeonRanks": [
+            "E",
+            "D",
+            "C",
+            "B",
+            "A",
+            "S",
+            "SS",
+            "SSS",
+            "SSS+",
+            "NH",
+            "Monarch",
+            "Monarch+",
+            "Shadow Monarch"
+        ],
+        "userActiveDungeon": null,
+        "lastSpawnTime": {},
+        "lastDungeonEndTime": {
+            "1311948619091284009_1498930233431167097": 1788026164632
+        },
+        "mobKillNotifications": {
+            "1457895113337340120_1458703985149083839": {
+                "count": 0,
+                "lastNotification": 1784166010485
+            },
+            "1452386367526010975_1523069347692675164": {
+                "count": 596,
+                "lastNotification": 1784402132666
+            },
+            "1524135118829256745_1524378344353824778": {
+                "count": 1251,
+                "lastNotification": 1785402881908
+            },
+            "1524135118829256745_1525162887994150983": {
+                "count": 0,
+                "lastNotification": 1785404022060
+            },
+            "1429280769418858499_1462331496709886112": {
+                "count": 4,
+                "lastNotification": 1785408027184
+            },
+            "1452386367526010975_1515057488918220932": {
+                "count": 800,
+                "lastNotification": 1785981867559
+            },
+            "1452386367526010975_1509981476643405944": {
+                "count": 800,
+                "lastNotification": 1785990472780
+            },
+            "1452386367526010975_1510070406055460924": {
+                "count": 800,
+                "lastNotification": 1786064587263
+            },
+            "1452386367526010975_1510075488482230344": {
+                "count": 800,
+                "lastNotification": 1786066428895
+            },
+            "1452386367526010975_1525542120998305923": {
+                "count": 800,
+                "lastNotification": 1786067689981
+            },
+            "1452386367526010975_1509422092670472272": {
+                "count": 800,
+                "lastNotification": 1786068329285
+            },
+            "1452386367526010975_1452386372248928257": {
+                "count": 800,
+                "lastNotification": 1786068715093
+            },
+            "1452386367526010975_1533236296237973534": {
+                "count": 800,
+                "lastNotification": 1786069118936
+            },
+            "1452386367526010975_1519126441520926863": {
+                "count": 800,
+                "lastNotification": 1786070987925
+            },
+            "1452386367526010975_1520498063464992788": {
+                "count": 800,
+                "lastNotification": 1786071489556
+            },
+            "1452386367526010975_1452386372416438342": {
+                "count": 800,
+                "lastNotification": 1786072205208
+            },
+            "1452386367526010975_1452386371879567467": {
+                "count": 800,
+                "lastNotification": 1786072455533
+            },
+            "1452386367526010975_1527746003363565629": {
+                "count": 400,
+                "lastNotification": 1786075840991
+            },
+            "1452386367526010975_1509673825153843291": {
+                "count": 800,
+                "lastNotification": 1786086811719
+            },
+            "1534135579934064791_1534137448047579136": {
+                "count": 144,
+                "lastNotification": 1786089876141
+            },
+            "1452386367526010975_1452386371707863078": {
+                "count": 800,
+                "lastNotification": 1786324243741
+            },
+            "1524135118829256745_1524316631692607538": {
+                "count": 800,
+                "lastNotification": 1786491249524
+            },
+            "1311948619091284009_1487616396199198915": {
+                "count": 800,
+                "lastNotification": 1786573466478
+            },
+            "1311948619091284009_1311948619980738590": {
+                "count": 0,
+                "lastNotification": 1786687316378
+            },
+            "story_demon_castle": {
+                "count": 2493,
+                "lastNotification": 1787697498333
+            },
+            "1311948619091284009_1311948619678613569": {
+                "count": 1600,
+                "lastNotification": 1787804727994
+            },
+            "1311948619091284009_1485441666625179689": {
+                "count": 0,
+                "lastNotification": 1787789589042
+            },
+            "1311948619091284009_1311948619980738599": {
+                "count": 0,
+                "lastNotification": 1787966709519
+            }
+        },
+        "userHP": 2498260,
+        "userMaxHP": 2498260,
+        "userMana": 2693340,
+        "userMaxMana": 2693340,
+        "userRankHpLinearStep": 50,
+        "userRankHpCurveStep": 35,
+        "userHpPerShadowBase": 8,
+        "userHpPerShadowRankStep": 0.6,
+        "userHpShadowSoftCapCount": 500,
+        "userHpShadowSoftCapMultiplier": 0.12,
+        "shadowCombatStatPivotScale": 3.5,
+        "shadowCombatStatCompressionExp": 0.68,
+        "settingsVersion": 5
+    }
+}
