@@ -796,19 +796,20 @@ div[class^="nowPlayingColumn_"] button:hover {
   box-shadow: none !important;
 }
 
-/* The Boost Goal pill: a purple-to-pink gradient with rounded ends, and the last
-   saturated colour left in the channel sidebar. Several hooks because the live class
-   is unconfirmed -- each is inert if it does not match. */
-div[class*="premiumProgress" i],
-div[class*="boostProgress" i],
-div[class*="guildBoost" i],
-[aria-label*="Boost" i][class*="container" i] {
-  background: var(--ut-black) !important;
-  background-image: none !important;
-  border: var(--ut-line) solid var(--ut-white) !important;
-  border-radius: var(--ut-radius) !important;
-  box-shadow: none !important;
-  color: var(--ut-white) !important;
+/* The Boost Goal widget, hidden outright. The earlier guesses here
+   (premiumProgress_, boostProgress_, guildBoost_) matched nothing -- a capture shows
+   the real chain:
+
+     div[role="button"].container__0d0f9
+       > div.contentContainer__0d0f9
+           > div.progressContainer__0d0f9   <- the bar, radius 1.67e7px, oklab fill
+
+   :has() hides the whole entry rather than leaving an empty labelled row behind; the
+   second selector is a fallback that at least removes the bar if :has() is ever
+   unavailable. Scoped to the channel list so no other progress bar is affected. */
+ul[aria-label="Channels"] div[role="button"]:has(div[class^="progressContainer_"]),
+ul[aria-label="Channels"] div[class^="progressContainer_"] {
+  display: none !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -859,6 +860,14 @@ div[aria-label$="(category)" i] *,
   letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
 }
+/* Size is set on the header ONLY, never on its descendants: `em` is relative to the
+   parent, so applying it to both would compound to 2.25x instead of 1.5x. */
+div[aria-label$="(category)" i],
+[class*="headerText_"],
+[class*="sectionLabel_"] {
+  font-size: var(--ut-category-size) !important;
+  line-height: 1.4 !important;
+}
 
 /* A lighter frame on a selected channel. The 2px used everywhere else reads as
    heavy across a full-width sidebar row, where the box is mostly empty. Specificity
@@ -885,6 +894,7 @@ ul[aria-label="Channels"] li[class*="containerDefault_"][class*="selected_"] {
    check the "g" in "livingroom".
    ══════════════════════════════════════════════════════════════════════════ */
 :root {
+  --ut-category-size: 1.5em;
   --ut-channel-inset: 8px;
   --ut-channel-tighten: 0px;
 }
