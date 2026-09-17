@@ -1111,3 +1111,54 @@ button[class*="lookOutlined_"]:hover *,
   border-color: var(--ut-hover) !important;
   background: var(--ut-black) !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   The full-profile modal gets the frame too.
+
+   It missed the popout rule because its chain is different: inner_ -> outer_ ->
+   root__24502 -> div[role="dialog"], where the popout nests inner_ inside a
+   popout_ dialog directly. Only the background rule reached it, so it was the one
+   panel in the theme with no frame -- which reads as unfinished rather than chosen.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[role="dialog"] div[class^="root_"] > div[class^="outer_"] {
+  background: var(--ut-black) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Link-style controls are NOT buttons.
+
+   "View Full Bio" came out boxed because Discord implements it as a <button> with a
+   LINK look, so the button rules above claimed it. A frame around an inline text link
+   is wrong twice over: it is not a control you press so much as text you follow, and
+   boxing it puts a frame inside a frame in the middle of a paragraph.
+
+   These come last so they win over the button rules, and they undo exactly the three
+   properties those rules set -- frame, fill, radius -- while keeping the shared font
+   and the yellow hover, so a link still behaves like everything else in the theme.
+   ══════════════════════════════════════════════════════════════════════════ */
+button[class*="lookLink_"],
+button[class*="lookLink_"] *,
+[class*="lookLink_"]:is(button, [role="button"]),
+[class*="lookLink_"]:is(button, [role="button"]) *,
+a[class*="anchor_"]:not([class*="button" i]) {
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  color: var(--ut-white) !important;
+  text-decoration: underline !important;
+  font-family: var(--ut-font) !important;
+}
+button[class*="lookLink_"]:hover,
+button[class*="lookLink_"]:hover *,
+a[class*="anchor_"]:not([class*="button" i]):hover {
+  color: var(--ut-hover) !important;
+  background: transparent !important;
+  border: none !important;
+}
