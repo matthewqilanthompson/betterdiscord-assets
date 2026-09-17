@@ -842,7 +842,14 @@ ul[aria-label="Channels"] [class*="name_"]::after,
 li[class*="containerDefault_"] [class*="name_"]::before,
 li[class*="containerDefault_"] [class*="name_"]::after,
 [class*="collapsed_"] [class*="name_"]::before,
-[class*="collapsed_"] [class*="name_"]::after {
+[class*="collapsed_"] [class*="name_"]::after,
+/* The member-list group header ("ONLINE - 5"). Fourth class using this same trick:
+     .membersGroup_c8ffbb:before { height:2px; flex-grow:1;
+                                   background: linear-gradient(to left, currentColor 50%, transparent) }
+   Note ClearVision writes it with a single colon. :before and ::before are the same
+   pseudo-element, so the double-colon form here still overrides it. */
+[class*="membersGroup_"]::before,
+[class*="membersGroup_"]::after {
   content: none !important;
   display: none !important;
   background: none !important;
@@ -853,7 +860,9 @@ li[class*="containerDefault_"] [class*="name_"]::after,
 div[aria-label$="(category)" i],
 div[aria-label$="(category)" i] *,
 [class*="headerText_"],
-[class*="sectionLabel_"] {
+[class*="sectionLabel_"],
+[class*="membersGroup_"],
+[class*="membersGroup_"] * {
   font-family: "Pixel Operator", "Pixelify Sans", system-ui, sans-serif !important;
   font-weight: 700 !important;
   color: var(--ut-white) !important;
@@ -864,7 +873,8 @@ div[aria-label$="(category)" i] *,
    parent, so applying it to both would compound to 2.25x instead of 1.5x. */
 div[aria-label$="(category)" i],
 [class*="headerText_"],
-[class*="sectionLabel_"] {
+[class*="sectionLabel_"],
+[class*="membersGroup_"] {
   font-size: var(--ut-category-size) !important;
   line-height: 1.4 !important;
 }
