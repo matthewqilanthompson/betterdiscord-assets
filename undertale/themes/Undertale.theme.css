@@ -1755,15 +1755,47 @@ main[class^="chatContent_"] > div[class*="scroller_"] {
   background-image: none !important;
 }
 
-/* The box itself. */
+/* The box itself -- ONE box per speaker, not one per message.
+
+   Discord already groups consecutive messages from the same person: the first carries
+   groupStart_ and the rest do not. So the box is assembled from three states rather
+   than drawn per row:
+
+     every row   ->  left and right edges only
+     groupStart  ->  + top edge, and the gap above
+     last of run ->  + bottom edge, and the gap below
+
+   "Last of the run" has no class of its own, and CSS has no previous-sibling combinator
+   -- but :has() turns the question around: the last row is the one whose NEXT sibling
+   starts a group, or is a date divider, or does not exist. That is the whole trick, and
+   it is why this needs no plugin.
+
+   The spacing lives on the group, not the row: rows inside a run sit flush so the box
+   reads as one panel, and the 16px margin applies only where a box actually ends. */
 li[class*="messageListItem_"] > div[role="article"] {
   background: transparent !important;
-  border: var(--ut-line) solid var(--ut-white) !important;
+  border: none !important;
+  border-left: var(--ut-line) solid var(--ut-white) !important;
+  border-right: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
   box-shadow: none !important;
-  margin: 8px 16px !important;
-  padding: 12px 16px 12px 78px !important;
-  min-height: 60px !important;
+  margin: 0 16px !important;
+  padding: 4px 16px 4px 78px !important;
+  min-height: 0 !important;
+}
+/* Opens the box. */
+li[class*="messageListItem_"] > div[class*="groupStart_"] {
+  border-top: var(--ut-line) solid var(--ut-white) !important;
+  margin-top: 16px !important;
+  padding-top: 12px !important;
+}
+/* Closes it: next row starts a new speaker, is a date divider, or there is no next row. */
+li[class*="messageListItem_"]:has(+ li[class*="messageListItem_"] > div[class*="groupStart_"]) > div[role="article"],
+li[class*="messageListItem_"]:has(+ li[class*="divider_"]) > div[role="article"],
+li[class*="messageListItem_"]:last-child > div[role="article"] {
+  border-bottom: var(--ut-line) solid var(--ut-white) !important;
+  margin-bottom: 16px !important;
+  padding-bottom: 12px !important;
 }
 /* Hovering a box does not fill it; the text goes yellow, as everywhere else. */
 li[class*="messageListItem_"] > div[role="article"]:hover {
@@ -1776,7 +1808,7 @@ li[class*="messageListItem_"] img[class*="avatar_"] {
   border-radius: 0 !important;
   image-rendering: pixelated !important;
   left: 16px !important;
-  top: 12px !important;
+  top: 14px !important;
   width: 48px !important;
   height: 48px !important;
 }
