@@ -1,0 +1,97 @@
+{
+    "settings": {
+        "anchors": [
+            {
+                "id": "sa_1771715004725_9z4y",
+                "name": "og-general",
+                "guildId": "1311948619091284009",
+                "channelId": "1311948619678613568",
+                "guildName": "Deaf Clown Adults",
+                "channelName": "og-general",
+                "createdAt": 1771715004725,
+                "lastUsed": 1786395113413,
+                "useCount": 167,
+                "sortOrder": 0
+            },
+            {
+                "id": "sa_1771715022676_svuj",
+                "name": "【📢】・announcements",
+                "guildId": "1444318088718844147",
+                "channelId": "1444625058277625939",
+                "guildName": "AFS: Endless",
+                "channelName": "【📢】・announcements",
+                "createdAt": 1771715022676,
+                "lastUsed": 1786395106329,
+                "useCount": 93,
+                "sortOrder": 1
+            },
+            {
+                "id": "sa_1771715024943_isdr",
+                "name": "【📣】・sub-announcements",
+                "guildId": "1444318088718844147",
+                "channelId": "1455879653326590064",
+                "guildName": "AFS: Endless",
+                "channelName": "【📣】・sub-announcements",
+                "createdAt": 1771715024943,
+                "lastUsed": 1772501208734,
+                "useCount": 76,
+                "sortOrder": 2
+            },
+            {
+                "id": "sa_1771715027519_mgaf",
+                "name": "【🤫】・sneak-peeks",
+                "guildId": "1444318088718844147",
+                "channelId": "1445948630354624613",
+                "guildName": "AFS: Endless",
+                "channelName": "【🤫】・sneak-peeks",
+                "createdAt": 1771715027519,
+                "lastUsed": 1778445212451,
+                "useCount": 184,
+                "sortOrder": 3
+            },
+            {
+                "id": "sa_1771741442989_qr87",
+                "name": "announcements",
+                "guildId": "86004744966914048",
+                "channelId": "178208945410801665",
+                "guildName": "BetterDiscord",
+                "channelName": "announcements",
+                "createdAt": 1771741442989,
+                "lastUsed": 1785389731863,
+                "useCount": 360,
+                "sortOrder": 4
+            },
+            {
+                "id": "sa_1771963925550_gu6k",
+                "name": "codira",
+                "guildId": "1194416882464342048",
+                "channelId": "1470854961028927509",
+                "guildName": "AI Core",
+                "channelName": "codira",
+                "createdAt": 1771963925550,
+                "lastUsed": null,
+                "useCount": 0,
+                "sortOrder": 5
+            },
+            {
+                "id": "sa_1772500960376_f2en",
+                "name": "custom-css",
+                "guildId": "86004744966914048",
+                "channelId": "123136820409139200",
+                "guildName": "BetterDiscord",
+                "channelName": "custom-css",
+                "createdAt": 1772500960376,
+                "lastUsed": 1785801240766,
+                "useCount": 38,
+                "sortOrder": 6
+            }
+        ],
+        "hotkey": "Ctrl+Shift+S",
+        "animationEnabled": true,
+        "respectReducedMotion": false,
+        "animationDuration": 800,
+        "maxAnchors": 10,
+        "sortBy": "manual",
+        "debugMode": false
+    }
+}

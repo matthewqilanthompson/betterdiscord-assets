@@ -1,0 +1,68 @@
+{
+    "settings": {
+        "waypoints": [
+            {
+                "id": "wp_1771324660660_fvme",
+                "label": "BetterDiscord » #custom-css",
+                "locationType": "channel",
+                "guildId": "86004744966914048",
+                "channelId": "123136820409139200",
+                "messageId": null,
+                "shadowId": "28_3ka43hf16",
+                "shadowName": "Tank",
+                "shadowRank": "E",
+                "createdAt": 1771324660660,
+                "lastVisited": 1771923210920,
+                "visitCount": 3,
+                "channelName": "custom-css",
+                "guildName": "BetterDiscord"
+            },
+            {
+                "id": "wp_1771325598000_q7oi",
+                "label": "BetterDiscord » #custom-css",
+                "locationType": "message",
+                "guildId": "86004744966914048",
+                "channelId": "123136820409139200",
+                "messageId": "1473216807409025151",
+                "shadowId": "31_jw4jxx1jq",
+                "shadowName": "Tank",
+                "shadowRank": "E",
+                "createdAt": 1771325598000,
+                "lastVisited": 1780010974562,
+                "visitCount": 12,
+                "channelName": "custom-css",
+                "guildName": "BetterDiscord",
+                "messagePreview": "RadialStatus has a secondary bug where, on servers you are able to \"View in Mod Panel\", the Status wrap on the avatar is…",
+                "messageAuthor": "Zacam"
+            },
+            {
+                "id": "wp_1783736357496_nmq8",
+                "label": "Anime Fighting Simulator » #💬┃bal-discussion",
+                "locationType": "message",
+                "guildId": "1452386367526010975",
+                "channelId": "1518352519653363752",
+                "messageId": "1525233518114766959",
+                "shadowId": "shadow_1771793829534_s5a8f7huf",
+                "shadowName": "Golem",
+                "shadowRank": "D",
+                "createdAt": 1783736357496,
+                "lastVisited": null,
+                "visitCount": 0,
+                "channelName": "💬┃bal-discussion",
+                "guildName": "Anime Fighting Simulator",
+                "messagePreview": "(usually not a reason to complain ever)",
+                "messageAuthor": "gost"
+            }
+        ],
+        "sortBy": "created",
+        "animationEnabled": true,
+        "respectReducedMotion": false,
+        "animationDuration": 550,
+        "_metadata": {
+            "lastSave": "2026-08-03T23:54:51.899Z",
+            "version": "2.1.1"
+        },
+        "debug": false
+    },
+    "_lastTeleportTime": 1773438064558
+}
