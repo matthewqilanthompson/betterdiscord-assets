@@ -1601,6 +1601,47 @@ div[class^="toolbar_"] div[aria-label]:hover svg[class^="icon_"] {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
+   Forum tag pills.
+
+   Measured: 20px radius, a 1px border and a 30%-black fill -- and the border already
+   reads YELLOW (srgb 1 1 0), which is --ut-save arriving through --main-color. That is
+   the token flipped earlier in this file, and here it lands on a resting element, so
+   every tag looks selected before anything is chosen.
+
+   Square them, put them at rest in white, and let yellow mean what it means everywhere
+   else in this theme: hovered, or actually on.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="tagListInner_"] div[class^="pill_"],
+div[class^="tagsContainer_"] div[class^="pill_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+div[class^="tagListInner_"] div[class^="pill_"] *,
+div[class^="tagsContainer_"] div[class^="pill_"] * {
+  background: transparent !important;
+  border: none !important;
+  color: inherit !important;
+  font-family: var(--ut-font) !important;
+}
+/* Yellow means hovered or on -- never a fill. */
+div[class^="tagListInner_"] div[class^="pill_"]:hover,
+div[class^="tagListInner_"] div[class^="pill_"][class*="selected_"],
+div[class^="tagListInner_"] div[class^="pill_"][aria-pressed="true"],
+div[class^="tagListInner_"] div[class^="pill_"][aria-checked="true"],
+div[class^="tagsContainer_"] div[class^="pill_"]:hover,
+div[class^="tagsContainer_"] div[class^="pill_"][class*="selected_"] {
+  background: var(--ut-black) !important;
+  border-color: var(--ut-hover) !important;
+  color: var(--ut-hover) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    The composer -- and this is where the battle box goes.
 
    §4 used to frame the whole message area, and that came off because the framed
