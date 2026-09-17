@@ -810,3 +810,47 @@ div[class*="guildBoost" i],
   box-shadow: none !important;
   color: var(--ut-white) !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Category headers: bold Pixel Operator, no flanking dashes.
+
+   The dashes are ClearVision's, not Discord's, and they are pseudo-elements --
+   found by reading its stylesheet rather than guessing:
+
+     .header_aa8da2::before   { height:2px; flex-grow:1;
+                                background: linear-gradient(to left, var(--hsl-main-color) 50%, transparent) }
+     .headerText__99e7c::after{ ... currentColor ... }
+     .sectionLabel__409aa::before/::after { ... }
+
+   Three different header classes carry them, which is why all three stems are
+   named here. flex-grow:1 is what makes them stretch to fill the row, so removing
+   the content is enough -- nothing needs repositioning afterwards.
+   ══════════════════════════════════════════════════════════════════════════ */
+[class*="header_"]::before, [class*="header_"]::after,
+[class*="headerText_"]::before, [class*="headerText_"]::after,
+[class*="sectionLabel_"]::before, [class*="sectionLabel_"]::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* The name itself. Pixel Operator ships a real Bold, so weight 700 picks up the
+   drawn face rather than a synthesised smear. */
+div[aria-label$="(category)" i],
+div[aria-label$="(category)" i] *,
+[class*="headerText_"],
+[class*="sectionLabel_"] {
+  font-family: "Pixel Operator", "Pixelify Sans", system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  color: var(--ut-white) !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+/* A lighter frame on a selected channel. The 2px used everywhere else reads as
+   heavy across a full-width sidebar row, where the box is mostly empty. Specificity
+   is (0,2,2) so it beats the (0,2,1) selection rule outright rather than by order. */
+ul[aria-label="Channels"] li[class*="selected_"],
+ul[aria-label="Channels"] li[class*="containerDefault_"][class*="selected_"] {
+  border-width: 1px !important;
+}
