@@ -747,25 +747,18 @@ div[class^="nowPlayingColumn_"] button:hover {
   border-color: var(--ut-hover) !important;
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   Square avatars in Active Now.
+/* Squared avatars were tried here and reverted. Squaring alone only crops a
+   photograph -- it does not make it pixel art, so it reads as broken rather than
+   styled. Square belongs WITH pixelation, not before it; see the note below.
 
-   The last round shapes in that column, and border-radius cannot reach them: a
-   CSS Picker capture shows the avatar is an svg[class*="mask_"] wrapping a
-   <foreignObject>, so the circle is an SVG MASK, not a corner radius. The mask has
-   to be cleared instead.
+   If that is ever done, the rule was:
+     div[class^="nowPlayingColumn_"] svg[class*="mask" i] foreignObject {
+       mask: none !important; -webkit-mask: none !important; clip-path: none !important; }
+   The circle is an SVG mask on a <foreignObject>, not a border-radius, which is why
+   --ut-radius never touched it.
 
-   Scoped to this column deliberately. Squaring every avatar in Discord is a far
-   bigger visual change -- message list, member list, DM rows, popouts -- and worth
-   deciding on its own rather than riding along with a panel restyle.
-   ══════════════════════════════════════════════════════════════════════════ */
-div[class^="nowPlayingColumn_"] svg[class*="mask" i] foreignObject {
-  mask: none !important;
-  -webkit-mask: none !important;
-  clip-path: none !important;
-}
-div[class^="nowPlayingColumn_"] svg[class*="mask" i] img,
-div[class^="nowPlayingColumn_"] img[class*="avatar" i] {
-  border-radius: var(--ut-radius) !important;
-  clip-path: none !important;
-}
+   Pixelation itself is NOT possible from a theme. image-rendering: pixelated only
+   bites when an image is scaled UP, and Discord downscales its avatars, so CSS alone
+   changes nothing. It needs a plugin to rewrite the avatar src to Discord's small
+   CDN size -- measured: ?size=16 returns 791 bytes against 33,715 for ?size=128 --
+   and then image-rendering: pixelated on the upscale does the rest. */
