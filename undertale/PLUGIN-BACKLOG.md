@@ -1,8 +1,10 @@
-# Undertale suite — parked plugin work
+# Undertale suite — parked work
 
-Two items that need a plugin and cannot be done from `Undertale.theme.css`. Both were
-investigated, both are confirmed feasible, and the findings are recorded here so the
-next session starts from evidence rather than from scratch.
+Items investigated during the theme pass and deferred. Each is confirmed feasible, and
+the findings are recorded so the next session starts from evidence rather than scratch.
+
+**Items 1 and 2 need a plugin. Item 3 does not** -- it is pure CSS and is only parked,
+not blocked.
 
 Parked 2026-09-17 by request, after the theme pass was finished.
 
@@ -85,3 +87,50 @@ The SOUL is the player, so it belongs on "this one is about you" and nowhere che
 `rgba(138, 43, 226, 0.4)`. An earlier attempt to tokenise it edited
 `plugins/HSLDockAutoHideMain.js`, which is a **dead file** -- the live plugin builds from
 `src/`. See DKB `four-theories-read-from-a-dead-source-file`.
+
+
+---
+
+## 3. Replace the Home icon with sprite art — **CSS only, not plugin work**
+
+Swap the Discord logo in the servers rail for an Undertale sprite, while the button still
+navigates Home.
+
+**Why no plugin:** only the *paint* changes. The click target is an ancestor
+(`div[role="treeitem"]`), so leaving it untouched preserves navigation, focus and
+accessibility for free. Nothing needs to intercept a click.
+
+**The element**, from a CSS Picker capture:
+
+```
+svg[role="img"]  40x40
+  └ parent  div[class^="childWrapper_"]
+      └ div[role="treeitem"][class^="wrapper_"]     <- the click target, DO NOT touch
+          └ <foreignObject>                          <- masked, like the avatars
+```
+
+Note the `<path>` inside the svg already computes as `display: none`, and
+`nav[aria-label="Servers sidebar"] svg` (this theme's rule) already reaches it.
+
+**Approach:** put a `background-image` on `div[class^="childWrapper_"]` with
+`background-size: contain`, and suppress the logo's paint — **hide the path, not the svg**.
+`display: none` on the svg itself risks collapsing the layout box and the hit area; the
+goal is to change what is drawn, not what is there.
+
+**Asset delivery is the real constraint.** A BD theme is injected into the discord.com
+document, so a relative `url()` resolves against discord.com and silently 404s (the reason
+the old theme pinned a GitHub raw URL — see the header comment in the theme). The fonts
+sidestep this entirely by being installed locally, which an image cannot do.
+
+So: **crop one frame and embed it as a base64 `data:` URI.** Self-contained, no network,
+no publishing step. For scale, the whole `sans-dr.png` sheet is 16 KB; a single cropped
+frame base64s to far less. Sheets available in
+`chrome-themes/newtab-src/media/`: `sans-dr.png`, `sans-poses.png`, `sans-expressions.png`,
+`sans-moods.png`, `overworld.png`.
+
+**Open:** which sprite. A single idle Sans head reads at 40x40; a full-body frame probably
+will not.
+
+Add `image-rendering: pixelated` so the upscale stays crisp — the same property that does
+nothing for avatars (item 1) works perfectly here, because this image genuinely IS small
+and genuinely IS being scaled up.
