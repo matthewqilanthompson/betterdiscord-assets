@@ -1722,6 +1722,55 @@ form[class^="form_"] button:hover svg {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   User Settings: the sidebar, the content, and the content header.
+
+   All three captures still computed gg sans and Discord's own greys, so this whole
+   modal was stock chrome -- and it is the surface the user opens most often after the
+   channel view.
+
+   The two edges are treated differently ON PURPOSE:
+     - aside.sidebar_ keeps its RIGHT edge at full weight. It splits the nav from the
+       content, the same job the Boost rail's left edge does.
+     - contentHeader_'s bottom hairline GOES. It is the same kind of line that was
+       removed from the Friends header by request: a rule under a title bar, inside a
+       panel that is already bounded.
+   If the header line is wanted back, it is one border-bottom here.
+   ══════════════════════════════════════════════════════════════════════════ */
+aside[class^="sidebar_"][class*="theme-"],
+div[class^="contentHeader_"],
+div[class^="contentBody_"],
+div[class^="contentColumn_"],
+div[class^="content_"] > div[class^="scroller_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+aside[class^="sidebar_"][class*="theme-"] {
+  border: none !important;
+  border-right: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+}
+div[class^="contentHeader_"] {
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+/* Everything in the modal takes the theme's font, and no tile owns a box. */
+div[class^="modalContentInner_"] *,
+aside[class^="sidebar_"][class*="theme-"] * {
+  font-family: var(--ut-font) !important;
+}
+aside[class^="sidebar_"][class*="theme-"] div[class*="item_"],
+div[class^="content_"] > div[class^="scroller_"] div[class*="card_"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    The Server Boost (powerups) page.
 
    Two panes, both captured: powerupsContainer_ scrolls the sections, and
