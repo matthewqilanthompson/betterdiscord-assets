@@ -593,6 +593,28 @@ div[class^="friendsButtonContainer_"] * {
   background-image: none !important;
 }
 
+/* THE PSEUDO-ELEMENTS. `*` matches elements and NEVER ::before/::after, so the rule
+   above blacked out every element in the container while Discord kept drawing the
+   SELECTED highlight on an overlay it could not reach.
+
+   That single fact explains every contradiction in this hunt: CSS Picker inspects
+   elements, so capture after capture truthfully reported rgb(0,0,0) on the very row
+   that was visibly white -- and it was only ever white WHEN SELECTED, which is when
+   Discord adds the overlay. Four rounds were spent moving an element selector around
+   a fill that was never on an element.
+
+   Transparent rather than black: the overlay sits ON TOP of the row's content, so
+   painting it black would hide the label and icon instead of the white. */
+div[class^="friendsButtonContainer_"]::before,
+div[class^="friendsButtonContainer_"]::after,
+div[class^="friendsButtonContainer_"] *::before,
+div[class^="friendsButtonContainer_"] *::after {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
 /* The frame goes on the row itself, not on every descendant. */
 div[class^="friendsButtonContainer_"] li[role="listitem"] {
   border: var(--ut-line) solid var(--ut-white) !important;
