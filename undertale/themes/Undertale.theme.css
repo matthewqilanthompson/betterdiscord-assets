@@ -37,7 +37,12 @@
   --ut-white:        #ffffff;
   --ut-grey:         #bfbfbf;   /* inactive text: the game dims, never tints */
   --ut-soul:         #ff0000;   /* the SOUL. Mentions, and nothing else. */
-  --ut-save:         #ffff00;   /* SAVE points. Unread, and nothing else. */
+  --ut-save:         #ffff00;   /* SAVE points and unread. */
+  /* The same yellow, named for its other job. In Undertale a menu highlight is the
+     SOUL beside the line plus the line itself turning yellow -- never a filled bar
+     behind it. Yellow therefore means "look here", whether that is an unread channel
+     or the row under the cursor; it is one idea, so it stays one colour. */
+  --ut-hover:        #ffff00;
   --ut-mercy:        #ffcc00;   /* FIGHT/ACT/ITEM/MERCY button yellow */
   --ut-determination:#ff3f3f;
 
@@ -333,4 +338,53 @@ div[class^="base_"] > div[class^="bar_"] > div[class^="leading_"] { display: non
    title bar is ever shown again. */
 div[class^="bar_"] div[class^="trailing_"] {
   display: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Hover: yellow text, never a filled bar.
+
+   ClearVision paints a hovered row with var(--hover-color) as a BACKGROUND, so
+   a bar sweeps across the width of the list. Undertale has no such thing: the
+   highlighted line is marked by the SOUL and by the text turning yellow, and the
+   background stays flat black. The theme carried no :hover rules at all before
+   this, so what was on screen was entirely CV's.
+
+   Anchored on ARIA roles and aria-labels rather than hashed class names --
+   Discord's 2026-07 update renamed the rail's classes wholesale and every rule
+   built on them died silently (DKB: discord-2026-07-server-rail-dom-change).
+   Roles and labels survived it.
+
+   The servers rail is deliberately excluded: its rows are icons, not text, and it
+   has its own selection pill.
+   ══════════════════════════════════════════════════════════════════════════ */
+nav[aria-label="Private channels"] li:hover,
+nav[aria-label="Private channels"] a:hover,
+div[aria-label="Channels"] li:hover,
+div[aria-label="Channels"] a:hover,
+div[class^="membersWrap_"] div[role="listitem"]:hover,
+div[role="menuitem"]:hover,
+div[role="tab"]:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* The text itself, and whatever Discord nests it in. The SOUL red of a mention
+   badge is exempt: a mention outranks the cursor. */
+nav[aria-label="Private channels"] li:hover,
+nav[aria-label="Private channels"] li:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+nav[aria-label="Private channels"] a:hover,
+nav[aria-label="Private channels"] a:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[aria-label="Channels"] li:hover,
+div[aria-label="Channels"] li:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[aria-label="Channels"] a:hover,
+div[aria-label="Channels"] a:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[class^="membersWrap_"] div[role="listitem"]:hover,
+div[class^="membersWrap_"] div[role="listitem"]:hover span,
+div[role="menuitem"]:hover,
+div[role="menuitem"]:hover span,
+div[role="tab"]:hover,
+div[role="tab"]:hover span {
+  color: var(--ut-hover) !important;
 }
