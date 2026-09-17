@@ -952,3 +952,51 @@ span[class*="botTag" i] * {
   border: none !important;
   background: transparent !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   The Active Now popout: ONE battle box, not two stacked cards.
+
+   Discord builds it from two halves of a single card -- the capture shows
+   popoutContentWrapper_ with radius "12px 12px 0 0" and interactionsContainer_ with
+   "0 0 12px 12px", plus a ::before between them drawn in --border-subtle. Framing
+   each half would draw a line through the middle of one object.
+
+   So the frame goes on the dialog that contains both, the halves go transparent, and
+   that existing ::before becomes the white rule separating the content from the
+   actions -- which is how the game separates a menu's body from its choices anyway.
+
+   Both halves also sat on black at 70% opacity, so whatever was behind them showed
+   through. Flat black here, like every other panel.
+
+   Scoped with :has() to the popout that actually contains this card. Extending it to
+   every div[role="dialog"] popout is a one-word change, but other popouts have not
+   been looked at yet and a frame is not automatically right for all of them.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[role="dialog"][class^="popout_"]:has(div[class^="popoutContentWrapper_"]) {
+  background: var(--ut-black) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+div[class^="popoutContentWrapper_"],
+div[class^="interactionsContainer_"],
+div[class^="popoutContentHeader_"],
+div[class^="hero_"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  font-family: var(--ut-font) !important;
+}
+
+/* Discord already draws the divider between the halves -- it only needs recolouring
+   from --border-subtle to a white hairline. */
+div[class^="interactionsContainer_"]::before {
+  background: var(--ut-white) !important;
+  background-color: var(--ut-white) !important;
+  opacity: 1 !important;
+}
