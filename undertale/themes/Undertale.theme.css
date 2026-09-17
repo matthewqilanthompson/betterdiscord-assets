@@ -746,3 +746,26 @@ div[class^="nowPlayingColumn_"] button:hover {
   color: var(--ut-hover) !important;
   border-color: var(--ut-hover) !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Square avatars in Active Now.
+
+   The last round shapes in that column, and border-radius cannot reach them: a
+   CSS Picker capture shows the avatar is an svg[class*="mask_"] wrapping a
+   <foreignObject>, so the circle is an SVG MASK, not a corner radius. The mask has
+   to be cleared instead.
+
+   Scoped to this column deliberately. Squaring every avatar in Discord is a far
+   bigger visual change -- message list, member list, DM rows, popouts -- and worth
+   deciding on its own rather than riding along with a panel restyle.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="nowPlayingColumn_"] svg[class*="mask" i] foreignObject {
+  mask: none !important;
+  -webkit-mask: none !important;
+  clip-path: none !important;
+}
+div[class^="nowPlayingColumn_"] svg[class*="mask" i] img,
+div[class^="nowPlayingColumn_"] img[class*="avatar" i] {
+  border-radius: var(--ut-radius) !important;
+  clip-path: none !important;
+}
