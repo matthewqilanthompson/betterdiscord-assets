@@ -1836,9 +1836,18 @@ div[class^="switchIndicator_"][class*="checked_"]:not(#\9):not(#\8)::after {
   transform: none !important;
   transition: none !important;
 }
-/* Only ::after draws the knob; ::before would be a second one. */
-.bd-switch:not(#\9):not(#\8) .bd-switch-body::before {
+/* Only ::after draws the knob. Everything else that could draw a second one goes:
+   ::before, and any CHILD of the body -- BetterDiscord draws its circle as a real
+   element, not a pseudo, so disabling ::before alone left two knobs stacked, a square
+   under a circle. The screenshot is what showed it; the capture lists the body's
+   children as unknown, so neither reading of it would have settled this. */
+.bd-switch:not(#\9):not(#\8) .bd-switch-body::before,
+.bd-switch:not(#\9):not(#\8) .bd-switch-body > * {
   display: none !important;
+}
+/* ...and no image on the body itself, in case the circle is painted rather than built. */
+.bd-switch:not(#\9):not(#\8) .bd-switch-body {
+  background-image: none !important;
 }
 .bd-switch-checked:not(#\9):not(#\8) .bd-switch-body {
   border-color: var(--ut-hover) !important;
