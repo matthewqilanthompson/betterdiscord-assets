@@ -24,6 +24,7 @@ import {
   trySaveReportJson,
   tryCopyJsonToClipboard,
 } from "./inspection.js";
+import { captureOpenPopouts } from "./popouts.js";
 const { loadBdModuleFromPlugins } = require("../shared/bd-module-loader");
 const { createToast } = require("../shared/toast");
 const { isEditableTarget, matchesHotkey } = require("../shared/hotkeys");
@@ -267,7 +268,15 @@ module.exports = class CSSPicker {
 
       event.preventDefault();
       event.stopPropagation();
-      if (this.isActive) this.deactivatePickMode(); else this.activatePickMode();
+      if (this.isActive) { this.deactivatePickMode(); return; }
+
+      /* ONE hotkey, doing whichever thing is possible right now.
+         A popup cannot be picked: pick mode resolves elementFromPoint from a click, and
+         the click dismisses the popup. So when something is open, the key captures all
+         of it directly -- no pointer, nothing to dismiss. With nothing open it toggles
+         pick mode exactly as before, so the old behaviour is unchanged. */
+      const found = this._capturePopouts();
+      if (!found) this.activatePickMode();
     };
     this._unsubGlobalHotkey = onKeydown(this.onGlobalHotkeyDown, { capture: true });
 
@@ -476,6 +485,35 @@ module.exports = class CSSPicker {
         message,
         toastTimeoutMs: settings.toastTimeoutMs || 5500,
       };
+    };
+
+    /* Returns true when something was open and captured, false when there was nothing
+       to capture -- the caller then falls through to pick mode. */
+    this._capturePopouts = () => {
+      let found;
+      try {
+        found = captureOpenPopouts();
+      } catch (err) {
+        this._toast(`Popout capture failed: ${err && err.message ? err.message : err}`, "error");
+        return true;   // it WAS attempted; do not also open pick mode on top of the error
+      }
+      if (!found || !found.count) return false;
+
+      const report = { plugin: PLUGIN_NAME, version: PLUGIN_VERSION, popouts: found };
+      const saveResult = trySaveReportJson(report);
+      tryCopyJsonToClipboard(report);
+      const names = found.popouts
+        .map((p) => p.root.ariaLabel || p.root.role || p.root.id || p.root.tag)
+        .join(", ");
+      const truncated = found.popouts.some((p) => p.truncated);
+      this._toast(
+        `Captured ${found.count} popout${found.count === 1 ? "" : "s"}: ${names}` +
+          (truncated ? " (truncated)" : "") +
+          (saveResult && saveResult.ok ? "" : " — clipboard only"),
+        "success",
+        (this.settings || loadSettings()).toastTimeoutMs || 5500
+      );
+      return true;
     };
 
     this.onClick = async (event) => {
