@@ -215,7 +215,7 @@ main[class^="chatContent_"], div[class^="chatContent_"] {
    message hot path. No animation here for the same reason -- a pulsing heart on
    every mention is exactly the sort of thing those audits were written about.
    ══════════════════════════════════════════════════════════════════════════ */
-div[class^="numberBadge_"], div[class^="mentionsBadge_"], div[class^="unreadMentionsIndicator"] {
+div[class^="numberBadge_"], div[class^="mentionsBadge_"] {
   background: var(--ut-soul) !important;
   border-radius: var(--ut-radius) !important;
   color: var(--ut-white) !important;
@@ -224,6 +224,24 @@ div[class^="numberBadge_"], div[class^="mentionsBadge_"], div[class^="unreadMent
                      72% 4%, 91% 12%, 100% 38%);
   min-width: 18px;
   min-height: 18px;
+}
+
+/* The scroll indicators at the ends of the server rail are NOT badges. They are
+   long thin bars meaning "unread mentions above/below", and the SOUL rule above
+   used to catch them via a class^="unreadMentionsIndicator" prefix -- which
+   heart-clipped a bar and produced the two red chevrons at the screen corners
+   that went unexplained through two wrong guesses. CSS Picker named the element
+   in one hover: the clip-path in its computed style was this theme's own polygon.
+
+   They keep SOUL red, because they do mean a mention, but they keep their own
+   shape: a heart is for a count, an arrow is for a direction. */
+div[class^="unreadMentionsIndicatorTop"],
+div[class^="unreadMentionsIndicatorBottom"] {
+  clip-path: none !important;
+  background: var(--ut-soul) !important;
+  border-radius: var(--ut-radius) !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
