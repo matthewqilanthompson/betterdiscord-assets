@@ -2,14 +2,18 @@
  * HSLDockAutoHide plugin lifecycle + React patcher shell.
  * Dock behavior/state machine lives in ./engine as DockEngine.
  *
- * The user-panel nameplate positioning is ALWAYS active (not skill-gated).
- * Only the dock auto-hide engine is gated behind rulers_authority >= 1.
+ * The user-panel nameplate positioning and the dock auto-hide engine are both
+ * ALWAYS active. The dock was previously gated behind SkillTree's
+ * rulers_authority >= 1; SkillTree was archived with the Solo Leveling suite on
+ * 2026-09-17, so that gate could never open again and the dock simply stopped
+ * auto-collapsing. The gate is removed rather than re-pointed -- dock auto-hide
+ * is a plain comfort feature and should not depend on an RPG plugin at all.
  */
 
 const { loadBdModuleFromPlugins } = require("../shared/bd-module-loader");
 const { createWarnOnce } = require("../shared/warn-once");
 const dc = require("../shared/discord-classes");
-const { getPluginInstance, getSkillTreeLevel } = require("../shared/plugin-bridge");
+const { getPluginInstance } = require("../shared/plugin-bridge");
 
 let _PluginUtils;
 try { _PluginUtils = loadBdModuleFromPlugins("BetterDiscordPluginUtils.js"); } catch (_) { _PluginUtils = null; }
@@ -39,7 +43,6 @@ module.exports = class HSLDockAutoHide {
     this._warnOnce = createWarnOnce();
     this._toastImpl = null;
     this._dockResourcesActive = false;
-    this._onSkillLevelChanged = null;
     // User panel always-on state
     this._userPanelEl = null;
     this._userPanelPollTimer = null;
@@ -49,10 +52,6 @@ module.exports = class HSLDockAutoHide {
 
   _toast(message, type = "info", timeout = null) {
     this._toastImpl?.(message, type, timeout);
-  }
-
-  _isRulersAuthorityUnlocked() {
-    return getSkillTreeLevel("rulers_authority") >= 1;
   }
 
   start() {
@@ -75,31 +74,8 @@ module.exports = class HSLDockAutoHide {
     BdApi.DOM.addStyle(STYLE_ID_USERPANEL, getUserPanelDockCss());
     this._startUserPanelPoller();
 
-    // SkillTree gate: rulers_authority >= 1 (dock auto-hide only)
-    this._onSkillLevelChanged = (e) => {
-      if (e.detail?.skillId !== "rulers_authority") return;
-      const level = e.detail.level || 0;
-      if (level >= 1 && !this._dockResourcesActive) {
-        this._activateDockResources();
-      } else if (level < 1 && this._dockResourcesActive) {
-        this._deactivateDockResources();
-      }
-    };
-    document.addEventListener("SkillTree:skillLevelChanged", this._onSkillLevelChanged);
-
-    if (this._isRulersAuthorityUnlocked()) {
-      this._activateDockResources();
-    } else {
-      // SkillTree may not have started yet — retry after a delay as fallback.
-      // Primary path is the SkillTree:skillLevelChanged event listener above.
-      this._skillTreeRetryTimer = setTimeout(() => {
-        this._skillTreeRetryTimer = null;
-        if (!this._isStopped && !this._dockResourcesActive && this._isRulersAuthorityUnlocked()) {
-          this._activateDockResources();
-        }
-      }, 4000);
-      this._toast("HSLDockAutoHide awaiting Ruler's Authority unlock", "info", 2200);
-    }
+    // Dock auto-hide: always on (see header -- the SkillTree gate was removed).
+    this._activateDockResources();
   }
 
   // Always-on user panel poller
@@ -147,16 +123,10 @@ module.exports = class HSLDockAutoHide {
     BdApi.DOM.removeStyle(STYLE_ID_USERPANEL);
   }
 
-  // Gated dock auto-hide resources
+  // Dock auto-hide resources
 
   _activateDockResources() {
     if (this._dockResourcesActive || this._isStopped) return;
-    // If the SkillTree event path got here first, cancel the pending fallback
-    // retry timer so it doesn't fire (and leak) after we're already active.
-    if (this._skillTreeRetryTimer) {
-      clearTimeout(this._skillTreeRetryTimer);
-      this._skillTreeRetryTimer = null;
-    }
     this._dockResourcesActive = true;
     this._engineMounted = false;
     this._fallbackEngine = null;
@@ -288,16 +258,6 @@ module.exports = class HSLDockAutoHide {
 
   stop(showToast = true) {
     this._isStopped = true;
-    // Clear SkillTree retry timer
-    if (this._skillTreeRetryTimer) {
-      clearTimeout(this._skillTreeRetryTimer);
-      this._skillTreeRetryTimer = null;
-    }
-    // Remove skill listener
-    if (this._onSkillLevelChanged) {
-      document.removeEventListener("SkillTree:skillLevelChanged", this._onSkillLevelChanged);
-      this._onSkillLevelChanged = null;
-    }
     // Tear down dock resources if active
     this._deactivateDockResources();
     // Tear down always-on user panel (full plugin stop)
