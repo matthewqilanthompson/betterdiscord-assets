@@ -1467,19 +1467,19 @@ div[class^="friendsButtonContainer_"]::after {
 
 /* The one exception, by request: the search at the top of the DM / Friends sidebar.
 
-   ONE box, not two. searchBar_ keeps the standard frame from the base rule, so this
-   field is framed like every other search box in the app; what is stripped is the
-   button_ inside it, which picks up the shared button frame at full 2px and drew a
-   second rectangle a few pixels inside the first.
+   ONE box, and it is the INNER one. searchBar_ is the full width of the nav, so a
+   frame there sits flush against the nav's own frame on both sides; the button_
+   inside it is inset by the searchBar's 10px padding, which is the smaller box that
+   reads as a field. So the outer frame goes and the button keeps the shared button
+   frame it already has.
 
-   Two earlier attempts are worth not repeating: thinning the outer frame to 1px left
-   the inner one untouched and still read as a box in a box, and stripping both left
-   the field with no edge at all.
+   Three earlier attempts, none worth repeating: thinning the outer frame to 1px (the
+   inner rectangle was still there, still a box in a box), stripping both (no edge at
+   all), and framing the outer one alone (a box the exact width of the panel).
 
-   Specificity (0,2,3), so it beats the shared button rule outright rather than by
-   sitting later in the file. */
-nav[aria-label="Private channels"] div[class*="searchBar_"] button[class*="button_"],
-nav[aria-label="Private channels"] div[class*="searchBar_"] button[class*="button_"] div {
+   Specificity (0,2,2) against the base rule's (0,1,1), so it wins outright rather
+   than by sitting later in the file. */
+nav[aria-label="Private channels"] div[class*="searchBar_"] {
   border: none !important;
   border-width: 0 !important;
   box-shadow: none !important;
@@ -1496,10 +1496,12 @@ nav[aria-label="Private channels"] div[class*="searchBar_"] button[class*="butto
    is a subtle grey; it is white here for the same reason the six earlier surfaces
    were, and the frames it collides with are the theme's own.
 
-   Scoped to the Friends page, because the same element is the channel toolbar
-   elsewhere and that line has not been asked about.
+   Not scoped to the Friends page. It was at first, and the line stayed -- the same
+   bar is the header on every page, and its aria-label is the channel or the person,
+   so a Friends-only selector misses it everywhere else. The theme draws its own
+   column frames; this edge is only ClearVision's white landing on Discord's divider.
    ══════════════════════════════════════════════════════════════════════════ */
-main[aria-label="Friends"] > section[role="navigation"] {
+section[role="navigation"][class*="container_"] {
   border-bottom: none !important;
   border-width: 0 !important;
   box-shadow: none !important;
