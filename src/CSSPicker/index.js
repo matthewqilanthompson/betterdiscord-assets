@@ -48,7 +48,7 @@ const DEFAULT_SETTINGS = {
      so a Karabiner Hyper+P (Ctrl+Alt+Shift+Cmd+P) also satisfies "Ctrl+Shift+P" and
      fired the picker alongside whatever else was bound to it. Moved to a letter that
      is not doubling as a Hyper binding here. */
-  hotkey: "Ctrl+Shift+Y",
+  hotkey: "Ctrl+Alt+Y",
   autoUpdateTheme: true,
   verifyWithDOM: true,
   verifyWithGitHub: true,

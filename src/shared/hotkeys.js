@@ -57,7 +57,14 @@ function matchesHotkey(event, hotkey) {
   if (!spec.key) return false;
   // Inclusive matching: required modifiers must be pressed,
   // but extra modifiers (e.g. from Hyper/CapsLock) are allowed.
-  if (event.key.toLowerCase() !== spec.key) return false;
+  /* Match event.key OR event.code. On macOS, Option is a COMPOSE key: Option+Y
+     reports event.key "\u00a5", not "y", so a key-only comparison silently never
+     fires for any Alt hotkey. event.code is layout- and modifier-independent. */
+  const key = String(event.key || "").toLowerCase();
+  const code = String(event.code || "").toLowerCase();
+  const codeMatches =
+    code === `key${spec.key}` || code === `digit${spec.key}` || code === spec.key;
+  if (key !== spec.key && !codeMatches) return false;
   if (spec.ctrl && !event.ctrlKey) return false;
   if (spec.shift && !event.shiftKey) return false;
   if (spec.alt && !event.altKey) return false;
