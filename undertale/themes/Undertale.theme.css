@@ -867,3 +867,31 @@ ul[aria-label="Channels"] li[class*="selected_"],
 ul[aria-label="Channels"] li[class*="containerDefault_"][class*="selected_"] {
   border-width: 1px !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   The size of the selected-channel box.
+
+   It spanned the sidebar edge to edge, which is what made a 42px row read as a
+   slab. Inset here, and via a variable so it is one number to tune.
+
+   The inset goes on EVERY row, not just the selected one. Putting it only on the
+   selected row would change that row's width the moment it is chosen, so the list
+   would twitch as you click through channels. Uniform margin costs nothing on the
+   unselected rows -- they draw no border -- and keeps the geometry still.
+
+   Vertical is separate and left alone by default: these rows are 42px and hold a
+   16px line, so tightening them is a real risk of clipping descenders. Set
+   --ut-channel-tighten to a small value (2-4px) if a shorter box is wanted, and
+   check the "g" in "livingroom".
+   ══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --ut-channel-inset: 8px;
+  --ut-channel-tighten: 0px;
+}
+
+ul[aria-label="Channels"] li[class*="containerDefault_"] {
+  margin-left: var(--ut-channel-inset) !important;
+  margin-right: var(--ut-channel-inset) !important;
+  padding-top: calc(-1 * var(--ut-channel-tighten)) !important;
+  padding-bottom: calc(-1 * var(--ut-channel-tighten)) !important;
+}
