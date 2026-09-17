@@ -1599,19 +1599,25 @@ div[class^="toolbar_"] div[aria-label]:hover svg[class^="icon_"] {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The Quick Switcher (Cmd+K): one frame around the whole popout.
+   Discord's shared popup shell: one frame around the whole thing.
 
-   Same shape as the Active Now popout -- Discord builds it as an input box and a
-   results panel stacked with a gap, and the theme was framing only the inner half,
-   because role="listbox" is what the results panel is. So the box that read as the
-   popout was actually the results list, and the popout itself had no edge at all.
+   The Quick Switcher and the Channel Topic popup captured as the SAME module --
+   container__8a031 inside outerContainer__8a031 -- so this is not two popups, it is
+   one shell Discord reuses. Written for the shell, which also covers whatever else
+   ships in it.
 
-   The frame moves out to container_ (680x396, the element Discord gives the shadow
-   and the 12px radius), and every box inside it is flattened: the input, the results
-   panel, the scroller. The descendant strip is (0,2,1), which beats the listbox
-   frame's (0,1,1) outright rather than by source order.
+   The shell was the piece the theme kept missing: role="listbox" is the results panel
+   INSIDE the Quick Switcher, so framing that framed the inner half and left the popup
+   itself with no edge. The frame belongs on container_, the element Discord gives the
+   shadow and the 12px radius.
+
+   Matched through outerContainer_ and layer_, because "container_" alone is one of the
+   most common prefixes in the app and would reach half the UI.
+
+   The descendant strip is (0,3,1), which beats the listbox frame's (0,1,1) outright
+   rather than by source order.
    ══════════════════════════════════════════════════════════════════════════ */
-div[aria-label="Quick Switcher"] div[class^="container_"] {
+div[class^="layer_"] div[class^="outerContainer_"] > div[class^="container_"] {
   background: var(--ut-black) !important;
   background-color: var(--ut-black) !important;
   background-image: none !important;
@@ -1622,17 +1628,23 @@ div[aria-label="Quick Switcher"] div[class^="container_"] {
   color: var(--ut-white) !important;
   font-family: var(--ut-font) !important;
 }
-/* Nothing inside owns a box of its own. */
-div[aria-label="Quick Switcher"] div[class^="container_"] div,
-div[aria-label="Quick Switcher"] div[class^="container_"] input {
+/* Nothing inside owns a box of its own -- one card, not cards within a card. */
+div[class^="layer_"] div[class^="outerContainer_"] > div[class^="container_"] div,
+div[class^="layer_"] div[class^="outerContainer_"] > div[class^="container_"] header,
+div[class^="layer_"] div[class^="outerContainer_"] > div[class^="container_"] input {
   border: none !important;
   border-width: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   outline: none !important;
 }
-div[aria-label="Quick Switcher"] div[role="listbox"],
-div[aria-label="Quick Switcher"] div[class*="scroller_"] {
+div[class^="layer_"] div[class^="outerContainer_"] > div[class^="container_"] div[role="listbox"],
+div[class^="layer_"] div[class^="outerContainer_"] > div[class^="container_"] div[class*="scroller_"] {
   background: transparent !important;
   background-color: transparent !important;
 }
+/* The text inside the shell takes the theme's font, headers included. */
+div[class^="layer_"] div[class^="outerContainer_"] > div[class^="container_"] * {
+  font-family: var(--ut-font) !important;
+}
+
