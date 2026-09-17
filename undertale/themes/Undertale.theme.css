@@ -52,9 +52,14 @@
   --ut-font:         "Pixelify Sans", "Determination Mono", system-ui, sans-serif;
   --ut-font-code:    "Pixel Code Regular", "PixelCode", ui-monospace, monospace;
 
-  /* ClearVision's own contract */
-  --main-color:      var(--ut-soul);
-  --hover-color:     var(--ut-white);
+  /* ClearVision's own contract.
+     --main-color is CV's UNIVERSAL accent: selected items, tab highlights, the
+     scrollbar, section headers. Setting it to SOUL red put the most reserved
+     colour in the palette on every chrome element at once -- seen on screen, the
+     result reads as ClearVision-in-red rather than Undertale. White is the UI
+     colour in this game; red is the SOUL and appears on mentions, nowhere else. */
+  --main-color:      var(--ut-white);
+  --hover-color:     var(--ut-grey);
   --success-color:   var(--ut-save);
   --danger-color:    var(--ut-determination);
   --font-primary:    var(--ut-font);
@@ -78,6 +83,37 @@
   --text-normal:          var(--ut-white);
   --text-muted:           var(--ut-grey);
 }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §3b  PANEL FRAMES
+   The battle box only framed the chat, so every other screen -- Friends, search,
+   settings -- kept ClearVision's borderless look and the theme read as a recolour.
+   Undertale draws EVERY region as a box in one weight of white line, so the
+   frame belongs on the panels, not just the message area.
+   ══════════════════════════════════════════════════════════════════════════ */
+[class*="sidebar_"], [class*="membersWrap_"], [class*="peopleColumn_"],
+[class*="privateChannels_"], [class*="content_"] > [class*="chat_"] {
+  border: var(--ut-line) solid var(--ut-white);
+  border-radius: var(--ut-radius);
+}
+
+/* Selection is an inverted box, the way the game highlights a menu item: white
+   outline and white text on black, never a solid fill of an accent colour. */
+[class*="selected_"], [class*="modeSelected_"] {
+  background: var(--ut-black) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  color: var(--ut-white) !important;
+}
+
+/* The scrollbar was the loudest thing on screen in red. It is furniture: grey
+   line, square, no thumb colour of its own. */
+::-webkit-scrollbar-thumb {
+  background: var(--ut-grey) !important;
+  border-radius: var(--ut-radius) !important;
+  border: none !important;
+}
+::-webkit-scrollbar-track { background: var(--ut-black) !important; }
 
 /* ══════════════════════════════════════════════════════════════════════════════
    §4  THE BATTLE BOX
