@@ -33,7 +33,28 @@
 :root {
   /* The palette is tiny on purpose. Undertale's UI is one weight of white line
      on black; nearly all of its character comes from restraint. */
-  --ut-black:        #000000;
+  /* ---- WALLPAPER ---------------------------------------------------------
+     Paste the image URL into --ut-bg-image and everything below follows. It must be
+     a REMOTE https URL or a data: URI -- this file is injected into the discord.com
+     document, so a relative path resolves against discord.com and a file:// URL is
+     blocked outright. A GitHub raw link is the usual answer.
+
+       --ut-bg-image: url("https://raw.githubusercontent.com/<you>/<repo>/main/x.png");
+
+     --ut-bg-dim is how much black is laid over the art (0 = raw image, 1 = invisible).
+     --ut-panel-alpha is how solid the panels are on top of it: 1 is the old flat-black
+     theme exactly, lower lets the art through every surface. Two numbers, and they are
+     the only things to touch when it is too dark or too busy. */
+  --ut-bg-image:     none;
+  --ut-bg-dim:       0.72;
+  --ut-panel-alpha:  0.78;
+
+  /* Panels are painted with --ut-black in 63 places, so making THAT translucent is
+     the whole mechanism -- no per-surface alpha, nothing to keep in sync.
+     --ut-black-solid stays opaque for the few places that need real black: text sitting
+     on a yellow fill, and the ground under the wallpaper itself. */
+  --ut-black:        rgba(0, 0, 0, var(--ut-panel-alpha));
+  --ut-black-solid:  #000000;
   --ut-white:        #ffffff;
   --ut-grey:         #bfbfbf;   /* inactive text: the game dims, never tints */
   --ut-soul:         #ff0000;   /* the SOUL. Mentions, and nothing else. */
@@ -148,8 +169,53 @@
   --font-display:    var(--ut-font);
   --font-headline:   var(--ut-font);
   --font-code:       var(--ut-font-code);
-  --background-image: none;                 /* flat black; no wallpaper */
+  --background-image: var(--ut-bg-image);   /* was "none; flat black; no wallpaper" */
   --background-overlay: var(--ut-black);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   §2.5  THE WALLPAPER
+
+   One image, on the root, under everything. The dim is baked into the same
+   background-image as a flat gradient rather than drawn as an overlay element: an
+   overlay has to win a stacking contest against every positioned thing Discord
+   renders, and it loses somewhere every time. A gradient layer cannot.
+
+   background-attachment is fixed, so the art does not scroll with the message list --
+   moving texture under stationary text is the thing that makes this style tiring.
+
+   The app's own opaque layers are cleared here. They are painted by Discord, not by
+   this theme, and any one of them left solid hides the wallpaper completely no matter
+   how transparent the panels are.
+   ══════════════════════════════════════════════════════════════════════════════ */
+html,
+body,
+#app-mount {
+  background-color: var(--ut-black-solid) !important;
+  background-image: linear-gradient(
+      rgba(0, 0, 0, var(--ut-bg-dim)),
+      rgba(0, 0, 0, var(--ut-bg-dim))
+    ),
+    var(--ut-bg-image) !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+/* Discord's own full-window layers: transparent, or the art never shows. */
+div[class^="app_"],
+div[class^="appAsidePanelWrapper_"],
+div[class^="appDiv_"],
+div[class^="base_"],
+div[class^="container_"][class*="app_"],
+div[class^="chat_"],
+div[class^="page_"],
+div[class^="content_"]:not([class*="contentBody_"]),
+div[class^="sidebar_"],
+div[class^="sidebarList_"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
