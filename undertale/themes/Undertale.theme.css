@@ -1542,6 +1542,63 @@ section[role="navigation"][class*="container_"]::before {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
+   The Threads popout, and the toolbar icons that open it.
+
+   The popout could not be captured -- the picker cannot stay active while a popout
+   opens, the same limitation the search popout hit. So it is covered by role and by
+   name rather than by hash: role="dialog" with a Threads label, plus the two class
+   spellings Discord has used. Each is inert if it does not match.
+
+   The icon WAS captured, and measured oklab(0.745443 ...) -- Discord's --icon-muted,
+   a mid grey. Every other icon in the theme is white and turns yellow on hover, so
+   the toolbar was simply never reached.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[role="dialog"][aria-label*="Thread" i],
+div[class*="threadsPopout" i],
+div[class*="threadBrowser" i] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+/* One frame, rows inside it -- the same treatment Active Now got. */
+div[role="dialog"][aria-label*="Thread" i] div,
+div[class*="threadsPopout" i] div,
+div[class*="threadBrowser" i] div {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-family: var(--ut-font) !important;
+}
+div[role="dialog"][aria-label*="Thread" i] [class*="card_"]:hover,
+div[role="dialog"][aria-label*="Thread" i] [class*="card_"]:hover *,
+div[class*="threadsPopout" i] [class*="card_"]:hover,
+div[class*="threadsPopout" i] [class*="card_"]:hover * {
+  background: transparent !important;
+  color: var(--ut-hover) !important;
+}
+
+/* The channel toolbar icons: white, yellow on hover, like every other icon. */
+div[class^="toolbar_"] svg[class^="icon_"],
+div[class^="toolbar_"] [class*="clickable_"] svg[class^="icon_"] {
+  color: var(--ut-white) !important;
+  fill: currentcolor !important;
+}
+div[class^="toolbar_"] [class*="clickable_"]:hover svg[class^="icon_"],
+div[class^="toolbar_"] a:hover svg[class^="icon_"],
+div[class^="toolbar_"] div[aria-label]:hover svg[class^="icon_"] {
+  color: var(--ut-hover) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
    The Quick Switcher (Cmd+K): one frame around the whole popout.
 
    Same shape as the Active Now popout -- Discord builds it as an input box and a
