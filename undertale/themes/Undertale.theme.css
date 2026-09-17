@@ -1850,6 +1850,15 @@ div[class^="switchIndicator_"][class*="checked_"]:not(#\9):not(#\8)::after {
   border-color: var(--ut-hover) !important;
   color: var(--ut-hover) !important;
 }
+/* The Changelog button is hidden outright. Hiding the BUTTON rather than its icon:
+   an invisible icon leaves a live 52x24 click target in the sidebar label, which is
+   worse than the thing being visible. Matched by aria-label and by BD's own class,
+   so either one surviving a rename keeps it hidden. */
+button[aria-label="Changelog"],
+.bd-changelog-button {
+  display: none !important;
+}
+
 /* Blank buttons stay blank, and mark themselves the way every other icon does. */
 .bd-button-blank,
 .bd-button-color-transparent {
