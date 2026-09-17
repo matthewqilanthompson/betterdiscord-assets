@@ -1252,3 +1252,55 @@ div[role="separator"] {
   border: none !important;
   opacity: 1 !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   The unread / jump bars above the message list.
+
+   Discord paints the unread one with the brand colour:
+
+     .newMessagesBar__0f481 { background-color: var(--brand-500); color: var(--white) }
+
+   ClearVision remaps brand onto the universal accent, which is white here, on white
+   text -- so the bar measured as color(srgb 1 1 1 / 0.9) and was invisible. Sixth
+   surface lost to --main-color being white.
+
+   barBase_ is the shared class behind both bars (unread, and jump-to-present), so it
+   takes the standard box. The unread bar then takes YELLOW on top of that, because
+   this theme already reserves the save-point yellow for unread -- the channel pill
+   uses it, and a bar announcing unread messages is the same idea at full width.
+
+   Yellow on black rather than a yellow fill: a 1139px block of saturated yellow across
+   the top of the message list is louder than anything in the game, and the frame plus
+   the text carries the signal perfectly well.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class*="barBase_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+
+div[class*="newMessagesBar_"],
+div[class*="newMessagesBar_"] * {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  color: var(--ut-save) !important;
+  font-family: var(--ut-font) !important;
+}
+div[class*="newMessagesBar_"] {
+  border: var(--ut-line) solid var(--ut-save) !important;
+}
+/* The buttons inside are text controls, not boxes -- same rule as View Full Bio. */
+div[class*="barBase_"] button,
+div[class*="barBase_"] button * {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
