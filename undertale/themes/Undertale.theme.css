@@ -526,3 +526,25 @@ li[role="listitem"] [class*="interactiveSelected_"] {
   box-shadow: none !important;
   color: var(--ut-hover) !important;
 }
+
+/* ...and their CHILDREN. The rule above colours the row; the generic
+   `[class*="selected_"] *` further up colours everything inside it WHITE, and a
+   row's text lives in children (layout, avatar, label, the link's svg paths --
+   CSS Picker counted 10 on one Friends button). So the row went yellow and its
+   text stayed white, which is the white that survived the last fix. It only
+   looked correct in the capture because hover was active at the same time.
+
+   Equal specificity to the generic rule (0,2,1), so this wins by coming later --
+   deliberately, and the reason these live at the end of the file. */
+ul[aria-label="Direct Messages"] [class*="selected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+ul[aria-label="Direct Messages"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+nav[aria-label="Private channels"] [class*="selected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+nav[aria-label="Private channels"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[aria-label="Channels"] [class*="selected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[aria-label="Channels"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+li[role="listitem"] [class*="selected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+li[role="listitem"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]) {
+  color: var(--ut-hover) !important;
+  fill: var(--ut-hover) !important;
+  background-color: transparent !important;
+}
