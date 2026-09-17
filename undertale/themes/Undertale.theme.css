@@ -1722,6 +1722,54 @@ form[class^="form_"] button:hover svg {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   The Server Boost (powerups) page.
+
+   Two panes, both captured: powerupsContainer_ scrolls the sections, and
+   sidebarContainer_ is the 375px rail beside it, measured at a 30%-black fill with a
+   1px left edge at 12% alpha. Neither was reached by anything in this theme -- both
+   still computed gg sans -- so the page was stock Discord chrome inside a themed app.
+
+   The rail keeps a LEFT edge only, at full weight. It is a divider between two panes
+   of one page, not a panel of its own, so framing all four sides would put a box
+   inside the page's own frame -- the mistake this theme has made six times.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="powerupsContainer_"],
+div[class^="contentContainer_"],
+div[class^="powerupsSection_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+div[class^="sidebarContainer_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: none !important;
+  border-left: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+/* Cards and tiles inside both panes: rows, not boxes. */
+div[class^="powerupsContainer_"] div,
+div[class^="sidebarContainer_"] div {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-family: var(--ut-font) !important;
+}
+div[class^="powerupsContainer_"] *,
+div[class^="sidebarContainer_"] * {
+  font-family: var(--ut-font) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    Modals (the Event modal is the one that was captured).
 
    Shell is div[role="dialog"] > root_, header and content are siblings inside it, and
