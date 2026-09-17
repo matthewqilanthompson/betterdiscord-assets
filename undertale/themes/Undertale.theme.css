@@ -64,6 +64,26 @@
   --ut-dock-accent-40:     rgba(255, 255, 255, 0.40);
   --ut-dock-accent-22:     rgba(255, 255, 255, 0.22);
 
+  /* HorizontalServerList's own layout knobs. HSL CONSUMES these and defines
+     neither -- confirmed by reading its main.css, which has no :root entry for
+     either and no var() fallback:
+
+       .guilds__5e434 .itemsContainer_ef3116, .stack_dbd263 {
+         flex-direction:  var(--HSL-server-direction);
+         justify-content: var(--HSL-server-alignment);
+       }
+
+     An undefined var() with no fallback makes the whole declaration invalid, so
+     flex-direction fell back to its initial value, `row`. HSL rotates the rail
+     -90deg, so the icons must flow in a COLUMN to read as a horizontal dock; laid
+     out as a row inside an 80px-wide rotated box they stack wrong -- the defect.
+     The archived Solo Leveling theme set both; this theme dropped them.
+
+     Not set: --HSL-server-icon-size, which the archive also carried. Current HSL
+     never reads it. --HSL-top-padding is left alone too; it has its own fallback. */
+  --HSL-server-direction: column;
+  --HSL-server-alignment: flex-start;
+
   /* ClearVision's own contract.
      --main-color is CV's UNIVERSAL accent: selected items, tab highlights, the
      scrollbar, section headers. Setting it to SOUL red put the most reserved
