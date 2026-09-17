@@ -146,11 +146,5 @@ export function captureOpenPopouts(maxNodes = 120) {
     };
   });
 
-  if (popouts.length) {
-    console.log(
-      "[CSSPicker] capture found:",
-      popouts.map((p) => p.root.ariaLabel || p.root.role || p.root.id || `.${p.root.classes[0] || p.root.tag}`).join(", ")
-    );
-  }
   return { at: new Date().toISOString(), count: popouts.length, popouts };
 }

@@ -260,29 +260,8 @@ module.exports = class CSSPicker {
 
     this.injectLauncher();
 
-    /* TEMPORARY INSTRUMENTATION -- remove once the hotkey is confirmed.
-       Prints to the console, which BetterDiscord mirrors into its debug.log, so the
-       question "does the handler run at all" can be answered from outside Discord. */
-    console.log("[CSSPicker] listener attached, hotkey =", JSON.stringify(this.settings?.hotkey));
-
     this.onGlobalHotkeyDown = (event) => {
       const settings = this.settings || loadSettings();
-      if (event.ctrlKey || event.altKey) {
-        console.log(
-          "[CSSPicker] keydown",
-          JSON.stringify({
-            key: event.key,
-            code: event.code,
-            ctrl: event.ctrlKey,
-            alt: event.altKey,
-            shift: event.shiftKey,
-            meta: event.metaKey,
-            enabled: !!settings.hotkeyEnabled,
-            hotkey: settings.hotkey,
-            matched: matchesHotkey(event, settings.hotkey),
-          })
-        );
-      }
       if (!settings.hotkeyEnabled) return;
       /* The hotkey is matched BEFORE the editable-target guard. The guard exists so the
          picker does not fire while typing a message -- but the popups worth capturing
@@ -294,7 +273,6 @@ module.exports = class CSSPicker {
       if (!matchesHotkey(event, settings.hotkey)) return;
 
       if (this.isActive) {
-        console.log("[CSSPicker] matched -> deactivating");
         event.preventDefault();
         event.stopPropagation();
         this.deactivatePickMode();
@@ -306,7 +284,6 @@ module.exports = class CSSPicker {
          the click dismisses the popup. So when something is open, the key captures all
          of it directly -- no pointer, nothing to dismiss. This runs even from an
          editable target, because that is where the popups live. */
-      console.log("[CSSPicker] matched -> trying popout capture");
       if (typeof this._capturePopouts === "function" && this._capturePopouts()) {
         event.preventDefault();
         event.stopPropagation();
@@ -323,7 +300,6 @@ module.exports = class CSSPicker {
          It is gone. Its purpose was to stop a bare key firing mid-sentence, but every
          hotkey here carries modifiers, so it was protecting against something that
          cannot happen while breaking the only thing the key does. */
-      console.log("[CSSPicker] activating pick mode");
       event.preventDefault();
       event.stopPropagation();
       this.activatePickMode();
