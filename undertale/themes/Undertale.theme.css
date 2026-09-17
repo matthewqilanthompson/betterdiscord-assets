@@ -1790,6 +1790,76 @@ div[class^="switchIndicator_"][class*="checked_"]:not(#\9):not(#\8)::after {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   BetterDiscord's addon cards and their buttons.
+
+   The gear / pencil / trash row shipped in Discord blue and red -- the last saturated
+   colours anywhere in the settings modal, and the reason the plugin list read as a
+   different application inside a themed one. The cards themselves were grey slabs.
+
+   Buttons follow the theme's rule for buttons: no primary/secondary distinction,
+   because Undertale has none. Same box, same weight, yellow on hover.
+
+   DELETE is the one exception, and only on hover: red in this theme is the SOUL, whose
+   token says "Mentions, and nothing else", so a permanently red button would break
+   that rule silently. On hover the warning still lands, and the resting list stays
+   monochrome.
+   ══════════════════════════════════════════════════════════════════════════ */
+.bd-addon-card {
+  background: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+}
+.bd-addon-header,
+.bd-addon-description,
+.bd-addon-footer {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+.bd-addon-card button,
+.bd-addon-footer button,
+.bd-button {
+  background: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+.bd-addon-card button svg,
+.bd-button svg {
+  color: var(--ut-white) !important;
+  fill: currentcolor !important;
+}
+.bd-addon-card button:hover,
+.bd-button:hover,
+.bd-addon-card button:hover svg,
+.bd-button:hover svg {
+  background: var(--ut-black) !important;
+  border-color: var(--ut-hover) !important;
+  color: var(--ut-hover) !important;
+}
+/* Delete looks like every other button AT REST, and shows the SOUL's red only on
+   hover -- the moment the action is actually reachable.
+
+   The token's own comment reads "Mentions, and nothing else", and a permanent red
+   button in a plugin list would break that quietly. Red on hover keeps the warning
+   where it does work, and keeps the resting list monochrome. */
+.bd-button-danger:hover,
+.bd-addon-card button[class*="danger" i]:hover,
+.bd-button-danger:hover svg,
+.bd-addon-card button[class*="danger" i]:hover svg {
+  border-color: var(--ut-soul) !important;
+  color: var(--ut-soul) !important;
+  background: var(--ut-black) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    BetterDiscord's own toggles, same shape as Discord's.
 
    A different component entirely -- .bd-switch wrapping .bd-switch-body, checked
