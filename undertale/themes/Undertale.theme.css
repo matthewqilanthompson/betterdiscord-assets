@@ -1334,12 +1334,7 @@ div[class*="searchBar_"] {
   background: var(--ut-black) !important;
   background-color: var(--ut-black) !important;
   background-image: none !important;
-  /* 1px, NOT the theme's 2px. Every search box lives inside a panel that already
-     carries a 2px frame -- the DM one sits a few pixels inside the Private channels
-     nav -- so a second 2px line reads as one thick double rule rather than as a field
-     in a panel. Same reasoning as the BOT tag: the frame weight belongs to the
-     outermost thing, and what sits inside it draws thinner or not at all. */
-  border: 1px solid var(--ut-white) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
   box-shadow: none !important;
   color: var(--ut-white) !important;
@@ -1467,4 +1462,18 @@ div[class^="friendsButtonContainer_"]::after {
   border-width: 0 !important;
   box-shadow: none !important;
   outline: none !important;
+}
+
+
+/* The one exception, by request: the search at the top of the DM / Friends sidebar.
+
+   It sits only a few pixels inside the Private channels nav's own 2px frame, so two
+   full-weight lines that close together read as a single thick double rule rather than
+   as a field inside a panel. Every other search box has room around it and keeps the
+   standard weight.
+
+   Specificity (0,2,2) against the base rule's (0,1,1), so it wins outright rather than
+   by sitting later in the file. */
+nav[aria-label="Private channels"] div[class*="searchBar_"] {
+  border: 1px solid var(--ut-white) !important;
 }
