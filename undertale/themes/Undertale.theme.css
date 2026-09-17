@@ -1467,15 +1467,24 @@ div[class^="friendsButtonContainer_"]::after {
 
 /* The one exception, by request: the search at the top of the DM / Friends sidebar.
 
-   It sits only a few pixels inside the Private channels nav's own 2px frame, so two
-   full-weight lines that close together read as a single thick double rule rather than
-   as a field inside a panel. Every other search box has room around it and keeps the
-   standard weight.
+   It carries NO frame. It sits only a few pixels inside the Private channels nav's own
+   2px frame, and the nav's line already reads as this field's edge -- a second line
+   that close is a double rule, whatever weight it is drawn at. It was tried at 1px
+   first; the hairline still read as a box inside a box.
 
-   Specificity (0,2,2) against the base rule's (0,1,1), so it wins outright rather than
-   by sitting later in the file. */
-nav[aria-label="Private channels"] div[class*="searchBar_"] {
-  border: 1px solid var(--ut-white) !important;
+   Two lines had to go, not one: searchBar_ draws its own, and the button_ inside it
+   picks up the shared button frame at full 2px -- that inner one is the thick
+   rectangle, not the hairline. Every other search box has room around it and keeps
+   the standard frame.
+
+   Specificity (0,2,2) and (0,2,3) against the base rules, so both win outright rather
+   than by sitting later in the file. */
+nav[aria-label="Private channels"] div[class*="searchBar_"],
+nav[aria-label="Private channels"] div[class*="searchBar_"] button[class*="button_"] {
+  border: none !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 
