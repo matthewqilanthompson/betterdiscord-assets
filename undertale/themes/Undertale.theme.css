@@ -1554,18 +1554,23 @@ section[role="navigation"][class*="container_"]::before {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The Threads popout, and the toolbar icons that open it.
+   The channel-header popouts: Threads, Pinned Messages, Notification Settings.
 
-   The popout could not be captured -- the picker cannot stay active while a popout
-   opens, the same limitation the search popout hit. So it is covered by role and by
-   name rather than by hash: role="dialog" with a Threads label, plus the two class
-   spellings Discord has used. Each is inert if it does not match.
+   Reported unstyled -- Threads transparent with no frame, Pinned with no frame either.
+   The previous attempt guessed at "threadsPopout_"/"threadBrowser_" and matched
+   nothing, which is what an inert selector looks like from the outside: no error, no
+   change. These popouts are the messagesPopout family, and they are matched here by
+   BOTH the family classes and by the dialog that carries the opener's aria-label, so a
+   rename has to break two independent things to go unstyled again.
 
-   The icon WAS captured, and measured oklab(0.745443 ...) -- Discord's --icon-muted,
-   a mid grey. Every other icon in the theme is white and turns yellow on hover, so
-   the toolbar was simply never reached.
+   Opaque black is deliberate: transparent is how they ship, and a popup you can read
+   the message list through is the single worst surface in a black theme.
    ══════════════════════════════════════════════════════════════════════════ */
+div[class*="messagesPopoutWrap_" i],
+div[class*="messagesPopout_" i],
 div[role="dialog"][aria-label*="Thread" i],
+div[role="dialog"][aria-label*="Pinned" i],
+div[role="dialog"][aria-label*="Notification" i],
 div[class*="threadsPopout" i],
 div[class*="threadBrowser" i] {
   background: var(--ut-black) !important;
@@ -1578,10 +1583,11 @@ div[class*="threadBrowser" i] {
   color: var(--ut-white) !important;
   font-family: var(--ut-font) !important;
 }
-/* One frame, rows inside it -- the same treatment Active Now got. */
+/* One frame, rows inside it. */
+div[class*="messagesPopoutWrap_" i] div,
+div[class*="messagesPopout_" i] div,
 div[role="dialog"][aria-label*="Thread" i] div,
-div[class*="threadsPopout" i] div,
-div[class*="threadBrowser" i] div {
+div[role="dialog"][aria-label*="Pinned" i] div {
   background: transparent !important;
   background-color: transparent !important;
   border: none !important;
@@ -1589,10 +1595,11 @@ div[class*="threadBrowser" i] div {
   box-shadow: none !important;
   font-family: var(--ut-font) !important;
 }
+/* A row marks itself in yellow, like every other row in the theme. */
+div[class*="messagesPopout_" i] [class*="message_"]:hover,
+div[class*="messagesPopout_" i] [class*="message_"]:hover *,
 div[role="dialog"][aria-label*="Thread" i] [class*="card_"]:hover,
-div[role="dialog"][aria-label*="Thread" i] [class*="card_"]:hover *,
-div[class*="threadsPopout" i] [class*="card_"]:hover,
-div[class*="threadsPopout" i] [class*="card_"]:hover * {
+div[role="dialog"][aria-label*="Thread" i] [class*="card_"]:hover * {
   background: transparent !important;
   color: var(--ut-hover) !important;
 }
