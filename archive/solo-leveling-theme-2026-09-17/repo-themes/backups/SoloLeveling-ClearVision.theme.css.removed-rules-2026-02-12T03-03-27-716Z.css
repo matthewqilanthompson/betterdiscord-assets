@@ -1,0 +1,122 @@
+/* Removed from SoloLeveling-ClearVision.theme.css at 2026-02-12T03:03:27.730Z */
+/* Based on 6 report intersection + hashed-class stale selector heuristic */
+
+/* Rule 1 */
+
+
+div._133bf5eea8e33a34-tabBar.aa8da23faa27393c-topPill[role='tablist'][aria-label='Friends']
+  > div._133bf5eea8e33a34-item[role='tab'][aria-selected='true']:hover,
+div._133bf5eea8e33a34-tabBar.aa8da23faa27393c-topPill[role='tablist'][aria-label='Friends']
+  > div._133bf5eea8e33a34-item[role='tab'][aria-selected='true']:hover::before,
+div._133bf5eea8e33a34-tabBar.aa8da23faa27393c-topPill[role='tablist'][aria-label='Friends']
+  > div._133bf5eea8e33a34-item[role='tab'][aria-selected='true']:hover::after {
+  background: linear-gradient(
+    135deg,
+    var(--sl-color-purple-alpha-96),
+    rgba(var(--sl-color-accent-purple-400-rgb), 0.78)
+  ) !important;
+  background-color: var(--sl-color-purple-alpha-96) !important;
+  background-image: none !important;
+  box-shadow: var(--shadow-button-selected-hover) !important;
+  transform: none !important;
+}
+
+/* Rule 2 */
+
+
+div._133bf5eea8e33a34-tabBar.aa8da23faa27393c-topPill[role='tablist'][aria-label='Friends']
+  > div._133bf5eea8e33a34-item[role='tab'][aria-selected='true'],
+div._133bf5eea8e33a34-tabBar.aa8da23faa27393c-topPill[role='tablist'][aria-label='Friends']
+  > div._133bf5eea8e33a34-item[role='tab'][aria-selected='true']::before,
+div._133bf5eea8e33a34-tabBar.aa8da23faa27393c-topPill[role='tablist'][aria-label='Friends']
+  > div._133bf5eea8e33a34-item[role='tab'][aria-selected='true']::after {
+  background: linear-gradient(
+    135deg,
+    var(--sl-color-purple-alpha-92),
+    rgba(var(--sl-color-accent-purple-400-rgb), 0.72)
+  ) !important;
+  background-color: var(--sl-color-purple-alpha-92) !important;
+  background-image: none !important;
+  border-color: var(--sl-color-purple-alpha-75) !important;
+  box-shadow: 0 0 22px var(--sl-color-purple-alpha-34),
+    inset 0 0 0 1px var(--sl-color-white-alpha-10) !important;
+  transform: none !important;
+  color: var(--sl-color-text-strong) !important;
+  text-shadow: var(--text-shadow-extreme) !important;
+}
+
+/* Rule 3 */
+
+
+div._133bf5eea8e33a34-tabBar.aa8da23faa27393c-topPill[role='tablist'][aria-label='Friends']
+  > div._133bf5eea8e33a34-item[role='tab'],
+div._133bf5eea8e33a34-tabBar.aa8da23faa27393c-topPill[role='tablist'][aria-label='Friends']
+  > div._133bf5eea8e33a34-item[role='tab']::before,
+div._133bf5eea8e33a34-tabBar.aa8da23faa27393c-topPill[role='tablist'][aria-label='Friends']
+  > div._133bf5eea8e33a34-item[role='tab']::after {
+  background: transparent !important;
+  background-image: none !important;
+  border: 1px solid var(--sl-color-white-alpha-7) !important;
+  border-radius: var(--radius-control, 8px) !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transform: none !important;
+  color: var(--sl-color-text-cool) !important;
+}
+
+/* Rule 4 */
+
+
+div._133bf5eea8e33a34-tabBar.aa8da23faa27393c-topPill[role='tablist'][aria-label='Friends']:hover {
+  background: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transform: none !important;
+}
+
+/* Rule 5 */
+
+
+nav[aria-label='Private channels']
+  div[class*='_972a0d22c8afa7f0-interactiveSelected']
+  a[class*='-link'][data-list-item-id^='private-channels-uid_'],
+nav[aria-label='Private channels']
+  div[class*='bf202d63ad53e289-selected']
+  a[class*='-link'][data-list-item-id^='private-channels-uid_'] {
+  color: var(--sl-color-text-strong) !important;
+}
+
+/* Rule 6 */
+
+
+nav[aria-label='Private channels']
+  div[class*='-interactiveSelected'][class*='_972a0d22c8afa7f0-interactiveSelected'],
+nav[aria-label='Private channels'] div[class*='_972a0d22c8afa7f0-interactiveSelected'],
+nav[aria-label='Private channels'] div[class*='bf202d63ad53e289-selected'] {
+  background: var(--sl-color-purple-alpha-22) !important;
+  border-color: var(--sl-color-purple-alpha-35) !important;
+  border-left: none !important;
+}
+
+/* Rule 7 */
+
+
+nav[aria-label='Private channels']
+  div[class*='-interactive'][class*='_972a0d22c8afa7f0-interactive']:hover {
+  background: var(--sl-color-bg-alpha-8) !important;
+  border-color: var(--sl-color-white-alpha-6) !important;
+}
+
+/* Rule 8 */
+
+
+nav[aria-label='Private channels']
+  div[class*='-interactive'][class*='_972a0d22c8afa7f0-interactive'] {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-left: none !important;
+  border-radius: var(--radius-control, 8px) !important;
+  margin: 2px 6px !important;
+}
