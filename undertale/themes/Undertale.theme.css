@@ -54,8 +54,17 @@
      map 124 glyphs and have no accents, curly quotes or ellipsis. That is fine
      for Sans's own dialogue, where the text is ours, and wrong for Discord,
      where usernames and messages are arbitrary. */
-  --ut-font:         "Pixelify Sans", "Determination Mono", system-ui, sans-serif;
-  --ut-font-code:    "Pixel Code Regular", "PixelCode", ui-monospace, monospace;
+  /* Pixel Operator is the lore-accurate face -- Undertale's own UI font descends from
+     this family. Measured from the installed file: 238 glyphs, covering Latin, accented
+     forms, the ellipsis and curly quotes (all of which "UT Sans" lacks, at 124).
+
+     It has NO CJK and NO Cyrillic, and Discord usernames have both -- 白厄 and 愛boo are
+     in this account's friends list right now. Pixelify Sans stays directly behind it for
+     exactly that reason: font fallback is PER GLYPH, so Latin renders in Pixel Operator
+     and a Japanese name falls through to a face that can draw it, in the same string.
+     Dropping the fallback would replace those names with tofu boxes. */
+  --ut-font:         "Pixel Operator", "Pixelify Sans", "Determination Mono", system-ui, sans-serif;
+  --ut-font-code:    "Pixel Operator Mono", "Pixel Code Regular", "PixelCode", ui-monospace, monospace;
 
   /* The HSLDockAutoHide plugin injects its own stylesheet with Solo Leveling
      purple baked in, so no theme CSS could reach it. Those values are now tokens
@@ -785,4 +794,19 @@ div[class^="nowPlayingColumn_"] button:hover {
 [class*="modeSelected_"]:not(nav[aria-label="Servers sidebar"] *) [class*="selected" i] {
   border: none !important;
   box-shadow: none !important;
+}
+
+/* The Boost Goal pill: a purple-to-pink gradient with rounded ends, and the last
+   saturated colour left in the channel sidebar. Several hooks because the live class
+   is unconfirmed -- each is inert if it does not match. */
+div[class*="premiumProgress" i],
+div[class*="boostProgress" i],
+div[class*="guildBoost" i],
+[aria-label*="Boost" i][class*="container" i] {
+  background: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
 }
