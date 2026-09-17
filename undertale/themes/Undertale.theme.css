@@ -324,10 +324,12 @@ li[class^="channel_"] [class*="selected_"] {
 /* ══════════════════════════════════════════════════════════════════════════════
    §4  THE BATTLE BOX
    The single most recognisable shape in the game: a 2px white rectangle with
-   nothing inside it but text. Drawn around the message area.
+   nothing inside it but text. NOT drawn around the message area: that surface is
+   already bounded on every side by the framed columns, so its own outline read as a
+   box inside a box. The black ground and the 8px margin stay.
    ══════════════════════════════════════════════════════════════════════════ */
 main[class^="chatContent_"], div[class^="chatContent_"] {
-  border: var(--ut-line) solid var(--ut-white) !important;
+  border: none !important;   /* was the battle box; removed by request -- see note above */
   border-radius: var(--ut-radius) !important;
   margin: 8px;
   background: var(--ut-black) !important;
