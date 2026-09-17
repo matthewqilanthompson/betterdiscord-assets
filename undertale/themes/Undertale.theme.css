@@ -434,15 +434,15 @@ div[role="tab"]:hover {
 /* The text itself, and whatever Discord nests it in. The SOUL red of a mention
    badge is exempt: a mention outranks the cursor. */
 nav[aria-label="Private channels"] li:hover,
-nav[aria-label="Private channels"] li:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+nav[aria-label="Private channels"] li:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
 nav[aria-label="Private channels"] a:hover,
-nav[aria-label="Private channels"] a:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+nav[aria-label="Private channels"] a:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
 div[aria-label="Channels"] li:hover,
-div[aria-label="Channels"] li:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[aria-label="Channels"] li:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
 div[aria-label="Channels"] a:hover,
-div[aria-label="Channels"] a:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[aria-label="Channels"] a:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
 div[role="list"] div[role="listitem"]:hover,
-div[role="list"] div[role="listitem"]:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[role="list"] div[role="listitem"]:hover *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
 div[class^="membersWrap_"] div[role="listitem"]:hover,
 div[class^="membersWrap_"] div[role="listitem"]:hover span,
 div[role="menuitem"]:hover,
@@ -535,15 +535,15 @@ div[role="list"] div[role="listitem"]:focus-within {
 }
 
 div[role="list"] div[role="listitem"]:active,
-div[role="list"] div[role="listitem"]:active *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[role="list"] div[role="listitem"]:active *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
 div[role="list"] div[role="listitem"][aria-selected="true"],
-div[role="list"] div[role="listitem"][aria-selected="true"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[role="list"] div[role="listitem"][aria-selected="true"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
 div[role="list"] div[role="listitem"][class*="selected" i],
-div[role="list"] div[role="listitem"][class*="selected" i] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[role="list"] div[role="listitem"][class*="selected" i] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
 div[role="list"] div[role="listitem"][class*="active" i],
-div[role="list"] div[role="listitem"][class*="active" i] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[role="list"] div[role="listitem"][class*="active" i] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
 div[role="list"] div[role="listitem"]:focus-within,
-div[role="list"] div[role="listitem"]:focus-within *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]) {
+div[role="list"] div[role="listitem"]:focus-within *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]) {
   color: var(--ut-hover) !important;
 }
 
@@ -585,14 +585,14 @@ li[role="listitem"] [class*="interactiveSelected_"] {
 
    Equal specificity to the generic rule (0,2,1), so this wins by coming later --
    deliberately, and the reason these live at the end of the file. */
-ul[aria-label="Direct Messages"] [class*="selected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
-ul[aria-label="Direct Messages"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
-nav[aria-label="Private channels"] [class*="selected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
-nav[aria-label="Private channels"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
-div[aria-label="Channels"] [class*="selected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
-div[aria-label="Channels"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
-li[role="listitem"] [class*="selected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
-li[role="listitem"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]) {
+ul[aria-label="Direct Messages"] [class*="selected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
+ul[aria-label="Direct Messages"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
+nav[aria-label="Private channels"] [class*="selected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
+nav[aria-label="Private channels"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
+div[aria-label="Channels"] [class*="selected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
+div[aria-label="Channels"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
+li[role="listitem"] [class*="selected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]),
+li[role="listitem"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]):not([class*="botTag" i]) {
   color: var(--ut-hover) !important;
   fill: var(--ut-hover) !important;
   background-color: transparent !important;
@@ -914,4 +914,41 @@ ul[aria-label="Channels"] li[class*="containerDefault_"] {
   margin-right: var(--ut-channel-inset) !important;
   padding-top: calc(-1 * var(--ut-channel-tighten)) !important;
   padding-bottom: calc(-1 * var(--ut-channel-tighten)) !important;
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   The BOT / Verified App tag.
+
+   ClearVision fills it with the universal accent:
+
+     .botTagRegular__82f07 { background: var(--hsl-main-color); color: var(--text-strong) }
+
+   --hsl-main-color derives from --main-color, which this theme sets to white, and
+   --text-strong is white too -- so the tag renders WHITE ON WHITE at rest and is
+   invisible. Hovering made it yellow on white, which is how it was noticed: barely
+   readable rather than not at all.
+
+   Now a tiny battle box: black fill, white hairline, white text. 1px rather than the
+   theme's 2px because the tag is 10px tall and a 2px frame on it is mostly frame.
+
+   It is also excluded from the hover and selection colour rules above, alongside the
+   mention badges -- a label is not body text and should not change colour with the
+   row it happens to sit in.
+   ══════════════════════════════════════════════════════════════════════════ */
+span[class*="botTag" i],
+span[class*="botTag" i] *,
+[class*="botTagRegular" i],
+[class*="botTagRegular" i] * {
+  background: var(--ut-black) !important;
+  background-image: none !important;
+  border: 1px solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+/* The inner text node must not draw its own frame inside the tag's. */
+span[class*="botTag" i] * {
+  border: none !important;
+  background: transparent !important;
 }
