@@ -1729,6 +1729,67 @@ form[class^="form_"] button:hover svg {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   Toggles: a square box with a square knob.
+
+   Three things in the capture shaped this rule.
+
+   1. The pill's colours are INLINE styles (background-color, border-*, set on the
+      element by React). A stylesheet declaration loses to inline -- unless it is
+      !important, which wins. Every property here that fights an inline value is
+      marked, and that is not decoration.
+   2. The knob is an <svg> circle, not a div. No border-radius can square a drawn
+      circle, so the svg is hidden and the knob is redrawn as a ::after block.
+   3. The :not(#\9) chain is load-bearing. The popup-shell flatten rule measured
+      584 matched elements in this capture at specificity (0,4,4) -- it reaches every
+      div inside a settings modal, this toggle included, and zeroes its border. The
+      negations lift these rules to (2,1,1) so the toggle keeps its box wherever it
+      appears. Without them the toggle is square everywhere EXCEPT inside modals,
+      which is where most toggles in Discord actually live.
+
+   Off is white on black; on is yellow, the same yellow that means "active" everywhere
+   else in this theme.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="switchIndicator_"]:not(#\9):not(#\8) {
+  position: relative !important;
+  box-sizing: border-box !important;
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: none !important;
+}
+/* The drawn circle goes; the knob is a block. */
+div[class^="switchIndicator_"]:not(#\9):not(#\8) svg {
+  display: none !important;
+}
+div[class^="switchIndicator_"]:not(#\9):not(#\8)::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 2px !important;
+  bottom: 2px !important;
+  left: 2px !important;
+  width: 16px !important;
+  background: var(--ut-white) !important;
+  border-radius: 0 !important;
+  transition: none !important;
+}
+/* On: knob to the right, everything yellow. */
+label[class^="container_"]:has(input:checked) div[class^="switchIndicator_"]:not(#\9):not(#\8),
+div[class^="switchIndicator_"][class*="checked_"]:not(#\9):not(#\8) {
+  border-color: var(--ut-hover) !important;
+}
+label[class^="container_"]:has(input:checked) div[class^="switchIndicator_"]:not(#\9):not(#\8)::after,
+div[class^="switchIndicator_"][class*="checked_"]:not(#\9):not(#\8)::after {
+  left: auto !important;
+  right: 2px !important;
+  background: var(--ut-hover) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    User Settings: the sidebar, the content, and the content header.
 
    All three captures still computed gg sans and Discord's own greys, so this whole
