@@ -1000,3 +1000,46 @@ div[class^="interactionsContainer_"]::before {
   background-color: var(--ut-white) !important;
   opacity: 1 !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   The user profile popout: framed, NOT repainted.
+
+   Everything else this theme touches is Discord's own chrome. A profile card is not
+   -- it carries that person's chosen banner gradient, avatar decoration and profile
+   effects:
+
+     .custom-user-profile-theme .inner_c0bea0 {
+       background: linear-gradient(var(--profile-gradient-start), ..., var(--profile-gradient-end)) }
+     div.profileEffects__0dd08  "Show this effect when others view your profile."
+
+   Flattening that to black and white would not theme Discord, it would erase other
+   people. So the frame is ours and the contents stay theirs. The game frames things;
+   it does not repaint what is inside the frame.
+
+   The one substantive fix here is opacity, not taste: the card sat on
+   oklab(0 0 0 / 0.6), so whatever was behind it bled through and made text harder to
+   read. Everything below is structure -- corners, frame, an opaque base -- and
+   nothing sets a colour on their content.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[role="dialog"] div[class^="outer_"]:has(div[class^="inner_"] div[class*="profileEffects_"]),
+div[role="dialog"] div[class^="outer_"]:has(> div[class^="inner_"] > div[class^="header_"]) {
+  background: var(--ut-black) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Square the inner card and give it an opaque base UNDER their gradient, so a
+   translucent profile colour composites onto black rather than onto the desktop. */
+div[role="dialog"] div[class^="outer_"] > div[class^="inner_"] {
+  border-radius: var(--ut-radius) !important;
+  background-color: var(--ut-black) !important;
+}
+
+/* Discord's own labels on the card take the theme font. Their name, their pronouns
+   and their About Me are left exactly as they wrote them. */
+div[role="dialog"] div[class^="inner_"] div[class^="footer_"],
+div[role="dialog"] div[class^="inner_"] div[class^="footer_"] button {
+  font-family: var(--ut-font) !important;
+}
