@@ -443,3 +443,47 @@ nav[aria-label="Private channels"] a[href^="/quests"],
 nav[aria-label="Private channels"] a[href^="/nitro"] {
   display: none !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   The ACTIVE row, which is not the hovered row.
+
+   Reported as "white accent when I select it". ClearVision fills a selected item
+   with var(--hsl-main-color), derived from --main-color -- which this theme sets
+   to white so CV's lines and icons read on black. A white FILL is the same trap
+   the DKB entry on this theme describes: the row becomes a blank slab with its
+   own white text inside it.
+
+   The [class*="selected_"] rule further up does not reach here: a friends row is
+   div[role="listitem"] under div[role="list"], and Discord marks its state on
+   this element with its own hooks rather than a "selected_" class.
+
+   So the fill is removed and the row is marked the way a hovered one is -- yellow
+   text. Several state hooks are listed because the live one is not confirmed; each
+   is inert if it does not match, so a wrong guess costs nothing and cannot hide a
+   row or paint one the wrong colour.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[role="list"] div[role="listitem"]:active,
+div[role="list"] div[role="listitem"][aria-selected="true"],
+div[role="list"] div[role="listitem"][class*="selected" i],
+div[role="list"] div[role="listitem"][class*="active" i],
+div[role="list"] div[role="listitem"]:focus,
+div[role="list"] div[role="listitem"]:focus-within {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+div[role="list"] div[role="listitem"]:active,
+div[role="list"] div[role="listitem"]:active *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[role="list"] div[role="listitem"][aria-selected="true"],
+div[role="list"] div[role="listitem"][aria-selected="true"] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[role="list"] div[role="listitem"][class*="selected" i],
+div[role="list"] div[role="listitem"][class*="selected" i] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[role="list"] div[role="listitem"][class*="active" i],
+div[role="list"] div[role="listitem"][class*="active" i] *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]),
+div[role="list"] div[role="listitem"]:focus-within,
+div[role="list"] div[role="listitem"]:focus-within *:not([class*="mentionsBadge" i]):not([class*="numberBadge" i]) {
+  color: var(--ut-hover) !important;
+}
