@@ -570,6 +570,14 @@ li[role="listitem"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge
    standing destination at the top of the sidebar, and a box around it is the
    Undertale way of showing which screen you are on. Asked for deliberately.
 
+   The fill is cleared on the container AND every descendant, rather than on the
+   element carrying "selected_". Three rounds were spent aiming at that class: a
+   screenshot showed the row as a solid WHITE block with yellow text, so the fill
+   lives on some other node inside the container -- ClearVision paints a selected
+   item with --hsl-main-color, which derives from --main-color, which this theme
+   sets to white. Chasing which exact node holds it is not worth a fourth round
+   when the container is one row wide and blacking all of it is safe.
+
    div[class^="friendsButtonContainer_"] is from CSS Picker's ancestry for that
    button and reaches nothing else. Specificity ties with the list-row rule that
    removed the border (0,2,1), so this wins by sitting after it -- which is why it
@@ -578,10 +586,15 @@ li[role="listitem"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge
    Text stays yellow: selected still means "look here", and yellow on black inside
    a white frame is the battle box as the game draws it.
    ══════════════════════════════════════════════════════════════════════════ */
-div[class^="friendsButtonContainer_"] [class*="selected_"],
-div[class^="friendsButtonContainer_"] [class*="interactiveSelected_"] {
+div[class^="friendsButtonContainer_"],
+div[class^="friendsButtonContainer_"] * {
   background: var(--ut-black) !important;
   background-color: var(--ut-black) !important;
+  background-image: none !important;
+}
+
+/* The frame goes on the row itself, not on every descendant. */
+div[class^="friendsButtonContainer_"] li[role="listitem"] {
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
 }
