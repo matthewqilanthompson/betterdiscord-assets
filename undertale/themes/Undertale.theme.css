@@ -2418,6 +2418,53 @@ div[class^="switchIndicator_"][class*="checked_"]:not(#\9):not(#\8)::after {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   BetterDiscord's modals.
+
+   Measured: a grey fill (oklab 0.26239), a 12px radius, a 1px border at 20% alpha,
+   and a footer bar in a slightly different grey with its own bottom-rounded corners --
+   three separate greys in a 440x200 box.
+
+   The footer's buttons also sit flush against each other, sharing an edge, which reads
+   as one two-part control rather than two choices. Undertale spaces its choices out;
+   they get a gap, and the footer keeps no bar of its own.
+   ══════════════════════════════════════════════════════════════════════════ */
+.bd-modal-root {
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+.bd-modal-root *,
+.bd-modal-content,
+.bd-modal-root .bd-flex {
+  font-family: var(--ut-font) !important;
+}
+/* The header and footer bars are not bars: one box, contents inside it. */
+.bd-modal-root > .bd-flex,
+.bd-modal-content {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* Two choices, not one split control. */
+.bd-modal-root > .bd-flex:last-child {
+  display: flex !important;
+  gap: 12px !important;
+  justify-content: flex-end !important;
+  padding: 12px 16px !important;
+}
+.bd-modal-root > .bd-flex:last-child button {
+  min-width: 96px !important;
+  justify-content: center !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    BetterDiscord's addon cards and their buttons.
 
    The gear / pencil / trash row shipped in Discord blue and red -- the last saturated
