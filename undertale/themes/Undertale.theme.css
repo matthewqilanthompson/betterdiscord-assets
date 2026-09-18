@@ -1816,16 +1816,53 @@ li[class*="messageListItem_"] img[class*="avatar_"] {
   height: 48px !important;
 }
 
-/* The asterisk. Undertale leads every line of dialogue with it. */
-li[class*="messageListItem_"] div[class^="messageContent_"]::before {
+/* The asterisk, and the message text.
+
+   Both were written for div[class^="messageContent_"] and BOTH SILENTLY DID NOTHING:
+   the element is div[id^="message-content-"] with class markup_, so the selector
+   matched nothing at all. No asterisk appeared and the text stayed gg sans, which is
+   exactly what an inert selector looks like -- no error, no change, and indistinguishable
+   from the rule being absent. Matched by id prefix AND by markup_ now, since the id is
+   stable across renames and the class is stable across id-format changes. */
+li[class*="messageListItem_"] div[id^="message-content-"]::before {
   content: "* " !important;
   color: var(--ut-white) !important;
   font-family: var(--ut-font) !important;
   white-space: pre !important;
 }
-li[class*="messageListItem_"] div[class^="messageContent_"] {
+li[class*="messageListItem_"] div[id^="message-content-"],
+li[class*="messageListItem_"] div[class*="markup_"],
+li[class*="messageListItem_"] div[id^="message-content-"] *:not([class*="emoji" i]) {
   color: var(--ut-white) !important;
   font-family: var(--ut-font) !important;
+}
+
+/* @mentions: yellow TEXT, never a yellow slab.
+
+   Measured at background srgb 0.749 with a 5px radius -- a filled pill, which is the one
+   thing this theme's highlight rule forbids. Undertale marks a word by colouring it, the
+   same yellow as a hovered row and an unread channel, because it is the same idea:
+   "look here". The fill came from --mention-background resolving through the palette,
+   so it is the theme's own colour landing in the wrong property. */
+span.mention,
+span[class*="wrapper_"][role="button"],
+.mention {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  color: var(--ut-hover) !important;
+  font-family: var(--ut-font) !important;
+  padding: 0 !important;
+}
+span.mention:hover,
+.mention:hover,
+.interactive:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--ut-white) !important;
+  text-decoration: underline !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
