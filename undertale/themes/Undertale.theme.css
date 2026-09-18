@@ -2044,6 +2044,80 @@ form[class^="form_"] [class*="placeholder_"] {
   opacity: 0.55 !important;
   font-family: var(--ut-font) !important;
 }
+/* ══════════════════════════════════════════════════════════════════════════
+   The expression pickers: emoji, GIF, sticker, and the Apps popup.
+
+   All four open from the composer and all four are the same shell in Discord's DOM --
+   an expression-picker panel with a search box, a scroller and a category rail. They
+   are written together because splitting them would be four copies of one rule.
+
+   Not captured: the picker cannot stay active while a popout opens. Matched by id
+   prefix, by role, and by the per-picker class names, so a rename has to break several
+   independent things at once. (The popout capture in CSS Picker CAN reach these now --
+   Cmd+Y with one open -- so if any of this misses, there is a capture available rather
+   than another guess.)
+
+   Opaque, because these float over the message list.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[id^="expression-picker"],
+div[class*="expressionPicker" i],
+div[class*="emojiPicker" i],
+div[class*="gifPicker" i],
+div[class*="stickerPicker" i],
+div[class*="contentWrapper_"]:has(div[id^="expression-picker"]),
+div[role="dialog"][aria-label*="Apps" i],
+div[class*="applicationLauncher" i] {
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+/* One frame: the panels, rails and headers inside own no box of their own. */
+div[id^="expression-picker"] div:not([class*="sprite" i]),
+div[class*="expressionPicker" i] div:not([class*="sprite" i]),
+div[role="dialog"][aria-label*="Apps" i] div:not([class*="sprite" i]) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-family: var(--ut-font) !important;
+}
+/* Headers and category labels read like the channel categories do. */
+div[id^="expression-picker"] h2,
+div[id^="expression-picker"] h3,
+div[class*="expressionPicker" i] h2,
+div[class*="expressionPicker" i] h3 {
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+/* A row, a category button or a result marks itself in yellow -- never a fill. */
+div[id^="expression-picker"] [role="button"]:hover,
+div[id^="expression-picker"] [role="button"]:hover *,
+div[id^="expression-picker"] [role="tab"]:hover,
+div[id^="expression-picker"] [role="gridcell"]:hover,
+div[class*="expressionPicker" i] [role="button"]:hover,
+div[role="dialog"][aria-label*="Apps" i] [role="button"]:hover,
+div[role="dialog"][aria-label*="Apps" i] [role="button"]:hover * {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--ut-hover) !important;
+}
+/* The selected category tab: framed, like every other selected thing here. */
+div[id^="expression-picker"] [role="tab"][aria-selected="true"],
+div[class*="expressionPicker" i] [role="tab"][aria-selected="true"] {
+  background: transparent !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  color: var(--ut-hover) !important;
+}
+
 /* Sprites keep their paint, everywhere.
 
    Discord draws several icons from sprite sheets rather than svg -- the emoji button is
