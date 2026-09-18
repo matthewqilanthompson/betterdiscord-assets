@@ -272,6 +272,23 @@ module.exports = class CSSPicker {
          hotkey worked and only the popout path was dead. */
       if (!matchesHotkey(event, settings.hotkey)) return;
 
+      /* HOLD SHIFT: arm a delayed capture instead of acting now.
+
+         Capturing a panel requires it to be open at the instant the key is pressed, and
+         that ordering turned out to be the hard part -- open the panel, then reach for a
+         chord, and any stray click closes it. Armed capture inverts it: press the key
+         FIRST, then open whatever you want captured, and the snapshot is taken a few
+         seconds later with no key press needed while it is open.
+
+         Shift is free here because matchesHotkey is inclusive about extra modifiers, so
+         the same binding carries both behaviours. */
+      if (event.shiftKey && this._armCapture) {
+        event.preventDefault();
+        event.stopPropagation();
+        this._armCapture();
+        return;
+      }
+
       if (this.isActive) {
         event.preventDefault();
         event.stopPropagation();
@@ -305,6 +322,7 @@ module.exports = class CSSPicker {
       this.activatePickMode();
     };
     this._unsubGlobalHotkey = onKeydown(this.onGlobalHotkeyDown, { capture: true });
+    this._armTimer = null;
 
     const hotkeyLabel =
       this.settings?.hotkeyEnabled && this.settings?.hotkey
@@ -319,6 +337,8 @@ module.exports = class CSSPicker {
     if (this._unsubGlobalHotkey) { this._unsubGlobalHotkey(); this._unsubGlobalHotkey = null; }
     this.onGlobalHotkeyDown = null;
     this._captureInProgress = false;
+    /* An armed capture must not fire after the plugin is disabled. */
+    if (this._armTimer) { clearTimeout(this._armTimer); this._armTimer = null; }
   }
 
   getSettingsPanel() {
@@ -437,6 +457,27 @@ module.exports = class CSSPicker {
      A METHOD, not an arrow assigned inside activatePickMode(). It lived there briefly and
      the hotkey called it before pick mode had ever run, so it was undefined and the
      handler threw: the key simply did nothing on a fresh load. */
+  /** Wait, then capture whatever is open. Lets the user open a panel after pressing. */
+  _armCapture(delayMs = 4000) {
+    if (this._armTimer) clearTimeout(this._armTimer);
+    const seconds = Math.round(delayMs / 1000);
+    this._toast(
+      `Capturing in ${seconds}s -- open the panel now, and leave it open.`,
+      "info",
+      delayMs
+    );
+    this._armTimer = setTimeout(() => {
+      this._armTimer = null;
+      const got = typeof this._capturePopouts === "function" && this._capturePopouts();
+      if (!got) {
+        this._toast(
+          "Nothing open to capture. Open the panel, then press the hotkey with Shift.",
+          "error"
+        );
+      }
+    }, delayMs);
+  }
+
   _capturePopouts() {
     let found;
     try {
