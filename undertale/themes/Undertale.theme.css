@@ -2549,6 +2549,40 @@ input:checked + div[class*="checkboxIndicator_"] {
   border-color: var(--ut-hover) !important;
   color: var(--ut-hover) !important;
 }
+/* ChatNavArrows: jump to the top of the channel, jump to the newest message.
+
+   The plugin ships Solo Leveling's look -- 2px radius, violet border, a purple glow on
+   hover and a 1.1x scale bounce. Restyled here rather than in the plugin, so the plugin
+   stays theme-agnostic and the Solo Leveling theme keeps its own version.
+
+   Undertale treatment: a square white box on black, yellow on hover, and NO scale
+   transform. Nothing in this UI grows when you point at it -- the game marks a choice
+   by colouring it, and a button that jumps 1.1x is the one animation that would stand
+   out in a theme with none.
+   ══════════════════════════════════════════════════════════════════════════ */
+.sl-chat-nav-arrow {
+  background: var(--ut-black-solid) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  transition: none !important;
+}
+.sl-chat-nav-arrow:hover {
+  background: var(--ut-black-solid) !important;
+  border-color: var(--ut-hover) !important;
+  box-shadow: none !important;
+  color: var(--ut-hover) !important;
+  transform: none !important;
+}
+.sl-chat-nav-arrow:active {
+  transform: none !important;
+  border-color: var(--ut-hover) !important;
+}
+.sl-chat-nav-arrow svg {
+  fill: currentcolor !important;
+}
+
 /* CallButtonGuard's toggle: the theme's palette, not the plugin's.
 
    The plugin ships Solo Leveling violet for "calls shown" and a soft red for "calls
