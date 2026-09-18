@@ -2065,6 +2065,17 @@ form[class^="form_"] [class*="placeholder_"] {
    written on, not the size of the thing it is testing for -- the test says "this
    contains a picker", the paint lands on the whole container.
    ══════════════════════════════════════════════════════════════════════════ */
+/* The panel is the position layer's DIRECT CHILD.
+
+   From the capture: the layer is expressionPickerPositionLayer__74017 (1616x486,
+   paints:false, transparent -- correctly excluded), and of its 68 descendants exactly
+   ONE painted: #gif-picker-tab, styled by the tab rule. So the panel itself was drawing
+   nothing: no id="expression-picker" to match, and the blanket inner strip had removed
+   the border it would otherwise have had. The theme was styling a tab inside an
+   invisible box.
+
+   "The layer's direct child" needs no class at all, which is why it is used here. */
+div[class*="expressionPickerPositionLayer" i] > div,
 div[id="expression-picker"],
 div[class*="expressionPicker" i]:not([class*="Layer" i]):not([class*="position" i]),
 div[class*="emojiPicker" i],
@@ -2130,6 +2141,9 @@ div[role="dialog"][aria-label*="Apps" i] div:not([class*="sprite" i]) {
 
    Pseudo-elements included: a frame that survives a border reset is usually a ::before,
    and that has cost this theme five rounds once already. */
+div[class*="expressionPickerPositionLayer" i] > div *,
+div[class*="expressionPickerPositionLayer" i] > div *::before,
+div[class*="expressionPickerPositionLayer" i] > div *::after,
 div[id="expression-picker"] *,
 div[id="expression-picker"] *::before,
 div[id="expression-picker"] *::after,
@@ -2141,7 +2155,10 @@ div[class*="expressionPicker" i] *::after {
   box-shadow: none !important;
   outline: none !important;
 }
-/* The three exceptions, at higher specificity so they win outright. */
+/* The four exceptions, at higher specificity so they win outright. */
+div[class*="expressionPickerPositionLayer" i] > div {
+  border: var(--ut-line) solid var(--ut-white) !important;
+}
 div[id="expression-picker"] div[class*="searchBar_"],
 div[class*="expressionPicker" i] div[class*="searchBar_"] {
   border: var(--ut-line) solid var(--ut-white) !important;
