@@ -214,3 +214,35 @@ settles the cheapest version:
 - A message whose timestamp is older than page load is never animated.
 - If the tab is hidden (`document.hidden`), messages land instantly -- typing out what
   arrived while you were in another app is the failure mode this decision avoids.
+
+
+## Group messages by author regardless of time gap
+
+**Status:** not started. Requested 2026-09-17, after the CSS grouping shipped.
+
+**What is wanted:** every consecutive run from the same person is ONE dialogue box, even
+when the messages are far apart in time.
+
+**Why the CSS version stops short.** The theme builds its box from Discord's own grouping:
+`groupStart_` opens it, and `:has(+ li ... groupStart_)` closes it. That is exact, and it
+is Discord's definition, not ours -- Discord ends a group after roughly **7 minutes** even
+when the author has not changed, and stamps `groupStart_` on the next message. Measured in
+the user's own screenshot: JOCCY at 16:20 and 16:29 are nine minutes apart, so both carry
+`groupStart_` and both correctly draw their own box.
+
+**Why CSS cannot fix it.** Merging those runs means knowing that two rows share an AUTHOR.
+The author is not in any class, attribute or id on the row -- `li` ids carry the channel and
+message snowflake only -- and CSS has no way to compare two elements' contents. There is
+nothing to select on.
+
+**What the plugin would do:**
+
+1. Read the author id from Discord's message store (or the avatar `src`, which embeds the
+   user id, as a DOM-only fallback).
+2. Stamp `data-ut-author` on each `li`, plus `data-ut-group-start` / `data-ut-group-end`
+   computed by comparing neighbours -- ignoring the time gap entirely.
+3. The theme then keys its borders off those attributes instead of `groupStart_`. The CSS
+   is otherwise unchanged: three states, same three rules.
+
+**Note:** this pairs naturally with the typing animation above -- both want a
+`MutationObserver` on the message list, so one observer should serve both.
