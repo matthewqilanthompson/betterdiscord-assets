@@ -1793,6 +1793,12 @@ li[class*="messageListItem_"] > div[role="article"] {
   margin: 0 24px !important;
   padding: 6px 20px 6px 82px !important;
   min-height: 0 !important;
+  /* A dialogue box is as wide as its dialogue. Full-window boxes put four words in a
+     1,950px rectangle, which reads as an empty frame rather than as speech -- Undertale's
+     box is wide because the text fills it. Capped, not centred: the left edge stays
+     aligned with every other box so the column still scans. */
+  max-width: 980px !important;
+  box-sizing: border-box !important;
 }
 /* Opens the box. */
 li[class*="messageListItem_"] > div[class*="groupStart_"] {
@@ -1843,6 +1849,44 @@ li[class*="messageListItem_"] div[class*="markup_"],
 li[class*="messageListItem_"] div[id^="message-content-"] *:not([class*="emoji" i]) {
   color: var(--ut-white) !important;
   font-family: var(--ut-font) !important;
+}
+
+/* The speaker's name: yellow, like a label.
+
+   Role colours were the only non-palette colour left in the message area, and they sit
+   at the top of every box where the eye lands first. Yellow is what this theme uses for
+   "look here", and a speaker's name is exactly that -- the game names who is talking and
+   the name is the thing you read before the line.
+
+   Role colour arrives as an INLINE style, so !important is required, not optional. */
+li[class*="messageListItem_"] span[class*="username_"],
+li[class*="messageListItem_"] span[class*="username_"] * {
+  color: var(--ut-hover) !important;
+  font-family: var(--ut-font) !important;
+}
+li[class*="messageListItem_"] span[class*="username_"]:hover {
+  color: var(--ut-white) !important;
+  text-decoration: underline !important;
+}
+
+/* Role badges and tags: outlined, never filled.
+
+   The DEAF badge is the last filled pill in the message area -- same shape as the
+   mentions and the forum tags. This covers the badge/tag class names Discord uses; the
+   BOT tag already has its own rule further up. NOT VERIFIED AGAINST A CAPTURE: if the
+   badge is still filled, one CSS Picker pick of it gives the real class. */
+li[class*="messageListItem_"] span[class*="roleBadge" i],
+li[class*="messageListItem_"] span[class*="badge_" i],
+li[class*="messageListItem_"] span[class*="tag_" i]:not([class*="botTag" i]),
+div[class*="header_"] span[class*="roleBadge" i] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 1px solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+  padding: 0 4px !important;
 }
 
 /* @mentions: yellow TEXT, never a yellow slab.
