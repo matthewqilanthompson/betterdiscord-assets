@@ -2798,30 +2798,56 @@ div[role="dialog"] > div[class^="root_"] * {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   A voice channel is solid black, wallpaper and all.
+   A voice channel is solid black -- wallpaper, chat and sidebar.
 
-   Video tiles, avatars and screen shares are CONTENT, and the wallpaper behind them
-   competes with every one of them -- a call is the one screen where the art is noise
-   rather than atmosphere. So the voice view and the text chat beside it go opaque.
+   Video tiles, avatars and screen shares are CONTENT, and the wallpaper competes with
+   every one of them. A call is the one screen where the art is noise.
 
-   Scoped by what only exists in a call: videoGrid_ for the tiles, chatLayerWrapper_
-   for the resizable side chat, and the text chat's own aria-label, which Discord
-   writes as "Text chat for voice channel <name>". Nothing here matches a normal text
-   channel, so the wallpaper is untouched everywhere else.
+   ANCHORS TAKEN FROM THE SOLO LEVELING THEME (§9j), which solved this already and is
+   worth copying rather than re-deriving: callContainer_ wraps the video side, and
+   channelChatWrapper_ is the VC text pane -- a SIBLING of callContainer_, not a child,
+   which is the part that is easy to get wrong. My first attempt used videoGrid_ and the
+   chat's aria-label; these two are the real containers.
 
-   The :not(#\9) lift is needed because the transparency rules for the message panel
-   are global and would otherwise win on source order -- the same tie that cost three
-   rounds on the picker panel.
+   The sidebar is conditional on being in a call: :has(callContainer_) on the app base,
+   so a normal text channel keeps the wallpaper in its sidebar.
+
+   Everything INSIDE callContainer_ stays transparent on purpose -- painting the tiles
+   black would hide the video feeds.
    ══════════════════════════════════════════════════════════════════════════ */
-div[class*="videoGrid_"]:not(#\9),
-div[class*="chatLayerWrapper_"]:not(#\9),
-div[class^="root_"]:not(#\9):has(> div div[class*="videoGrid_"]),
-section[aria-label^="Text chat for voice channel"]:not(#\9),
-section[aria-label^="Text chat for voice channel"]:not(#\9) div[class^="messagesWrapper_"],
-section[aria-label^="Text chat for voice channel"]:not(#\9) div[class^="scrollerContent_"],
-section[aria-label^="Text chat for voice channel"]:not(#\9) ol[class^="scrollerInner_"],
-section[aria-label^="Text chat for voice channel"]:not(#\9) div[class*="scroller_"],
-section[aria-label^="Text chat for voice channel"]:not(#\9) form[class^="form_"] {
+div[class^="callContainer_"]:not(#\9) {
+  background: var(--ut-black-solid) !important;
+  background-image: none !important;
+  border-radius: 0 !important;
+}
+div[class^="callContainer_"] div[class^="root_"],
+div[class^="callContainer_"] div[class^="root_"] > div,
+div[class^="callContainer_"] div[class^="videoGrid_"] {
+  background: transparent !important;
+  background-image: none !important;
+  border-radius: 0 !important;
+}
+div[class^="channelChatWrapper_"]:not(#\9),
+div[class^="channelChatWrapper_"]:not(#\9) > div,
+div[class^="channelChatWrapper_"]:not(#\9) div[class^="chat_"],
+div[class^="channelChatWrapper_"]:not(#\9) div[class^="content_"],
+div[class^="channelChatWrapper_"]:not(#\9) section[class^="chatContent_"],
+div[class^="channelChatWrapper_"]:not(#\9) main[class^="chatContent_"],
+div[class^="channelChatWrapper_"]:not(#\9) div[class^="messagesWrapper_"],
+div[class^="channelChatWrapper_"]:not(#\9) div[class^="scroller_"],
+div[class^="channelChatWrapper_"]:not(#\9) div[class^="scrollerContent_"],
+div[class^="channelChatWrapper_"]:not(#\9) ol[class^="scrollerInner_"],
+div[class^="channelChatWrapper_"]:not(#\9) form[class^="form_"] {
+  background: var(--ut-black-solid) !important;
+  background-image: none !important;
+  border-radius: 0 !important;
+}
+/* The channel sidebar, but ONLY while in a call. */
+div[class^="base_"]:has(div[class^="callContainer_"]) div[aria-label="Channels"]:not(#\9),
+div[class^="base_"]:has(div[class^="callContainer_"]) nav[aria-label="Channels"]:not(#\9),
+div[class^="base_"]:has(div[class^="callContainer_"]) div[class^="sidebar_"]:not(#\9),
+div[class^="base_"]:has(div[class^="callContainer_"]) div[class^="sidebarList_"]:not(#\9),
+div[class^="base_"]:has(div[class^="callContainer_"]) nav[aria-label="Private channels"]:not(#\9) {
   background: var(--ut-black-solid) !important;
   background-color: var(--ut-black-solid) !important;
   background-image: none !important;
