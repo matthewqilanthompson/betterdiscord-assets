@@ -6,6 +6,67 @@
  * @source https://github.com/matthewqilanthompson/betterdiscord-assets
  */
 
+/* ══════════════════════════════════════════════════════════════════════════
+   CONTENTS
+
+   Generated from the section banners. Line numbers shift as the file grows, so
+   the section NUMBER is the thing to search for: /§23 finds it wherever it is.
+
+   ORDER IS LOAD-BEARING IN THIS FILE, so sections are never rearranged to tidy
+   the list. Several rules resolve specificity ties by position -- the Friends-row
+   strip must lose to nothing, the DM search exception sits after the base rule,
+   and the sprite revert is last so nothing can delete an icon after it. Moving a
+   block to group it with its neighbours can silently change what wins.
+
+   §1     IMPORTS                                                    L10
+   §2     TOKENS                                                     L27
+   §2.5   THE WALLPAPER                                              L183
+   §3     FLATTEN                                                    L228
+   §4     THE BATTLE BOX                                             L408
+   §5     THE SOUL                                                   L422
+   §6     SAVE                                                       L459
+   §7     Chrome that is not Undertale                               L468
+   §8     Hover                                                      L500
+   §9     The ACTIVE row, which is not the hovered row               L603
+   §10    No outline box on a selected LIST ROW                      L647
+   §11    The Friends button keeps its battle box                    L699
+   §12    The three framed columns line up                           L759
+   §13    Active Now                                                 L787
+   §14    One frame per selected thing, never two                    L872
+   §15    Category headers                                           L912
+   §16    The size of the selected-channel box                       L987
+   §17    The BOT / Verified App tag                                 L1017
+   §18    The Active Now popout                                      L1053
+   §19    The user profile popout                                    L1101
+   §20    Every button and tag is the same box                       L1144
+   §21    The full-profile modal gets the frame too                  L1212
+   §22    Link-style controls are NOT buttons                        L1227
+   §23    textButton_ is a text control, never a box                 L1272
+   §24    Context menus                                              L1309
+   §25    The unread / jump bars above the message list              L1353
+   §26    Search boxes, and the popout a search opens                L1405
+   §27    Popovers, and the message hover toolbar                    L1467
+   §28    The Friends row carries no frame. Final word               L1535
+   §29    The Friends header bar keeps no line under it              L1586
+   §30    The channel-header popouts                                 L1640
+   §31    Forum tag pills                                            L1704
+   §32    MESSAGES AS DIALOGUE BOXES                                 L1745
+   §33    The composer                                               L1982
+   §34    The expression pickers                                     L2048
+   §35    Inside the pickers and the Apps panel, from the captures   L2222
+   §36    Toggles                                                    L2360
+   §37    The Go Live / stream modal                                 L2421
+   §38    BetterDiscord's modals                                     L2529
+   §39    BetterDiscord's addon cards and their buttons              L2576
+   §40    BetterDiscord's own toggles, same shape as Discord's       L2698
+   §41    User Settings                                              L2767
+   §42    The Server Boost (powerups) page                           L2816
+   §43    Modals (the Event modal is the one that was captured)      L2864
+   §44    Forum post cards                                           L2900
+   §45    A voice channel is solid black                             L2956
+   §46    Discord's shared popup shell                               L3076
+   ══════════════════════════════════════════════════════════════════════════ */
+
 /* ══════════════════════════════════════════════════════════════════════════════
    §1  IMPORTS
    ClearVision v7 stays the base (user's call): it carries Discord's surface
@@ -465,7 +526,7 @@ div[class^="unread_"]::before, div[class^="unreadMentionsBar_"] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Chrome that is not Undertale: the title bar and ClearVision's watermark.
+   §7  Chrome that is not Undertale: the title bar and ClearVision's watermark.
 
    CSS Picker on the help icon: div[class^="trailing_"] sits in div[class^="bar_"],
    and Discord's own rule names ".trailing_c38106, .winButtons_c38106" -- same
@@ -497,7 +558,7 @@ div[class^="bar_"] div[class^="trailing_"] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Hover: yellow text, never a filled bar.
+   §8  Hover: yellow text, never a filled bar.
 
    ClearVision paints a hovered row with var(--hover-color) as a BACKGROUND, so
    a bar sweeps across the width of the list. Undertale has no such thing: the
@@ -600,7 +661,7 @@ nav[aria-label="Private channels"] li:has([aria-label="Quests" i]) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The ACTIVE row, which is not the hovered row.
+   §9  The ACTIVE row, which is not the hovered row.
 
    Reported as "white accent when I select it". ClearVision fills a selected item
    with var(--hsl-main-color), derived from --main-color -- which this theme sets
@@ -644,7 +705,7 @@ div[role="list"] div[role="listitem"]:focus-within *:not([class*="mentionsBadge"
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   No outline box on a selected LIST ROW.
+   §10  No outline box on a selected LIST ROW.
 
    The battle box (black fill, white 2px outline) is right for a menu panel and
    wrong for a row in a list: across the width of a DM entry it reads as exactly
@@ -696,7 +757,7 @@ li[role="listitem"] [class*="interactiveSelected_"] *:not([class*="mentionsBadge
 
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The Friends button keeps its battle box.
+   §11  The Friends button keeps its battle box.
 
    Everything else in a list drops the outline (a border across a DM row reads as
    the "accent box across"), but Friends is not a conversation -- it is the one
@@ -756,7 +817,7 @@ div[class^="friendsButtonContainer_"] li[role="listitem"] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The three framed columns line up.
+   §12  The three framed columns line up.
 
    Measured, not eyeballed -- CSS Picker on all three:
      nav[aria-label="Private channels"]   1032px
@@ -784,7 +845,7 @@ nav[aria-label="Private channels"] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Active Now: one frame, rows inside it.
+   §13  Active Now: one frame, rows inside it.
 
    The column already carries a frame from the panel rule. Framing each card inside
    it too would give boxes inside boxes -- the thing the battle box exists to avoid.
@@ -869,7 +930,7 @@ div[class^="nowPlayingColumn_"] button:hover {
    and then image-rendering: pixelated on the upscale does the rest. */
 
 /* ══════════════════════════════════════════════════════════════════════════
-   One frame per selected thing, never two.
+   §14  One frame per selected thing, never two.
 
    A selected channel row drew a double outline. CSS Picker on it reports the
    selection rule matching TWO elements -- li.containerDefault_ (which carries
@@ -909,7 +970,7 @@ ul[aria-label="Channels"] div[class^="progressContainer_"] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Category headers: bold Pixel Operator, no flanking dashes.
+   §15  Category headers: bold Pixel Operator, no flanking dashes.
 
    The dashes are ClearVision's, not Discord's, and they are pseudo-elements --
    found by reading its stylesheet rather than guessing:
@@ -984,7 +1045,7 @@ ul[aria-label="Channels"] li[class*="containerDefault_"][class*="selected_"] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The size of the selected-channel box.
+   §16  The size of the selected-channel box.
 
    It spanned the sidebar edge to edge, which is what made a 42px row read as a
    slab. Inset here, and via a variable so it is one number to tune.
@@ -1014,7 +1075,7 @@ ul[aria-label="Channels"] li[class*="containerDefault_"] {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The BOT / Verified App tag.
+   §17  The BOT / Verified App tag.
 
    ClearVision fills it with the universal accent:
 
@@ -1050,7 +1111,7 @@ span[class*="botTag" i] * {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The Active Now popout: ONE battle box, not two stacked cards.
+   §18  The Active Now popout: ONE battle box, not two stacked cards.
 
    Discord builds it from two halves of a single card -- the capture shows
    popoutContentWrapper_ with radius "12px 12px 0 0" and interactionsContainer_ with
@@ -1098,7 +1159,7 @@ div[class^="interactionsContainer_"]::before {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The user profile popout: framed, NOT repainted.
+   §19  The user profile popout: framed, NOT repainted.
 
    Everything else this theme touches is Discord's own chrome. A profile card is not
    -- it carries that person's chosen banner gradient, avatar decoration and profile
@@ -1141,7 +1202,7 @@ div[role="dialog"] div[class^="inner_"] div[class^="footer_"] button {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Every button and tag is the same box.
+   §20  Every button and tag is the same box.
 
    ClearVision fills the primary/brand variants with the universal accent:
 
@@ -1209,7 +1270,7 @@ button[class*="lookOutlined_"]:not([class*="textButton_" i]):hover *,
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The full-profile modal gets the frame too.
+   §21  The full-profile modal gets the frame too.
 
    It missed the popout rule because its chain is different: inner_ -> outer_ ->
    root__24502 -> div[role="dialog"], where the popout nests inner_ inside a
@@ -1224,7 +1285,7 @@ div[role="dialog"] div[class^="root_"] > div[class^="outer_"] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Link-style controls are NOT buttons.
+   §22  Link-style controls are NOT buttons.
 
    "View Full Bio" came out boxed because Discord implements it as a <button> with a
    LINK look, so the button rules above claimed it. A frame around an inline text link
@@ -1269,7 +1330,7 @@ div[class*="viewFullBio_" i]:hover * {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
-   textButton_ is a text control, never a box.
+   §23  textButton_ is a text control, never a box.
 
    "View Full Bio" stayed boxed through two attempts at unboxing it, and the reason is
    in its own class list: button.textButton__7a01b.secondary__7a01b. The
@@ -1306,7 +1367,7 @@ button[class*="textButton_" i]:hover *,
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Context menus.
+   §24  Context menus.
 
    Reported as "transparent a bit", and the capture confirms it: the menu's own
    background is in defaultStyles, i.e. never set, so whatever is behind it shows
@@ -1350,7 +1411,7 @@ div[role="separator"] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The unread / jump bars above the message list.
+   §25  The unread / jump bars above the message list.
 
    Discord paints the unread one with the brand colour:
 
@@ -1402,7 +1463,7 @@ div[class*="barBase_"] button * {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Search boxes, and the popout a search opens.
+   §26  Search boxes, and the popout a search opens.
 
    The toolbar search measured as background oklab(0 0 0 / 0.121569) with a 1px border
    at 20% alpha -- 12% black over whatever is behind it, which is why it read as
@@ -1464,7 +1525,7 @@ div[role="listbox"] [role="option"][aria-selected="true"] * {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Popovers, and the message hover toolbar.
+   §27  Popovers, and the message hover toolbar.
 
    The toolbar that appears over a hovered message measured as 70% black with a 1px
    border at 12% alpha, an 8px radius and a drop shadow -- so it floated over the
@@ -1532,7 +1593,7 @@ div[class*="separator_"]:not([class*="header_" i]):not([class*="footer_" i]):not
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The Friends row carries no frame. Final word.
+   §28  The Friends row carries no frame. Final word.
 
    Its border has come back twice from different rules, because that row satisfies
    several of them at once: it is a list row, it carries a "selected_" class when
@@ -1583,7 +1644,7 @@ nav[aria-label="Private channels"] div[class*="searchBar_"] {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The Friends header bar keeps no line under it.
+   §29  The Friends header bar keeps no line under it.
 
    section[role="navigation"] measured as border-width 0 0 1px with the bottom edge
    taking --main-color, which is white -- so the bar drew a full-width rule directly
@@ -1637,7 +1698,7 @@ section[role="navigation"][class*="container_"]::before {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The channel-header popouts: Threads, Pinned Messages, Notification Settings.
+   §30  The channel-header popouts: Threads, Pinned Messages, Notification Settings.
 
    Reported unstyled -- Threads transparent with no frame, Pinned with no frame either.
    The previous attempt guessed at "threadsPopout_"/"threadBrowser_" and matched
@@ -1701,7 +1762,7 @@ div[class^="toolbar_"] div[aria-label]:hover svg[class^="icon_"] {
 
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Forum tag pills.
+   §31  Forum tag pills.
 
    Measured: 20px radius, a 1px border and a 30%-black fill -- and the border already
    reads YELLOW (srgb 1 1 0), which is --ut-save arriving through --main-color. That is
@@ -1742,7 +1803,7 @@ div[class^="tagsContainer_"] div[class^="pill_"][class*="selected_"] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   MESSAGES AS DIALOGUE BOXES.
+   §32  MESSAGES AS DIALOGUE BOXES.
 
    Undertale's dialogue box is a white rectangle, a portrait on the left, and every
    line led by an asterisk. Discord's message row is the closest thing in the app, so
@@ -1979,7 +2040,7 @@ span.mention:hover,
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The composer -- and this is where the battle box goes.
+   §33  The composer -- and this is where the battle box goes.
 
    §4 used to frame the whole message area, and that came off because the framed
    columns already bounded it. The composer is the shape the game actually uses: a
@@ -2045,7 +2106,7 @@ form[class^="form_"] [class*="placeholder_"] {
   font-family: var(--ut-font) !important;
 }
 /* ══════════════════════════════════════════════════════════════════════════
-   The expression pickers: emoji, GIF, sticker, and the Apps popup.
+   §34  The expression pickers: emoji, GIF, sticker, and the Apps popup.
 
    All four open from the composer and all four are the same shell in Discord's DOM --
    an expression-picker panel with a search box, a scroller and a category rail. They
@@ -2219,7 +2280,7 @@ div[class*="expressionPicker" i] [role="tab"][aria-selected="true"] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Inside the pickers and the Apps panel, from the captures.
+   §35  Inside the pickers and the Apps panel, from the captures.
 
    Every value below was measured, not guessed:
      emojiItem_fc7141          rgba(151,151,159,0.12) fill, radius 4px
@@ -2357,7 +2418,7 @@ form[class^="form_"] button:hover svg {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Toggles: a square box with a square knob.
+   §36  Toggles: a square box with a square knob.
 
    Three things in the capture shaped this rule.
 
@@ -2418,7 +2479,7 @@ div[class^="switchIndicator_"][class*="checked_"]:not(#\9):not(#\8)::after {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The Go Live / stream modal: footer, tab strip, and the soundboard.
+   §37  The Go Live / stream modal: footer, tab strip, and the soundboard.
 
    Three measured problems, all the same family this theme keeps hitting:
 
@@ -2488,6 +2549,25 @@ input:checked + div[class*="checkboxIndicator_"] {
   border-color: var(--ut-hover) !important;
   color: var(--ut-hover) !important;
 }
+/* The hover popout in a call (Apps, and anything else Discord floats there).
+
+   Captured: a popout_ layer whose direct child container_ paints at oklab(0.1457),
+   radius 16px, with the white-ring-as-box-shadow trick again
+   (rgba(255,255,255,0.08) 0 0 0 1px). Matched as "the popout layer's direct child",
+   which is structural and needs no hash -- the same shape that finally caught the
+   expression picker.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[id^="popout_"] > div[class^="container_"]:not(#\9) {
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+
 /* The soundboard button is hidden.
 
    The BUTTON's wrapper goes too, not just the button: attachedCaretButtonContainer_
@@ -2526,7 +2606,7 @@ div[class*="soundButton_"]:hover {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   BetterDiscord's modals.
+   §38  BetterDiscord's modals.
 
    Measured: a grey fill (oklab 0.26239), a 12px radius, a 1px border at 20% alpha,
    and a footer bar in a slightly different grey with its own bottom-rounded corners --
@@ -2573,7 +2653,7 @@ div[class*="soundButton_"]:hover {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   BetterDiscord's addon cards and their buttons.
+   §39  BetterDiscord's addon cards and their buttons.
 
    The gear / pencil / trash row shipped in Discord blue and red -- the last saturated
    colours anywhere in the settings modal, and the reason the plugin list read as a
@@ -2695,7 +2775,7 @@ button[aria-label="Changelog"]:hover .bd-button-content::after,
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   BetterDiscord's own toggles, same shape as Discord's.
+   §40  BetterDiscord's own toggles, same shape as Discord's.
 
    A different component entirely -- .bd-switch wrapping .bd-switch-body, checked
    marked by .bd-switch-checked on the wrapper, and the on-state ships as flat blue
@@ -2764,7 +2844,7 @@ button[aria-label="Changelog"]:hover .bd-button-content::after,
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   User Settings: the sidebar, the content, and the content header.
+   §41  User Settings: the sidebar, the content, and the content header.
 
    All three captures still computed gg sans and Discord's own greys, so this whole
    modal was stock chrome -- and it is the surface the user opens most often after the
@@ -2813,7 +2893,7 @@ div[class^="content_"] > div[class^="scroller_"] div[class*="card_"] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   The Server Boost (powerups) page.
+   §42  The Server Boost (powerups) page.
 
    Two panes, both captured: powerupsContainer_ scrolls the sections, and
    sidebarContainer_ is the 375px rail beside it, measured at a 30%-black fill with a
@@ -2861,7 +2941,7 @@ div[class^="sidebarContainer_"] * {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Modals (the Event modal is the one that was captured).
+   §43  Modals (the Event modal is the one that was captured).
 
    Shell is div[role="dialog"] > root_, header and content are siblings inside it, and
    both were unstyled: gg sans, Discord's own radius, and a header that this theme had
@@ -2897,7 +2977,7 @@ div[role="dialog"] > div[class^="root_"] * {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Forum post cards.
+   §44  Forum post cards.
 
    Measured: radius 12px, a 2px grey border (srgb 0.749) and a soft drop shadow, on a
    30%-black fill. Discord styles the card in two places -- mainCard_ sets the resting
@@ -2953,7 +3033,7 @@ div[role="dialog"] > div[class^="root_"] * {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   A voice channel is solid black -- wallpaper, chat and sidebar.
+   §45  A voice channel is solid black -- wallpaper, chat and sidebar.
 
    Video tiles, avatars and screen shares are CONTENT, and the wallpaper competes with
    every one of them. A call is the one screen where the art is noise.
@@ -3073,7 +3153,7 @@ div[class^="base_"]:has(div[class^="callContainer_"]) nav[aria-label="Private ch
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   Discord's shared popup shell: one frame around the whole thing.
+   §46  Discord's shared popup shell: one frame around the whole thing.
 
    The Quick Switcher and the Channel Topic popup captured as the SAME module --
    container__8a031 inside outerContainer__8a031 -- so this is not two popups, it is
