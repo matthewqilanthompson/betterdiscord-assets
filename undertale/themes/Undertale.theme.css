@@ -2075,7 +2075,7 @@ form[class^="form_"] [class*="placeholder_"] {
    invisible box.
 
    "The layer's direct child" needs no class at all, which is why it is used here. */
-div[class*="expressionPickerPositionLayer" i] > div,
+div[class*="expressionPickerPositionLayer" i]:not(#\9):not(#\8) > div,
 div[id="expression-picker"],
 div[class*="expressionPicker" i]:not([class*="Layer" i]):not([class*="position" i]),
 div[class*="emojiPicker" i],
@@ -2161,9 +2161,23 @@ div[class*="expressionPicker" i] *::after {
   box-shadow: none !important;
   outline: none !important;
 }
-/* The four exceptions, at higher specificity so they win outright. */
-div[class*="expressionPickerPositionLayer" i] > div {
+/* The four exceptions, at higher specificity so they win outright.
+
+   The panel needed the :not(#\9) lift for a reason worth keeping: the position layer's
+   class CONTAINS "expressionPicker", so the inner rules -- written as
+   div[class*="expressionPicker" i] div / * -- match the panel too, as a descendant of
+   the layer. Those rules and the panel rule were both (0,1,2), so the later one won and
+   the panel lost its frame AND its background. It was transparent and unframed for
+   three rounds because of that tie, not because the selector was wrong.
+
+   The negations make it (2,1,2), which nothing here can beat. */
+div[class*="expressionPickerPositionLayer" i]:not(#\9):not(#\8) > div {
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
+  background-image: none !important;
   border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 div[id="expression-picker"] div[class*="searchBar_"],
 div[class*="expressionPicker" i] div[class*="searchBar_"] {
