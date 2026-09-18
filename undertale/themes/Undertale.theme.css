@@ -2595,7 +2595,14 @@ div[class^="notice_"] div[class^="closeButton_"]:hover * {
    which is structural and needs no hash -- the same shape that finally caught the
    expression picker.
    ══════════════════════════════════════════════════════════════════════════ */
-div[id^="popout_"] > div[class^="container_"]:not(#\9) {
+/* ANY direct child of a popout layer, not just container_ ones.
+
+   The Apps hover popout was container__9fa5a, so the first version matched on that
+   class -- and Suggested Activities, which is the same kind of floating panel, uses a
+   different one and stayed rounded and unframed. The popout layer's direct child IS
+   the panel, whatever Discord calls it this build, so the class adds nothing but a way
+   to miss. */
+div[id^="popout_"] > div:not(#\9) {
   background: var(--ut-black-solid) !important;
   background-color: var(--ut-black-solid) !important;
   background-image: none !important;
