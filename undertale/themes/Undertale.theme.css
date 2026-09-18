@@ -2058,13 +2058,18 @@ form[class^="form_"] [class*="placeholder_"] {
    than another guess.)
 
    Opaque, because these float over the message list.
+
+   contentWrapper_:has(the picker) was in this list and is NOT any more: it is a
+   full-width container, so painting it black covered the entire message area with a
+   slab beside the picker. A :has() selector inherits the SIZE of the element it is
+   written on, not the size of the thing it is testing for -- the test says "this
+   contains a picker", the paint lands on the whole container.
    ══════════════════════════════════════════════════════════════════════════ */
 div[id^="expression-picker"],
 div[class*="expressionPicker" i],
 div[class*="emojiPicker" i],
 div[class*="gifPicker" i],
 div[class*="stickerPicker" i],
-div[class*="contentWrapper_"]:has(div[id^="expression-picker"]),
 div[role="dialog"][aria-label*="Apps" i],
 div[class*="applicationLauncher" i] {
   background: var(--ut-black-solid) !important;
