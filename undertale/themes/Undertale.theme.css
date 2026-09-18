@@ -1069,7 +1069,7 @@ span[class*="botTag" i] * {
    been looked at yet and a frame is not automatically right for all of them.
    ══════════════════════════════════════════════════════════════════════════ */
 div[role="dialog"][class^="popout_"]:has(div[class^="popoutContentWrapper_"]) {
-  background: var(--ut-black) !important;
+  background: var(--ut-black-solid) !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
   box-shadow: none !important;
@@ -1119,7 +1119,7 @@ div[class^="interactionsContainer_"]::before {
    ══════════════════════════════════════════════════════════════════════════ */
 div[role="dialog"] div[class^="outer_"]:has(div[class^="inner_"] div[class*="profileEffects_"]),
 div[role="dialog"] div[class^="outer_"]:has(> div[class^="inner_"] > div[class^="header_"]) {
-  background: var(--ut-black) !important;
+  background: var(--ut-black-solid) !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
   box-shadow: none !important;
@@ -1130,7 +1130,7 @@ div[role="dialog"] div[class^="outer_"]:has(> div[class^="inner_"] > div[class^=
    translucent profile colour composites onto black rather than onto the desktop. */
 div[role="dialog"] div[class^="outer_"] > div[class^="inner_"] {
   border-radius: var(--ut-radius) !important;
-  background-color: var(--ut-black) !important;
+  background-color: var(--ut-black-solid) !important;
 }
 
 /* Discord's own labels on the card take the theme font. Their name, their pronouns
@@ -1217,7 +1217,7 @@ button[class*="lookOutlined_"]:not([class*="textButton_" i]):hover *,
    panel in the theme with no frame -- which reads as unfinished rather than chosen.
    ══════════════════════════════════════════════════════════════════════════ */
 div[role="dialog"] div[class^="root_"] > div[class^="outer_"] {
-  background: var(--ut-black) !important;
+  background: var(--ut-black-solid) !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
   box-shadow: none !important;
@@ -1324,8 +1324,8 @@ button[class*="textButton_" i]:hover *,
 div[role="menu"],
 div[class*="menu_"]:has([role="menuitem"]),
 div[class*="menu_"]:has([role="separator"]) {
-  background: var(--ut-black) !important;
-  background-color: var(--ut-black) !important;
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
   background-image: none !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
@@ -1416,8 +1416,8 @@ div[class*="barBase_"] button * {
    already cover role="menu".
    ══════════════════════════════════════════════════════════════════════════ */
 div[class*="searchBar_"] {
-  background: var(--ut-black) !important;
-  background-color: var(--ut-black) !important;
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
   background-image: none !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
@@ -1445,8 +1445,8 @@ div[role="listbox"],
 div[class*="autocomplete_" i],
 div[class*="searchPopout_" i],
 div[class*="resultsGroup_" i] {
-  background: var(--ut-black) !important;
-  background-color: var(--ut-black) !important;
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
   background-image: none !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
@@ -1481,8 +1481,8 @@ div[role="listbox"] [role="option"][aria-selected="true"] * {
    ══════════════════════════════════════════════════════════════════════════ */
 div[class*="popover_"],
 div[aria-label="Message Actions"] div[class*="buttonsInner_"] {
-  background: var(--ut-black) !important;
-  background-color: var(--ut-black) !important;
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
   background-image: none !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
@@ -1656,8 +1656,8 @@ div[role="dialog"][aria-label*="Pinned" i],
 div[role="dialog"][aria-label*="Notification" i],
 div[class*="threadsPopout" i],
 div[class*="threadBrowser" i] {
-  background: var(--ut-black) !important;
-  background-color: var(--ut-black) !important;
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
   background-image: none !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
@@ -1875,8 +1875,8 @@ li[class*="messageListItem_"] div[id^="message-content-"] *:not([class*="emoji" 
    ══════════════════════════════════════════════════════════════════════════ */
 div[class^="reactionTooltip_"],
 div[class^="animatorBottom_"] > div[class^="reactionTooltip_"] {
-  background: var(--ut-black) !important;
-  background-color: var(--ut-black) !important;
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
   background-image: none !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
@@ -2409,8 +2409,8 @@ div[class^="sidebarContainer_"] * {
    ══════════════════════════════════════════════════════════════════════════ */
 div[role="dialog"] > div[class^="root_"],
 div[class^="layer_"] div[class^="focusLock_"] > div[class^="root_"] {
-  background: var(--ut-black) !important;
-  background-color: var(--ut-black) !important;
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
   background-image: none !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
@@ -2421,8 +2421,8 @@ div[class^="layer_"] div[class^="focusLock_"] > div[class^="root_"] {
 div[role="dialog"] > div[class^="root_"] > div[class*="header_"],
 div[role="dialog"] > div[class^="root_"] > div[class*="content_"],
 div[role="dialog"] > div[class^="root_"] > div[class*="footer_"] {
-  background: var(--ut-black) !important;
-  background-color: var(--ut-black) !important;
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
   background-image: none !important;
   border: none !important;
   border-radius: 0 !important;
@@ -2509,8 +2509,8 @@ div[role="dialog"] > div[class^="root_"] * {
    rather than by source order.
    ══════════════════════════════════════════════════════════════════════════ */
 div[class^="layer_"] div[class^="outerContainer_"] > div[class^="container_"] {
-  background: var(--ut-black) !important;
-  background-color: var(--ut-black) !important;
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
   background-image: none !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
