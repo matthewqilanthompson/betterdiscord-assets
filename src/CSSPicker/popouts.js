@@ -14,7 +14,31 @@
 
 /* Anything that behaves like a popup. Roles first: they survive Discord renaming its
    classes, which the class-based selectors here do not. */
+/* Panels that ARE popups even though they do not float in a layer container. The
+   expression pickers (emoji / GIF / sticker) and the Apps panel are rendered inside the
+   chat column, not in Discord's popout layer, so the containment test below rejects
+   them -- which is why a capture with one of them open came back with nothing. Matching
+   these by name is the exception that makes them reachable. */
+const ALWAYS_POPUP = [
+  '#expression-picker',
+  '[id^="expression-picker"]',
+  '[class*="expressionPicker" i]',
+  '[class*="emojiPicker" i]',
+  '[class*="gifPicker" i]',
+  '[class*="stickerPicker" i]',
+  '[class*="applicationLauncher" i]',
+  '[class*="appLauncher" i]',
+].join(", ");
+
 const POPOUT_SELECTORS = [
+  '#expression-picker',
+  '[id^="expression-picker"]',
+  '[class*="expressionPicker" i]',
+  '[class*="emojiPicker" i]',
+  '[class*="gifPicker" i]',
+  '[class*="stickerPicker" i]',
+  '[class*="applicationLauncher" i]',
+  '[class*="appLauncher" i]',
   '[id^="popout_"]',
   '[role="menu"]',
   '[role="listbox"]',
@@ -72,7 +96,9 @@ const describe = (el, depth) => {
 };
 
 /**
- * @param {number} maxNodes per popout, so one huge modal cannot produce an unreadable report
+ * @param {number} maxNodes per popout, so one huge modal cannot produce an unreadable
+ *        report. 200 rather than 120: the expression pickers are deep, and a truncated
+ *        capture of a picker cuts off exactly the rails and footers being styled.
  * @returns {{ at: string, count: number, popouts: object[] }}
  */
 /* Containers Discord floats real popups in. A node inside one of these is open; a node
@@ -99,6 +125,8 @@ const APP_CHROME =
  */
 const isFloating = (el) => {
   if (el.querySelector && el.querySelector(APP_CHROME)) return false;
+  /* Named panels are popups by definition, wherever Discord renders them. */
+  if (el.matches && el.matches(ALWAYS_POPUP)) return true;
   /* Containment in a real popup container is the ONLY signal. The position/z-index
      fallback that used to live here matched permanently-mounted absolute elements,
      which is the same false-positive class. A popup Discord renders outside these
@@ -106,7 +134,7 @@ const isFloating = (el) => {
   return !!(el.closest && el.closest(FLOATING_CONTAINERS));
 };
 
-export function captureOpenPopouts(maxNodes = 120) {
+export function captureOpenPopouts(maxNodes = 200) {
   const roots = new Set();
   for (const sel of POPOUT_SELECTORS) {
     for (const el of document.querySelectorAll(sel)) {
