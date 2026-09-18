@@ -2136,7 +2136,7 @@ form[class^="form_"] [class*="placeholder_"] {
    invisible box.
 
    "The layer's direct child" needs no class at all, which is why it is used here. */
-div[class*="expressionPickerPositionLayer" i]:not(#\9):not(#\8) > div,
+div[class*="expressionPickerPositionLayer" i]:not(#\9):not(#\8) > *,
 div[id="expression-picker"],
 div[class*="expressionPicker" i]:not([class*="Layer" i]):not([class*="position" i]),
 div[class*="emojiPicker" i],
@@ -2208,9 +2208,9 @@ div[role="dialog"][aria-label*="Apps" i] div:not([class*="sprite" i]) {
 
    Pseudo-elements included: a frame that survives a border reset is usually a ::before,
    and that has cost this theme five rounds once already. */
-div[class*="expressionPickerPositionLayer" i] > div *,
-div[class*="expressionPickerPositionLayer" i] > div *::before,
-div[class*="expressionPickerPositionLayer" i] > div *::after,
+div[class*="expressionPickerPositionLayer" i] > * *,
+div[class*="expressionPickerPositionLayer" i] > * *::before,
+div[class*="expressionPickerPositionLayer" i] > * *::after,
 div[id="expression-picker"] *,
 div[id="expression-picker"] *::before,
 div[id="expression-picker"] *::after,
@@ -2232,7 +2232,7 @@ div[class*="expressionPicker" i] *::after {
    three rounds because of that tie, not because the selector was wrong.
 
    The negations make it (2,1,2), which nothing here can beat. */
-div[class*="expressionPickerPositionLayer" i]:not(#\9):not(#\8) > div {
+div[class*="expressionPickerPositionLayer" i]:not(#\9):not(#\8) > * {
   background: var(--ut-black-solid) !important;
   background-color: var(--ut-black-solid) !important;
   background-image: none !important;
@@ -2358,6 +2358,42 @@ section[role="dialog"][aria-label="Application Launcher"] div[class*="wrapper__7
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: 0 !important;
   box-shadow: none !important;
+}
+
+/* The emoji picker's nested frames, and its yellow category bars.
+
+   Measured in one capture: THREE elements each drew the full 2px frame, nested --
+   animatorLeft_ (the popout panel, correct), emojiPicker_c0e32c inside it, and
+   emojiPickerListWrapper_c0e32c inside that. Two of them come from the picker rules
+   matching [class*="emojiPicker" i], which is true of the panel AND of its inner list.
+   Only the outermost keeps a frame.
+
+   The category bars measured color(srgb 1 1 0 / 0.8): an 80% YELLOW FILL carrying
+   WHITE text -- the "Frequently Used" and server rows. --main-color in a background
+   again, the tenth sighting. Yellow text on black instead, like every other header.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[id^="popout_"] div[class*="emojiPicker" i],
+div[id^="popout_"] div[class*="emojiPickerListWrapper" i],
+div[id^="popout_"] div[role="grid"],
+div[class*="expressionPickerPositionLayer" i] div[class*="emojiPicker" i],
+div[class*="expressionPickerPositionLayer" i] div[role="grid"] {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+div[class*="wrapper__14245"],
+div[class*="header_c656ac"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  color: var(--ut-hover) !important;
+  font-family: var(--ut-font) !important;
+}
+div[class*="wrapper__14245"] *,
+div[class*="header_c656ac"] * {
+  color: var(--ut-hover) !important;
+  background: transparent !important;
 }
 
 /* Sprites keep their paint, everywhere.
