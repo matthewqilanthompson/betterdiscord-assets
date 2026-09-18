@@ -2418,6 +2418,99 @@ div[class^="switchIndicator_"][class*="checked_"]:not(#\9):not(#\8)::after {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   The Go Live / stream modal: footer, tab strip, and the soundboard.
+
+   Three measured problems, all the same family this theme keeps hitting:
+
+   1. footer_a55fdc is a grey bar (oklab 0.26239) across the bottom of a black modal.
+   2. pillContainer_ is a 12%-grey trough, and the SELECTED tab is a solid YELLOW FILL
+      (srgb 1 1 0) with WHITE text on it -- the capture shows the fill and the colour
+      both, which is why "Devices" was unreadable in the screenshot. This is the filled
+      highlight the theme forbids, arriving through --main-color for the ninth time.
+   3. checkboxIndicator_ ships at radius 4 with a grey hairline.
+
+   Yellow marks the selected tab the way it marks everything else here: the edge and
+   the text, never the fill.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="footer_a55fdc"],
+div[class^="footerContent_"],
+div[class^="header_a55fdc"] {
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+div[class^="pillContainer_"],
+div[class*="segmentedControl_"] {
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+}
+div[class^="pillItem_"],
+div[class*="segmentedControlOption_"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  color: var(--ut-white) !important;
+}
+div[class^="pillItem_"][class*="Selected_"],
+div[class^="pillItem_"][aria-selected="true"],
+div[class*="segmentedControlOption_"][aria-selected="true"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: var(--ut-line) solid var(--ut-hover) !important;
+  color: var(--ut-hover) !important;
+}
+div[class^="pillItem_"][class*="Selected_"] *,
+div[class^="pillItem_"][aria-selected="true"] * {
+  color: var(--ut-hover) !important;
+  background: transparent !important;
+}
+div[class^="pillItem_"]:hover,
+div[class^="pillItem_"]:hover * {
+  background: transparent !important;
+  color: var(--ut-hover) !important;
+}
+/* Checkboxes: square, white, yellow when ticked. */
+div[class*="checkboxIndicator_"] {
+  background: var(--ut-black-solid) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+}
+div[class*="checkboxIndicator_"][class*="checked" i],
+input:checked + div[class*="checkboxIndicator_"] {
+  border-color: var(--ut-hover) !important;
+  color: var(--ut-hover) !important;
+}
+/* The soundboard: rows of buttons, each one a box. */
+ul[class^="soundRow_"] {
+  background: transparent !important;
+  gap: 8px !important;
+}
+li[class^="soundButtonWrapper_"] button,
+div[class*="soundButton_"] {
+  background: var(--ut-black-solid) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+li[class^="soundButtonWrapper_"] button:hover,
+li[class^="soundButtonWrapper_"] button:hover *,
+div[class*="soundButton_"]:hover {
+  background: var(--ut-black-solid) !important;
+  border-color: var(--ut-hover) !important;
+  color: var(--ut-hover) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    BetterDiscord's modals.
 
    Measured: a grey fill (oklab 0.26239), a 12px radius, a 1px border at 20% alpha,
