@@ -2488,6 +2488,21 @@ input:checked + div[class*="checkboxIndicator_"] {
   border-color: var(--ut-hover) !important;
   color: var(--ut-hover) !important;
 }
+/* The soundboard button is hidden.
+
+   The BUTTON's wrapper goes too, not just the button: attachedCaretButtonContainer_
+   pairs a control with its caret, so hiding the button alone would leave a stray caret
+   in the bar. Scoped with :has() to the container that holds THIS button -- the same
+   class wraps the microphone and camera, and hiding those would be a bad day.
+
+   The soundboard's own styling below stays. It is inert while the button is hidden,
+   and it is what makes the board look right if this line is ever removed.
+   ══════════════════════════════════════════════════════════════════════════ */
+button[aria-label="Open Soundboard"],
+div[class^="attachedCaretButtonContainer_"]:has(button[aria-label="Open Soundboard"]) {
+  display: none !important;
+}
+
 /* The soundboard: rows of buttons, each one a box. */
 ul[class^="soundRow_"] {
   background: transparent !important;
