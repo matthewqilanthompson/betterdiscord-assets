@@ -1902,19 +1902,29 @@ span[class*="wrapper_"][role="button"],
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
-  border: none !important;
+  /* Boxed, not just coloured. Yellow alone did not separate a mention from the rest of
+     a line -- the theme already spends yellow on hovered rows, unread channels and
+     speaker names, so by itself it is not a distinct signal here. A 1px box is, and it
+     is the lighter weight on purpose: 2px inside a sentence sits as heavy as the
+     dialogue box around it. */
+  border: 1px solid var(--ut-hover) !important;
   border-radius: 0 !important;
   color: var(--ut-hover) !important;
   font-family: var(--ut-font) !important;
-  padding: 0 !important;
+  padding: 0 4px !important;
 }
+/* Hover flips the whole mark instead of underlining it. An underline is a weak change
+   at this size -- one or two pixels at the bottom of a word, in a theme that already
+   underlines links -- so the box and the text both change colour, which reads at a
+   glance and stays consistent with how every other control marks itself here. */
 span.mention:hover,
 .mention:hover,
 .interactive:hover {
   background: transparent !important;
   background-color: transparent !important;
+  border-color: var(--ut-white) !important;
   color: var(--ut-white) !important;
-  text-decoration: underline !important;
+  text-decoration: none !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
