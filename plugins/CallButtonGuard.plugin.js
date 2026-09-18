@@ -180,14 +180,28 @@ module.exports = class CallButtonGuard {
   }
 
   _ensureButton() {
-    // Only inject in toolbars that ALREADY contain a Start Voice Call
-    // button. That's the unambiguous DM / group-DM signal — text
-    // channels don't have those buttons, so we won't pollute them.
-    const toolbars = document.querySelectorAll(
-      'section[aria-label="Channel header"] [class*="toolbar_"]'
-    );
+    // Only inject in toolbars that ALREADY contain a call button. That is the
+    // unambiguous DM / group-DM signal -- text channels do not have those buttons,
+    // so we will not pollute them.
+    //
+    // TWO THINGS WERE WRONG HERE, and they had the same root: the JS was stricter
+    // than the CSS it drives.
+    //
+    //   1. The scope was section[aria-label="Channel header"]. A DM's header is not
+    //      always labelled that -- Discord labels some headers with the conversation
+    //      instead -- so the toggle never appeared in the surfaces this plugin exists
+    //      for, while the CSS above happily hid the buttons. That combination is the
+    //      worst one: calls hidden, and no way to bring them back.
+    //   2. The match was the exact string "Start Voice Call", while the CSS matches
+    //      [aria-label*="oice Call" i]. Any rename, or a video-only header, missed.
+    //
+    // Both now use the SAME loose test as the stylesheet, over every toolbar on the
+    // page. The guard is "does this toolbar have a call button", which is the real
+    // condition -- not where the toolbar happens to live.
+    const CALL_BTN = '[aria-label*="oice Call" i], [aria-label*="ideo Call" i]';
+    const toolbars = document.querySelectorAll('[class*="toolbar_"]');
     for (const toolbar of toolbars) {
-      if (!toolbar.querySelector('[aria-label="Start Voice Call"]')) continue;
+      if (!toolbar.querySelector(CALL_BTN)) continue;
       if (toolbar.querySelector("#" + BUTTON_ID)) continue;
 
       const btn = document.createElement("button");

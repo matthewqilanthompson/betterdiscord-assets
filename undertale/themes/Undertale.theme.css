@@ -2549,6 +2549,41 @@ input:checked + div[class*="checkboxIndicator_"] {
   border-color: var(--ut-hover) !important;
   color: var(--ut-hover) !important;
 }
+/* CallButtonGuard's toggle: the theme's palette, not the plugin's.
+
+   The plugin ships Solo Leveling violet for "calls shown" and a soft red for "calls
+   hidden" -- it was written for that theme. Here the state reads the way state reads
+   everywhere else in this one: white when the call buttons are visible, YELLOW when
+   they are hidden, because yellow is what this theme uses for "this is on".
+
+   Red is not used for the hidden state on purpose. Red is the SOUL, spent on mentions
+   and on genuinely destructive actions, and a toggle that hides two buttons is neither.
+   ══════════════════════════════════════════════════════════════════════════ */
+#cbg-toggle-button {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+#cbg-toggle-button:hover,
+#cbg-toggle-button:hover svg {
+  background: transparent !important;
+  color: var(--ut-hover) !important;
+}
+#cbg-toggle-button[data-collapsed="true"],
+#cbg-toggle-button[data-collapsed="true"] svg {
+  color: var(--ut-hover) !important;
+}
+#cbg-toggle-button[data-collapsed="true"]:hover,
+#cbg-toggle-button[data-collapsed="true"]:hover svg {
+  background: transparent !important;
+  color: var(--ut-white) !important;
+}
+#cbg-toggle-button svg {
+  fill: currentcolor !important;
+}
+
 /* The notice bar across the top (update ready, reconnecting, and friends).
 
    Measured GREEN: rgb(0,43,14) fill with rgb(153,224,173) text, border and button --
