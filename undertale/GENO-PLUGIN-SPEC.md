@@ -128,16 +128,54 @@ over the same UI. Decide before building, not after.
 **The theme is already Undertale.** `Undertale.theme.css` is live and the Solo Leveling theme is
 archived — so the visual layer has already moved. The plugins are the part that has not.
 
+## RULING: trim the army out entirely
+
+User's instruction, 2026-09-18: **the shadow-army layer is cut, not converted.** Geno does not
+summon, station or command anything. He does not extract shadows from people -- that concept is
+both wrong for him and wrong for a peaceful setting.
+
+So the copies keep the underlying FUNCTION and drop the entities that carry it:
+
+| Plugin | Keep | Cut |
+|---|---|---|
+| **ShadowStep** | bookmark a channel, jump to it | nothing to cut |
+| **ShadowExchange** | waypoints, jump to them | "station a shadow at a location" -- the waypoint is just a waypoint |
+| **ShadowSenses** | watch a user, be told when they speak | deploying soldiers as entities that do the watching |
+
+**`ShadowArmy` itself is not eligible at all.** It IS the army system; there is no function
+underneath to keep.
+
+### Measured trim cost, 2026-09-18 -- this reorders the build
+
+Counted by grepping each plugin for army/soldier/extraction references:
+
+| Plugin | Size | Army wiring | Copy difficulty |
+|---|---|---|---|
+| **ShadowStep** | 5 files, 1,377 lines | **none found** | Cleanest in the suite. Straight copy and re-skin. |
+| **ShadowExchange** | 5 files, 2,118 lines | `index.js` only | Shallow. One file to unpick. |
+| **ShadowSenses** | 12 files, **8,668 lines** | 4+ files incl. a dedicated `deployment-manager.js` | **Deep.** Removing the army here is a rewrite, not a trim. |
+
+The last row is the useful finding: ShadowSenses looked like the most interesting mapping
+("what happened while you were gone") and it is also, by a wide margin, the most expensive. Its
+deployment model is not a skin over the watch-and-notify function -- it is most of the plugin.
+
+**Consequence:** if "what happened while you were gone" is wanted, consider writing it fresh
+against the same Flux dispatches rather than carving 8,668 lines down. A watch-and-notify plugin
+built for Geno directly is very likely smaller than ShadowSenses minus its army.
+
 ## Recommended build order
 
 1. **MessageEditHistory → the one who keeps things.** Smallest change, best thematic fit, already
    works. Mostly re-skin and re-word.
 2. **RulersAuthority → blue magic.** Mechanic is already telekinesis; change the verbs and the
    colour. "Heavy" rather than "crushed".
-3. **ShadowStep + ShadowExchange → shortcuts**, merged into one.
-4. **ItemVault → the saved state**, as the store behind anything that restores.
-5. **ShadowSenses → what happened while you were gone.** Most work, because the framing shift from
-   surveillance to memory is real rather than cosmetic.
+3. **ShadowStep → shortcuts.** Confirmed clean: no army wiring at all, 1,377 lines. The
+   cheapest real copy in the suite; do it before ShadowExchange, not alongside it.
+4. **ShadowExchange → merge into the same shortcuts plugin.** Shallow trim, one file.
+5. **ItemVault → the saved state**, as the store behind anything that restores.
+6. **"What happened while you were gone"** -- and per the measurement above, probably NOT by
+   copying ShadowSenses. Write it against the same Flux dispatches instead and leave those 8,668
+   lines alone.
 
 Stop after any step; each stands alone.
 
