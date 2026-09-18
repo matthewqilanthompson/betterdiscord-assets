@@ -1742,14 +1742,17 @@ div[class^="tagsContainer_"] div[class^="pill_"][class*="selected_"] {
    because those are not elements and do not exist until layout runs. Per-line
    asterisks are a plugin, and they are in PLUGIN-BACKLOG.md with the reason.
 
-   The message panel is cleared to transparent here so exactly ONE translucent layer
-   sits over the wallpaper. Every stacked layer multiplies: three at 0.78 is 0.99, and
-   the art disappears while every individual rule still looks correct.
+   The message panel is cleared to transparent ENTIRELY -- chatContent_ included -- so
+   the wallpaper sits directly behind the boxes with nothing tinting it. Every stacked
+   translucent layer multiplies: three at 0.78 is 0.99, the art vanishes, and each rule
+   still looks correct on its own. The frames carry the readability here, not a fill.
    ══════════════════════════════════════════════════════════════════════════ */
 div[class^="messagesWrapper_"],
 ol[class^="scrollerInner_"],
 div[class^="scrollerContent_"],
-main[class^="chatContent_"] > div[class*="scroller_"] {
+main[class^="chatContent_"],
+main[class^="chatContent_"] > div[class*="scroller_"],
+div[class^="chatContent_"] {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
@@ -1779,23 +1782,23 @@ li[class*="messageListItem_"] > div[role="article"] {
   border-right: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
   box-shadow: none !important;
-  margin: 0 16px !important;
-  padding: 4px 16px 4px 78px !important;
+  margin: 0 24px !important;
+  padding: 6px 20px 6px 82px !important;
   min-height: 0 !important;
 }
 /* Opens the box. */
 li[class*="messageListItem_"] > div[class*="groupStart_"] {
   border-top: var(--ut-line) solid var(--ut-white) !important;
-  margin-top: 16px !important;
-  padding-top: 12px !important;
+  margin-top: 20px !important;
+  padding-top: 14px !important;
 }
 /* Closes it: next row starts a new speaker, is a date divider, or there is no next row. */
 li[class*="messageListItem_"]:has(+ li[class*="messageListItem_"] > div[class*="groupStart_"]) > div[role="article"],
 li[class*="messageListItem_"]:has(+ li[class*="divider_"]) > div[role="article"],
 li[class*="messageListItem_"]:last-child > div[role="article"] {
   border-bottom: var(--ut-line) solid var(--ut-white) !important;
-  margin-bottom: 16px !important;
-  padding-bottom: 12px !important;
+  margin-bottom: 20px !important;
+  padding-bottom: 14px !important;
 }
 /* Hovering a box does not fill it; the text goes yellow, as everywhere else. */
 li[class*="messageListItem_"] > div[role="article"]:hover {
