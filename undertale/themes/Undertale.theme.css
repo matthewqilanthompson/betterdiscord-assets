@@ -1851,6 +1851,46 @@ li[class*="messageListItem_"] div[id^="message-content-"] *:not([class*="emoji" 
   font-family: var(--ut-font) !important;
 }
 
+/* The reaction tooltip.
+
+   Measured at 70% black with a 4px radius and TWO shadows stacked -- a 1px white ring
+   (rgba(255,255,255,0.08) 0 0 0 1px) plus a drop shadow. The ring is a border drawn as
+   a shadow, which is why resetting borders alone never squares one of these: the edge
+   is not in the border property at all. Reset box-shadow or the faint ring survives
+   under the new frame.
+
+   Also matched on animatorBottom_, the wrapper Discord animates, so the frame does not
+   sit inside a rounded parent that clips its corners.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="reactionTooltip_"],
+div[class^="animatorBottom_"] > div[class^="reactionTooltip_"] {
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: var(--ut-radius) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+  overflow: visible !important;
+}
+div[class^="reactionTooltip_"] *,
+div[class^="reactionTooltip_"] div[role="button"] {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+/* The names inside read as a list, so a hovered one marks itself like every row. */
+div[class^="reactionTooltip_"] div[role="button"]:hover,
+div[class^="reactionTooltip_"] div[role="button"]:hover * {
+  background: transparent !important;
+  color: var(--ut-hover) !important;
+}
+
 /* The speaker's name: yellow, like a label.
 
    Role colours were the only non-palette colour left in the message area, and they sit
