@@ -689,6 +689,29 @@ module.exports = class CSSPicker {
     this.launcher.removeEventListener("click", this._launcherClickHandler);
     this.launcher.addEventListener("click", this._launcherClickHandler);
 
+    /* A second, visible button for panel capture.
+
+       The hotkey for this exists (hold Shift) and kept not being hit -- every attempt
+       came back as a pick-mode capture of the button that OPENS the panel, which is what
+       happens when the key fires with nothing open. A key you have to press at the right
+       moment, with the right modifier, while a panel is open, is three chances to miss.
+       A button you click is none: click it, then open the panel, and the snapshot takes
+       itself. */
+    this._captureBtn = this._captureBtn || document.createElement("button");
+    this._captureBtn.id = "css-picker-capture";
+    this._captureBtn.textContent = "CAPTURE PANEL (4s)";
+    this._captureBtn.style.cssText = [
+      "position:fixed", "right:12px", "bottom:52px", "z-index:100000",
+      "padding:6px 10px", "background:#000", "color:#fff",
+      "border:2px solid #fff", "border-radius:0",
+      "font:700 11px/1.2 monospace", "cursor:pointer",
+    ].join(";");
+    this._captureBtnHandler =
+      this._captureBtnHandler || ((e) => { e.preventDefault(); e.stopPropagation(); this._armCapture(); });
+    this._captureBtn.removeEventListener("click", this._captureBtnHandler);
+    this._captureBtn.addEventListener("click", this._captureBtnHandler);
+    document.body.appendChild(this._captureBtn);
+
     document.body.appendChild(this.launcher);
     this.updateLauncherState();
   }
@@ -699,6 +722,11 @@ module.exports = class CSSPicker {
         this._launcherClickHandler &&
         this.launcher.removeEventListener("click", this._launcherClickHandler);
       this.launcher?.remove();
+      this._captureBtn &&
+        this._captureBtnHandler &&
+        this._captureBtn.removeEventListener("click", this._captureBtnHandler);
+      this._captureBtn?.remove();
+      this._captureBtn = null;
     } catch (e) {
       // ignore
     }
