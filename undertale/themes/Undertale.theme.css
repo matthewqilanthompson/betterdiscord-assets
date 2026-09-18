@@ -2065,8 +2065,8 @@ form[class^="form_"] [class*="placeholder_"] {
    written on, not the size of the thing it is testing for -- the test says "this
    contains a picker", the paint lands on the whole container.
    ══════════════════════════════════════════════════════════════════════════ */
-div[id^="expression-picker"],
-div[class*="expressionPicker" i],
+div[id="expression-picker"],
+div[class*="expressionPicker" i]:not([class*="Layer" i]):not([class*="position" i]),
 div[class*="emojiPicker" i],
 div[class*="gifPicker" i],
 div[class*="stickerPicker" i],
@@ -2082,6 +2082,31 @@ div[class*="applicationLauncher" i] {
   color: var(--ut-white) !important;
   font-family: var(--ut-font) !important;
 }
+/* NOTHING nested gets a second frame.
+
+   div[id^="expression-picker"] matched BOTH the picker and #expression-picker-tab-panel
+   inside it, so the panel drew a box within the box -- the prefix looked specific and
+   was not. The outer rule now matches the exact id, and anything expression-picker
+   nested inside another is stripped outright.
+
+   The positioning layer is excluded from the paint for the same reason the
+   contentWrapper was: it is a full-window element, so a background on it is a slab
+   across the whole app, not a panel. */
+div[id^="expression-picker"] div[id^="expression-picker"],
+div[id="expression-picker-tab-panel"],
+div[class*="expressionPicker" i] div[class*="expressionPicker" i] {
+  border: none !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+div[class*="expressionPicker" i][class*="Layer" i],
+div[class*="expressionPicker" i][class*="position" i] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
 /* One frame: the panels, rails and headers inside own no box of their own. */
 div[id^="expression-picker"] div:not([class*="sprite" i]),
 div[class*="expressionPicker" i] div:not([class*="sprite" i]),
