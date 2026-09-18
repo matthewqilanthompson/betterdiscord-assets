@@ -2117,6 +2117,40 @@ div[role="dialog"][aria-label*="Apps" i] div:not([class*="sprite" i]) {
   box-shadow: none !important;
   font-family: var(--ut-font) !important;
 }
+/* ONE frame, enforced rather than negotiated.
+
+   Three rounds of excluding individual containers did not converge -- the picker is
+   built from many nested wrappers, several of which pick up frames from rules written
+   for menus, panels and selected states elsewhere in this theme. Chasing them one at a
+   time is how the divider hunt went.
+
+   So every border inside the picker is stripped, and exactly three things are allowed
+   to draw one back: the picker itself, the search field, and the selected tab. Anything
+   else that wants a box inside here has to be added deliberately, below this rule.
+
+   Pseudo-elements included: a frame that survives a border reset is usually a ::before,
+   and that has cost this theme five rounds once already. */
+div[id="expression-picker"] *,
+div[id="expression-picker"] *::before,
+div[id="expression-picker"] *::after,
+div[class*="expressionPicker" i] *,
+div[class*="expressionPicker" i] *::before,
+div[class*="expressionPicker" i] *::after {
+  border: none !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+/* The three exceptions, at higher specificity so they win outright. */
+div[id="expression-picker"] div[class*="searchBar_"],
+div[class*="expressionPicker" i] div[class*="searchBar_"] {
+  border: var(--ut-line) solid var(--ut-white) !important;
+}
+div[id="expression-picker"] [role="tab"][aria-selected="true"],
+div[class*="expressionPicker" i] [role="tab"][aria-selected="true"] {
+  border: var(--ut-line) solid var(--ut-hover) !important;
+}
+
 /* Headers and category labels read like the channel categories do. */
 div[id^="expression-picker"] h2,
 div[id^="expression-picker"] h3,
@@ -2143,7 +2177,6 @@ div[role="dialog"][aria-label*="Apps" i] [role="button"]:hover * {
 div[id^="expression-picker"] [role="tab"][aria-selected="true"],
 div[class*="expressionPicker" i] [role="tab"][aria-selected="true"] {
   background: transparent !important;
-  border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: 0 !important;
   color: var(--ut-hover) !important;
 }
