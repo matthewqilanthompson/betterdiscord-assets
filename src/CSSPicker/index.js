@@ -339,6 +339,7 @@ module.exports = class CSSPicker {
     this._captureInProgress = false;
     /* An armed capture must not fire after the plugin is disabled. */
     if (this._armTimer) { clearTimeout(this._armTimer); this._armTimer = null; }
+    if (this._armTick) { clearInterval(this._armTick); this._armTick = null; }
   }
 
   getSettingsPanel() {
@@ -460,7 +461,35 @@ module.exports = class CSSPicker {
   /** Wait, then capture whatever is open. Lets the user open a panel after pressing. */
   _armCapture(delayMs = 4000) {
     if (this._armTimer) clearTimeout(this._armTimer);
+    if (this._armTick) clearInterval(this._armTick);
     const seconds = Math.round(delayMs / 1000);
+
+    /* The button IS the indicator. A toast was the only feedback before, and a toast is
+       easy to miss and may be covered by the very panel being opened -- there was no way
+       to tell an armed capture from a dead button. It now counts down in place, in the
+       theme's yellow, so the state is visible exactly where the click happened. */
+    const btn = this._captureBtn;
+    const restore = () => {
+      if (this._armTick) { clearInterval(this._armTick); this._armTick = null; }
+      if (btn) {
+        btn.textContent = "CAPTURE PANEL (4s)";
+        btn.style.background = "#000";
+        btn.style.color = "#fff";
+        btn.style.borderColor = "#fff";
+      }
+    };
+    if (btn) {
+      let left = seconds;
+      btn.textContent = `OPEN IT NOW -- ${left}`;
+      btn.style.background = "#ffff00";
+      btn.style.color = "#000";
+      btn.style.borderColor = "#ffff00";
+      this._armTick = setInterval(() => {
+        left -= 1;
+        if (left > 0) btn.textContent = `OPEN IT NOW -- ${left}`;
+      }, 1000);
+    }
+
     this._toast(
       `Capturing in ${seconds}s -- open the panel now, and leave it open.`,
       "info",
@@ -468,10 +497,18 @@ module.exports = class CSSPicker {
     );
     this._armTimer = setTimeout(() => {
       this._armTimer = null;
+      restore();
       const got = typeof this._capturePopouts === "function" && this._capturePopouts();
+      if (btn) {
+        /* Say what happened ON THE BUTTON too: the capture toast can land behind the
+           panel that was just opened. */
+        btn.textContent = got ? "CAPTURED -- PASTE IT" : "NOTHING WAS OPEN";
+        btn.style.borderColor = got ? "#ffff00" : "#ff0000";
+        setTimeout(() => restore(), 3000);
+      }
       if (!got) {
         this._toast(
-          "Nothing open to capture. Open the panel, then press the hotkey with Shift.",
+          "Nothing open to capture. Click CAPTURE PANEL, then open the panel.",
           "error"
         );
       }
