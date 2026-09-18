@@ -1,0 +1,49 @@
+/* The theme draws its dialogue box from DISCORD's grouping (`groupStart_`), which ends a
+   run after ~7 minutes even when the speaker has not changed. This plugin stamps the real
+   author boundaries, and these rules re-cut the box on those instead.
+
+   They live in the PLUGIN, not the theme, on purpose: turn the plugin off and the theme
+   falls straight back to Discord's grouping with nothing to undo. */
+
+/* A row the plugin knows is a continuation loses the top edge and the gap the theme gave
+   it, so the run reads as one box. */
+li[class*="messageListItem_"][data-ut-group-start="false"] > div[role="article"] {
+  border-top: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 2px !important;
+}
+
+/* ...and it loses the repeated avatar/name header, which is what made it look like a new
+   speaker in the first place. */
+li[class*="messageListItem_"][data-ut-group-start="false"] > div[role="article"] [class*="contents_"] > [class*="header_"] {
+  display: none !important;
+}
+
+/* A row the plugin knows ENDS a run closes the box, even if Discord thought the group
+   continued. */
+li[class*="messageListItem_"][data-ut-group-end="true"] > div[role="article"] {
+  border-bottom: var(--ut-line, 2px) solid var(--ut-white, #ffffff) !important;
+  margin-bottom: 8px !important;
+}
+li[class*="messageListItem_"][data-ut-group-end="false"] > div[role="article"] {
+  border-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* While a message is typing, the caret. Undertale has no blinking cursor, but the box is
+   visibly "still going", and this reads at a glance without adding a new colour. */
+div[id^="message-content-"][data-ut-typing]::after {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: var(--ut-white, #ffffff);
+  animation: ut-caret 0.53s steps(1) infinite;
+}
+@keyframes ut-caret { 50% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  div[id^="message-content-"][data-ut-typing]::after { animation: none; }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "UndertaleDialogue",
+  "description": "Messages type themselves out like Undertale dialogue, and consecutive messages from one speaker share a single box regardless of the time gap. Pairs with the Undertale theme.",
+  "version": "1.0.0",
+  "author": "Undertale Theme Dev"
+}

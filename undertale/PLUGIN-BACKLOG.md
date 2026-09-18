@@ -8,9 +8,16 @@ not blocked.
 
 Parked 2026-09-17 by request, after the theme pass was finished.
 
+**SHIPPED 2026-09-17**, later the same day:
+- Item 1, pixelated avatars -> `src/UndertalePixelAvatars/` (32px, user's choice).
+- The typing animation and the author-grouping item -> `src/UndertaleDialogue/`, one
+  plugin because both wanted the same MutationObserver and the same author id.
+
+Still parked: **item 2 (alert rail glow)** and **item 3 (Home icon sprite)**.
+
 ---
 
-## 1. Pixelated avatars
+## 1. Pixelated avatars -- SHIPPED (`src/UndertalePixelAvatars/`)
 
 **Why a plugin:** `image-rendering: pixelated` only applies when an image is scaled
 **up**. Discord downscales avatars (128px asset into a 40px box), so CSS alone changes
@@ -174,9 +181,20 @@ Also worth lifting from that theme when channels are revisited:
 ul[aria-label="Channels"] li[class*="containerDefault_"] { margin-bottom: 8px !important; }
 ```
 
-## Undertale typing animation for messages
+## Undertale typing animation for messages -- SHIPPED (`src/UndertaleDialogue/`)
 
-**Status:** not started. Requested 2026-09-17, alongside the dialogue-box message styling.
+**Status:** shipped 2026-09-17. The findings below are kept because they explain WHY the
+implementation looks the way it does.
+
+**One correction to the plan in step 2 below, found while building.** "Take `textContent`,
+blank it, write it back" would have destroyed work the theme had already shipped: Discord
+message content is a TREE, so that flattens boxed @mentions into plain text and deletes
+custom emoji `<img>` outright. The plugin walks TEXT NODES instead and reveals characters
+across the tree with every element left in place (`reveal-plan.js` + `typewriter.js`).
+
+**Three rules added beyond the plan**, all from the game: click a message to finish it
+early (Undertale's Z-to-skip), skip messages over 280 characters, and never type your own
+messages -- the game never types the player's dialogue either.
 
 **What is wanted:** messages type themselves out character by character, the way Sans's and
 Papyrus's dialogue does in `sans-companion` / `pixel-home`.
@@ -216,9 +234,14 @@ settles the cheapest version:
   arrived while you were in another app is the failure mode this decision avoids.
 
 
-## Group messages by author regardless of time gap
+## Group messages by author regardless of time gap -- SHIPPED (`src/UndertaleDialogue/`)
 
-**Status:** not started. Requested 2026-09-17, after the CSS grouping shipped.
+**Status:** shipped 2026-09-17, in the same plugin as the typing animation, exactly as the
+closing note below predicted.
+
+**The CSS lives in the PLUGIN, not the theme** (`src/UndertaleDialogue/styles.css`). Turning
+the plugin off falls straight back to Discord's own grouping with nothing to undo in the
+theme -- which would not be true if the theme's box rules had been rewritten in place.
 
 **What is wanted:** every consecutive run from the same person is ONE dialogue box, even
 when the messages are far apart in time.

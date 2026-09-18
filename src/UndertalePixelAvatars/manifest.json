@@ -1,0 +1,6 @@
+{
+  "name": "UndertalePixelAvatars",
+  "description": "Serves avatars from Discord's small CDN sizes and upscales them with nearest-neighbour, so they read as pixel art instead of blurry thumbnails. Pairs with the Undertale theme.",
+  "version": "1.0.0",
+  "author": "Undertale Theme Dev"
+}

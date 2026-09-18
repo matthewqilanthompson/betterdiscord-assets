@@ -1,0 +1,7 @@
+/* Nearest-neighbour upscale. This is the half that CSS CAN do -- and it only works
+   because the plugin has already pointed the src at a genuinely small asset. The same
+   property does nothing on an unmodified Discord avatar, which is downscaled. */
+img[data-ut-pixel] {
+  image-rendering: pixelated !important;
+  image-rendering: crisp-edges !important; /* older WebKit spelling, harmless fallback */
+}
