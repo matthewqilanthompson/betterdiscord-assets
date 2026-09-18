@@ -28,3 +28,26 @@ function computeGroups(rows) {
 }
 
 module.exports = { computeGroups };
+
+/**
+ * Which rows should MERGE INTO THE ROW ABOVE them.
+ *
+ * This is the only thing the plugin acts on, and the shape matters: merging is purely
+ * SUBTRACTIVE -- it removes the edges between two rows the theme already drew. It never
+ * asks for an edge to be added.
+ *
+ * That makes the whole feature fail safe. If the author cannot be read (Discord changes a
+ * class, a default avatar carries no id, the row is a system message), nothing merges and
+ * the theme's own boxes are left exactly as they were. The first version stamped
+ * start/end on every row and told the CSS to draw the closing edge itself, so a failed
+ * author lookup silently re-cut every box in the channel -- including old conversations
+ * that were rendering correctly before the plugin loaded.
+ *
+ * @param {Array<{id: string, authorId: string|null}>} rows
+ * @returns {boolean[]} true where the row continues the speaker above it
+ */
+function mergesUp(rows) {
+  return computeGroups(rows).map((g) => !g.start);
+}
+
+module.exports.mergesUp = mergesUp;

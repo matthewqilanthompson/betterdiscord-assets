@@ -148,3 +148,24 @@ test("a default avatar has no user id, and that must read as unknown", () => {
   assert.equal(authorIdFromAvatarSrc(""), null);
   assert.equal(authorIdFromAvatarSrc(null), null);
 });
+
+// ── merging is subtractive, and that is what makes it fail safe ────────────────
+
+const { mergesUp } = require("../src/UndertaleDialogue/grouping.js");
+
+test("a continuation merges into the row above it", () => {
+  const rows = [{ id: "a", authorId: "1" }, { id: "b", authorId: "1" }, { id: "c", authorId: "2" }];
+  assert.deepEqual(mergesUp(rows), [false, true, false]);
+});
+
+test("when the author cannot be read, NOTHING merges and the theme is left alone", () => {
+  // The failure that shipped in v1.0.0: a failed author lookup re-cut every box in the
+  // channel, including conversations that were rendering correctly before the plugin
+  // loaded. Nothing to merge must mean nothing to change.
+  const rows = [{ id: "a", authorId: null }, { id: "b", authorId: null }, { id: "c", authorId: null }];
+  assert.deepEqual(mergesUp(rows), [false, false, false]);
+});
+
+test("the first row never merges upward — there is nothing above it", () => {
+  assert.deepEqual(mergesUp([{ id: "a", authorId: "1" }]), [false]);
+});

@@ -2,7 +2,7 @@ import STYLES from "./styles.css";
 const { pixelAvatarUrl } = require("./avatar-url");
 const { loadSettings, saveSettings } = require("../shared/settings");
 
-const DEFAULTS = { size: 32, debug: false };
+const DEFAULTS = { size: 16, debug: false };
 const STYLE_ID = "UndertalePixelAvatars";
 
 /**

@@ -1,31 +1,35 @@
 /* The theme draws its dialogue box from DISCORD's grouping (`groupStart_`), which ends a
    run after ~7 minutes even when the speaker has not changed. This plugin stamps the real
-   author boundaries, and these rules re-cut the box on those instead.
+   author boundaries and these rules close the seam.
+
+   EVERY RULE HERE IS SUBTRACTIVE. They remove edges the theme already drew between two
+   rows; none of them asks for an edge to be added. That is what makes the feature fail
+   safe -- when the author cannot be read, no row is stamped, no rule matches, and the
+   theme's boxes are exactly what they were with the plugin off.
+
+   v1.0.0 did the opposite: it stamped start/end on every row and had the CSS draw the
+   closing edge itself, so one failed author lookup silently re-cut every box in the
+   channel, including old conversations that had been rendering correctly.
 
    They live in the PLUGIN, not the theme, on purpose: turn the plugin off and the theme
    falls straight back to Discord's grouping with nothing to undo. */
 
-/* A row the plugin knows is a continuation loses the top edge and the gap the theme gave
-   it, so the run reads as one box. */
-li[class*="messageListItem_"][data-ut-group-start="false"] > div[role="article"] {
+/* A row that continues the speaker above it drops its own top edge and the gap above it. */
+li[class*="messageListItem_"][data-ut-merge-up="true"] > div[role="article"] {
   border-top: 0 !important;
   margin-top: 0 !important;
   padding-top: 2px !important;
 }
 
-/* ...and it loses the repeated avatar/name header, which is what made it look like a new
-   speaker in the first place. */
-li[class*="messageListItem_"][data-ut-group-start="false"] > div[role="article"] [class*="contents_"] > [class*="header_"] {
+/* ...and the repeated avatar/name header, which is what made it read as a new speaker. */
+li[class*="messageListItem_"][data-ut-merge-up="true"] > div[role="article"] [class*="contents_"] > [class*="header_"] {
   display: none !important;
 }
 
-/* A row the plugin knows ENDS a run closes the box, even if Discord thought the group
-   continued. */
-li[class*="messageListItem_"][data-ut-group-end="true"] > div[role="article"] {
-  border-bottom: var(--ut-line, 2px) solid var(--ut-white, #ffffff) !important;
-  margin-bottom: 8px !important;
-}
-li[class*="messageListItem_"][data-ut-group-end="false"] > div[role="article"] {
+/* ...and the row ABOVE drops its bottom edge, so the two halves become one box. The
+   closing edge of the merged run is still the theme's own, drawn wherever Discord's last
+   group ends -- this never has to draw one. */
+li[class*="messageListItem_"]:has(+ li[data-ut-merge-up="true"]) > div[role="article"] {
   border-bottom: 0 !important;
   margin-bottom: 0 !important;
 }

@@ -1,6 +1,6 @@
 import STYLES from "./styles.css";
 const { shouldType, DEFAULTS: POLICY } = require("./typing-policy");
-const { computeGroups } = require("./grouping");
+const { mergesUp } = require("./grouping");
 const { sliceCounts } = require("./reveal-plan");
 const { authorIdFromAvatarSrc } = require("./author-id");
 const { typeOut } = require("./typewriter");
@@ -88,10 +88,9 @@ module.exports = class UndertaleDialogue {
     this._active.clear();
 
     for (const el of document.querySelectorAll("[data-ut-typing]")) el.removeAttribute("data-ut-typing");
-    for (const li of document.querySelectorAll("[data-ut-author]")) {
+    for (const li of document.querySelectorAll("[data-ut-merge-up]")) {
+      li.removeAttribute("data-ut-merge-up");
       li.removeAttribute("data-ut-author");
-      li.removeAttribute("data-ut-group-start");
-      li.removeAttribute("data-ut-group-end");
     }
 
     BdApi.DOM.removeStyle(STYLE_ID);
@@ -244,9 +243,8 @@ module.exports = class UndertaleDialogue {
 
     if (!this._settings.grouping) {
       for (const li of rows) {
+        li.removeAttribute("data-ut-merge-up");
         li.removeAttribute("data-ut-author");
-        li.removeAttribute("data-ut-group-start");
-        li.removeAttribute("data-ut-group-end");
       }
       return;
     }
@@ -262,18 +260,24 @@ module.exports = class UndertaleDialogue {
       return { id: String(i), authorId: own ?? carried };
     });
 
-    const groups = computeGroups(model);
+    const merge = mergesUp(model);
     for (let i = 0; i < rows.length; i++) {
       const li = rows[i];
       if (model[i].authorId) li.setAttribute("data-ut-author", model[i].authorId);
-      li.setAttribute("data-ut-group-start", String(groups[i].start));
-      li.setAttribute("data-ut-group-end", String(groups[i].end));
+      else li.removeAttribute("data-ut-author");
+
+      // Stamped ONLY when true. An absent attribute matches no rule, so a row we cannot
+      // read keeps exactly the box the theme gave it.
+      if (merge[i]) li.setAttribute("data-ut-merge-up", "true");
+      else li.removeAttribute("data-ut-merge-up");
     }
-    this._log("regrouped", rows.length, "rows");
+    this._log("regrouped", rows.length, "rows,", merge.filter(Boolean).length, "merged");
   }
 
   _authorOf(row) {
-    const img = row.querySelector('img[class*="avatar_"]');
+    // Matched on the SRC, not on a hashed class: the src is the thing we parse, so the
+    // selector cannot drift away from the parser. A class name can, and silently.
+    const img = row.querySelector('img[src*="/avatars/"]');
     return img ? authorIdFromAvatarSrc(img.getAttribute("src")) : null;
   }
 };
