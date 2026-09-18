@@ -2034,6 +2034,33 @@ form[class^="form_"] [class*="placeholder_"] {
   opacity: 0.55 !important;
   font-family: var(--ut-font) !important;
 }
+/* The gift button goes, and the row realigns.
+
+   Hidden by aria-label rather than class: the gift button's wrapper is
+   container__5287f, a hash that says nothing and changes on any Discord build, while
+   "Send a gift" is what the button IS. :has() takes the wrapper with it, so the flex
+   row closes up instead of leaving a 40px hole where the button was.
+
+   The row itself measured width:192px with the apps button sitting apart from the
+   other three. That width is Discord sizing the row for the buttons it expects, so it
+   stops matching the moment one is hidden -- width:auto plus an explicit gap lets the
+   row size to what is actually in it, and the apps icon lands beside its neighbours.
+   ══════════════════════════════════════════════════════════════════════════ */
+form[class^="form_"] [aria-label*="gift" i],
+form[class^="form_"] div[class*="container_"]:has(> [aria-label*="gift" i]),
+form[class^="form_"] div[class*="buttonContainer_"]:has([aria-label*="gift" i]) {
+  display: none !important;
+}
+form[class^="form_"] div[class^="buttons_"] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  width: auto !important;
+}
+form[class^="form_"] div[class^="buttons_"] > div {
+  margin: 0 !important;
+}
+
 /* Composer buttons own no box, and mark themselves in yellow like every other icon. */
 form[class^="form_"] button,
 form[class^="form_"] button svg {
