@@ -1742,10 +1742,13 @@ div[class^="tagsContainer_"] div[class^="pill_"][class*="selected_"] {
    because those are not elements and do not exist until layout runs. Per-line
    asterisks are a plugin, and they are in PLUGIN-BACKLOG.md with the reason.
 
-   The message panel is cleared to transparent ENTIRELY -- chatContent_ included -- so
-   the wallpaper sits directly behind the boxes with nothing tinting it. Every stacked
-   translucent layer multiplies: three at 0.78 is 0.99, the art vanishes, and each rule
-   still looks correct on its own. The frames carry the readability here, not a fill.
+   The panel behind the list is cleared ENTIRELY -- chatContent_ included -- and the
+   FILL moves onto the boxes themselves. So the wallpaper shows in the margins and the
+   gaps between boxes, and stops at the edge of anything you have to read.
+
+   One fill, one layer: every stacked translucent layer multiplies, and three at 0.78
+   is 0.99, at which point the art is gone while each rule still looks correct on its
+   own. That is why the panel is transparent rather than "slightly transparent".
    ══════════════════════════════════════════════════════════════════════════ */
 div[class^="messagesWrapper_"],
 ol[class^="scrollerInner_"],
@@ -1776,7 +1779,12 @@ div[class^="chatContent_"] {
    The spacing lives on the group, not the row: rows inside a run sit flush so the box
    reads as one panel, and the 16px margin applies only where a box actually ends. */
 li[class*="messageListItem_"] > div[role="article"] {
-  background: transparent !important;
+  /* Filled, while the panel behind stays clear: the art shows in the margins and the
+     gaps between boxes, and stops behind the text. --ut-black is the shared panel
+     alpha (0.78), so the boxes match every other surface in the theme; swap it for
+     --ut-black-solid to make them fully opaque. */
+  background: var(--ut-black) !important;
+  background-color: var(--ut-black) !important;
   border: none !important;
   border-left: var(--ut-line) solid var(--ut-white) !important;
   border-right: var(--ut-line) solid var(--ut-white) !important;
@@ -1802,7 +1810,7 @@ li[class*="messageListItem_"]:last-child > div[role="article"] {
 }
 /* Hovering a box does not fill it; the text goes yellow, as everywhere else. */
 li[class*="messageListItem_"] > div[role="article"]:hover {
-  background: transparent !important;
+  background: var(--ut-black) !important;
   border-color: var(--ut-white) !important;
 }
 
