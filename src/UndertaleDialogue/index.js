@@ -10,6 +10,7 @@ const { loadSettings, saveSettings } = require("../shared/settings");
 const STYLE_ID = "UndertaleDialogue";
 const LIST = 'ol[data-list-id="chat-messages"]';
 const ROW = 'li[class*="messageListItem_"]';
+const DIVIDER = 'li[class*="divider_"]';
 
 const DEFAULTS = {
   typing: true,
@@ -252,18 +253,34 @@ module.exports = class UndertaleDialogue {
     // Only the first row of one of DISCORD's groups renders an avatar, so a row without
     // one belongs to the speaker above it. Discord's groups are already
     // author-homogeneous; this walk only merges ACROSS them.
+    //
+    // The walk goes over the list's CHILDREN rather than the rows alone, because
+    // querySelectorAll(ROW) skips dividers -- which would make two rows on opposite sides
+    // of a "new messages" or date divider look adjacent and merge across it.
     let carried = null;
-    const model = rows.map((li, i) => {
-      const own = this._authorOf(li);
-      if (own != null) carried = own;
-      else if (i === 0) carried = null;
-      return { id: String(i), authorId: own ?? carried };
-    });
+    let barrier = false;
+    const model = [];
+    const barriers = [];
 
-    const merge = mergesUp(model);
+    for (const child of this._list.children) {
+      if (child.matches(DIVIDER)) {
+        barrier = true;     // nothing merges across a divider
+        carried = null;     // ...and the speaker above it does not carry over
+        continue;
+      }
+      if (!child.matches(ROW)) continue;
+
+      const own = this._authorOf(child);
+      if (own != null) carried = own;
+      model.push({ id: String(model.length), authorId: own ?? carried });
+      barriers.push(barrier);
+      barrier = false;
+    }
+
+    const merge = mergesUp(model).map((m, i) => m && !barriers[i]);
     for (let i = 0; i < rows.length; i++) {
       const li = rows[i];
-      if (model[i].authorId) li.setAttribute("data-ut-author", model[i].authorId);
+      if (model[i]?.authorId) li.setAttribute("data-ut-author", model[i].authorId);
       else li.removeAttribute("data-ut-author");
 
       // Stamped ONLY when true. An absent attribute matches no rule, so a row we cannot

@@ -7,29 +7,46 @@
    safe -- when the author cannot be read, no row is stamped, no rule matches, and the
    theme's boxes are exactly what they were with the plugin off.
 
-   v1.0.0 did the opposite: it stamped start/end on every row and had the CSS draw the
-   closing edge itself, so one failed author lookup silently re-cut every box in the
-   channel, including old conversations that had been rendering correctly.
+   ── THE :not(#\9):not(#\8) ON EVERY SELECTOR IS LOAD-BEARING ──────────────────
+   The theme's own closing rule (Undertale.theme.css:1882) is
 
-   They live in the PLUGIN, not the theme, on purpose: turn the plugin off and the theme
+     li[class*="messageListItem_"]:has(+ li[class*="messageListItem_"] > div[class*="groupStart_"]) > div[role="article"]
+
+   and `:has()` takes the specificity of its most specific argument, so that scores
+   (0,4,4). The same rule here without the negations scores (0,3,3) and LOSES outright --
+   not a tie broken by source order, an actual loss. That is why v1.0.1 hid the header but
+   left both borders in place: the one rule with no competition won, the two that had
+   competition lost. The ID negations lift these to (2,3,3) without changing what is
+   matched. Same trick the theme uses on itself.
+   ──────────────────────────────────────────────────────────────────────────────
+
+   These live in the PLUGIN, not the theme, on purpose: turn the plugin off and the theme
    falls straight back to Discord's grouping with nothing to undo. */
 
 /* A row that continues the speaker above it drops its own top edge and the gap above it. */
-li[class*="messageListItem_"][data-ut-merge-up="true"] > div[role="article"] {
+li[class*="messageListItem_"][data-ut-merge-up="true"]:not(#\9):not(#\8) > div[role="article"] {
   border-top: 0 !important;
   margin-top: 0 !important;
   padding-top: 2px !important;
 }
 
-/* ...and the repeated avatar/name header, which is what made it read as a new speaker. */
-li[class*="messageListItem_"][data-ut-merge-up="true"] > div[role="article"] [class*="contents_"] > [class*="header_"] {
+/* ...and the repeated name/timestamp header. */
+li[class*="messageListItem_"][data-ut-merge-up="true"]:not(#\9):not(#\8) > div[role="article"] [class*="contents_"] > [class*="header_"] {
+  display: none !important;
+}
+
+/* ...AND the repeated avatar. The avatar is a SIBLING of the header, not a child of it,
+   so hiding the header left it behind -- and because Discord positions it absolutely, it
+   then floated out of the box and overlapped the message above. Discord's own
+   continuation rows carry neither, which is what makes a run read as one block. */
+li[class*="messageListItem_"][data-ut-merge-up="true"]:not(#\9):not(#\8) > div[role="article"] img[class*="avatar"] {
   display: none !important;
 }
 
 /* ...and the row ABOVE drops its bottom edge, so the two halves become one box. The
    closing edge of the merged run is still the theme's own, drawn wherever Discord's last
    group ends -- this never has to draw one. */
-li[class*="messageListItem_"]:has(+ li[data-ut-merge-up="true"]) > div[role="article"] {
+li[class*="messageListItem_"]:not(#\9):not(#\8):has(+ li[data-ut-merge-up="true"]) > div[role="article"] {
   border-bottom: 0 !important;
   margin-bottom: 0 !important;
 }
