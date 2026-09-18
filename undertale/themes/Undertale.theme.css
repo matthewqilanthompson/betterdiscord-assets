@@ -2081,6 +2081,11 @@ div[class*="expressionPicker" i]:not([class*="Layer" i]):not([class*="position" 
 div[class*="emojiPicker" i],
 div[class*="gifPicker" i],
 div[class*="stickerPicker" i],
+/* The Apps panel is a SECTION labelled "Application Launcher", and the thing that
+   paints is contentWrapper_ inside it -- measured 70% black, radius 8px, on a section
+   that paints nothing. My earlier selector was wrong twice over: div instead of
+   section, and "Apps" (the BUTTON's label) instead of the panel's own. */
+section[role="dialog"][aria-label="Application Launcher"] > div[class*="contentWrapper_"],
 div[role="dialog"][aria-label*="Apps" i],
 div[class*="applicationLauncher" i] {
   background: var(--ut-black-solid) !important;
@@ -2196,6 +2201,71 @@ div[class*="expressionPicker" i] [role="tab"][aria-selected="true"] {
   background: transparent !important;
   border-radius: 0 !important;
   color: var(--ut-hover) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Inside the pickers and the Apps panel, from the captures.
+
+   Every value below was measured, not guessed:
+     emojiItem_fc7141          rgba(151,151,159,0.12) fill, radius 4px
+     container_cb32c7 rows     the same 12% grey, radius 8px / 12px
+     icon_bd6d20               radius 12px with a 12%-alpha hairline
+     item__58105 (rail)        white fill, pill radius
+     the Apps search           a YELLOW border AND a yellow glow
+                               (box-shadow: srgb 1 1 0 0 0 2px)
+
+   That last one is --main-color again: the theme's yellow arriving as a focus ring on
+   a resting field, the same way it reached the tag pills and the mention slab. Yellow
+   means "look here" in this theme, and a search box at rest is not that.
+   ══════════════════════════════════════════════════════════════════════════ */
+button[class*="emojiItem_"],
+div[class*="container_cb32c7"],
+div[class*="rowContainer_"],
+div[class*="iconCard_"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+button[class*="emojiItem_"]:hover,
+div[class*="container_cb32c7"]:hover,
+div[class*="container_cb32c7"]:hover *:not(img) {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--ut-hover) !important;
+}
+button[class*="emojiItem_"][class*="Selected_"],
+div[class*="container_cb32c7"][class*="selected" i] {
+  background: transparent !important;
+  border: var(--ut-line) solid var(--ut-hover) !important;
+  border-radius: 0 !important;
+}
+/* App and guild icons: square and pixelated, like every avatar in the theme. */
+img[class*="icon_bd6d20"],
+img[class*="rowIcon_"],
+img[class*="guildIcon_"],
+img[class*="bannerImage_"] {
+  border: none !important;
+  border-radius: 0 !important;
+  image-rendering: pixelated !important;
+}
+/* The category rail: square marks, yellow when selected, never a white pill. */
+span[class*="item__58105"] {
+  background: var(--ut-white) !important;
+  border-radius: 0 !important;
+}
+span[class*="item__58105"][class*="selected" i] {
+  background: var(--ut-hover) !important;
+  border: none !important;
+}
+/* The Apps search field: white at rest, no yellow glow. */
+section[role="dialog"][aria-label="Application Launcher"] div[class*="container__75098"],
+section[role="dialog"][aria-label="Application Launcher"] div[class*="wrapper__72c38"] {
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 /* Sprites keep their paint, everywhere.
