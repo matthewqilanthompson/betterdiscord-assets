@@ -2798,6 +2798,36 @@ div[role="dialog"] > div[class^="root_"] * {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   A voice channel is solid black, wallpaper and all.
+
+   Video tiles, avatars and screen shares are CONTENT, and the wallpaper behind them
+   competes with every one of them -- a call is the one screen where the art is noise
+   rather than atmosphere. So the voice view and the text chat beside it go opaque.
+
+   Scoped by what only exists in a call: videoGrid_ for the tiles, chatLayerWrapper_
+   for the resizable side chat, and the text chat's own aria-label, which Discord
+   writes as "Text chat for voice channel <name>". Nothing here matches a normal text
+   channel, so the wallpaper is untouched everywhere else.
+
+   The :not(#\9) lift is needed because the transparency rules for the message panel
+   are global and would otherwise win on source order -- the same tie that cost three
+   rounds on the picker panel.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class*="videoGrid_"]:not(#\9),
+div[class*="chatLayerWrapper_"]:not(#\9),
+div[class^="root_"]:not(#\9):has(> div div[class*="videoGrid_"]),
+section[aria-label^="Text chat for voice channel"]:not(#\9),
+section[aria-label^="Text chat for voice channel"]:not(#\9) div[class^="messagesWrapper_"],
+section[aria-label^="Text chat for voice channel"]:not(#\9) div[class^="scrollerContent_"],
+section[aria-label^="Text chat for voice channel"]:not(#\9) ol[class^="scrollerInner_"],
+section[aria-label^="Text chat for voice channel"]:not(#\9) div[class*="scroller_"],
+section[aria-label^="Text chat for voice channel"]:not(#\9) form[class^="form_"] {
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
+  background-image: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    Discord's shared popup shell: one frame around the whole thing.
 
    The Quick Switcher and the Channel Topic popup captured as the SAME module --
