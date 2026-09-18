@@ -2136,7 +2136,7 @@ form[class^="form_"] [class*="placeholder_"] {
    invisible box.
 
    "The layer's direct child" needs no class at all, which is why it is used here. */
-div[class*="expressionPickerPositionLayer" i]:not(#\9):not(#\8) > *:has([id$="-picker-tab"]),
+div[class*="contentWrapper_"]:not(#\9):not(#\8):has(> nav [aria-label="Expression Picker Categories"]),
 div[id="expression-picker"],
 div[class*="expressionPicker" i]:not([class*="Layer" i]):not([class*="position" i]),
 div[class*="emojiPicker" i],
@@ -2208,9 +2208,9 @@ div[role="dialog"][aria-label*="Apps" i] div:not([class*="sprite" i]) {
 
    Pseudo-elements included: a frame that survives a border reset is usually a ::before,
    and that has cost this theme five rounds once already. */
-div[class*="expressionPickerPositionLayer" i] > * *,
-div[class*="expressionPickerPositionLayer" i] > * *::before,
-div[class*="expressionPickerPositionLayer" i] > * *::after,
+div[class*="contentWrapper_"]:has(> nav [aria-label="Expression Picker Categories"]) *,
+div[class*="contentWrapper_"]:has(> nav [aria-label="Expression Picker Categories"]) *::before,
+div[class*="contentWrapper_"]:has(> nav [aria-label="Expression Picker Categories"]) *::after,
 div[id="expression-picker"] *,
 div[id="expression-picker"] *::before,
 div[id="expression-picker"] *::after,
@@ -2232,18 +2232,20 @@ div[class*="expressionPicker" i] *::after {
    three rounds because of that tie, not because the selector was wrong.
 
    The negations make it (2,1,2), which nothing here can beat. */
-/* REVERTED from "> *" to "> div:not(...)" and then to this.
+/* THE PANEL NAMES ITSELF -- taken from the Solo Leveling theme, which solved this a
+   year ago and did it properly.
 
-   "> *" painted a 1616x486 black slab across the whole window: the layer is FULL WIDTH
-   (measured x:86 w:1616) and its direct child is a full-width wrapper, not the 500px
-   panel. That is the third time a container match has produced a slab -- layer_,
-   contentWrapper_, and now this -- always because the element that CONTAINS the panel
-   is not the panel.
+   Every guess at this panel went through its CONTAINER: the position layer, the layer's
+   direct child, contentWrapper_:has(a picker). All three are full-window, so all three
+   painted a black slab beside the picker instead of behind it. A :has() selector takes
+   the SIZE of the element it is written on, never the size of the thing it tests for.
 
-   So the paint is scoped by :has() to the child that actually holds a picker tab, and
-   width is left alone. If that still lands on a full-width wrapper, the answer is a
-   capture that names the panel, not another guess. */
-div[class*="expressionPickerPositionLayer" i]:not(#\9):not(#\8) > *:has([id$="-picker-tab"]) {
+   Solo Leveling's anchor is the panel's own identity instead: the ONE contentWrapper_
+   whose DIRECT CHILD nav holds the navList labelled "Expression Picker Categories".
+   All three pickers (emoji / GIF / sticker) share that shell; nothing else in Discord
+   has it. The "> nav" is what makes it tight -- a full-window wrapper contains a picker
+   but does not have the picker's tab bar as its own child. */
+div[class*="contentWrapper_"]:not(#\9):not(#\8):has(> nav [aria-label="Expression Picker Categories"]) {
   background: var(--ut-black-solid) !important;
   background-color: var(--ut-black-solid) !important;
   background-image: none !important;
