@@ -2012,10 +2012,20 @@ form[class^="form_"] div[class*="channelTextArea_"] {
   box-shadow: none !important;
   overflow: visible !important;
 }
-/* One box: everything inside the strip is flat. */
-form[class^="form_"] div[class*="scrollableContainer_"] div,
-form[class^="form_"] div[class*="channelTextArea_"] div,
-form[class^="form_"] div[class*="inner_"] {
+/* One box: everything inside the strip is flat.
+
+   EXCEPT anything drawn as a sprite. The emoji button has no <svg> and no <img> -- its
+   icon is a background-image on div.spriteContainer_, positioned out of a sheet. This
+   rule's "background-image: none" therefore did not flatten a decoration, it DELETED
+   THE ICON, and the button went invisible while staying clickable. Nothing in a capture
+   of the button says "icon": the element is empty, its child is a bare div, and the
+   missing paint is a property this rule overwrote.
+
+   So sprite containers and the emoji button keep their backgrounds. The exclusion is by
+   what the element is for, not by hash. */
+form[class^="form_"] div[class*="scrollableContainer_"] div:not([class*="sprite" i]):not([class*="emojiButton" i]),
+form[class^="form_"] div[class*="channelTextArea_"] div:not([class*="sprite" i]):not([class*="emojiButton" i]),
+form[class^="form_"] div[class*="inner_"]:not([class*="sprite" i]) {
   background: transparent !important;
   background-color: transparent !important;
   border: none !important;
@@ -2034,6 +2044,22 @@ form[class^="form_"] [class*="placeholder_"] {
   opacity: 0.55 !important;
   font-family: var(--ut-font) !important;
 }
+/* Sprites keep their paint, everywhere.
+
+   Discord draws several icons from sprite sheets rather than svg -- the emoji button is
+   the one that was noticed, because it vanished. A background-image reset is normally
+   safe chrome-flattening; on a sprite it is deletion. Last word, so any rule added
+   above cannot take an icon away by accident. */
+[class*="spriteContainer" i],
+[class*="spriteContainer" i] *,
+div[aria-label="Add Emoji"],
+div[aria-label="Add Emoji"] * {
+  background-image: revert !important;
+  background-position: revert !important;
+  background-size: revert !important;
+  background-repeat: revert !important;
+}
+
 /* The gift button goes, and the row realigns.
 
    Hidden by aria-label rather than class: the gift button's wrapper is
