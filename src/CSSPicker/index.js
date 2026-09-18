@@ -340,6 +340,12 @@ module.exports = class CSSPicker {
     /* An armed capture must not fire after the plugin is disabled. */
     if (this._armTimer) { clearTimeout(this._armTimer); this._armTimer = null; }
     if (this._armTick) { clearInterval(this._armTick); this._armTick = null; }
+    if (this._armMove) {
+      document.removeEventListener("mousemove", this._armMove, true);
+      this._armMove = null;
+    }
+    try { this._armOverlay?.remove(); } catch (_) {}
+    this._armOverlay = null;
   }
 
   getSettingsPanel() {
@@ -468,6 +474,35 @@ module.exports = class CSSPicker {
        easy to miss and may be covered by the very panel being opened -- there was no way
        to tell an armed capture from a dead button. It now counts down in place, in the
        theme's yellow, so the state is visible exactly where the click happened. */
+    /* Show the SAME highlight pick mode uses, for the whole armed window.
+
+       Without it an armed capture is invisible: the panel opens, nothing marks what is
+       under the cursor, and there is no way to tell what the snapshot will contain until
+       it is pasted. The overlay is pick mode's own, so the outline means exactly what it
+       means there. No click handler is attached -- clicking would dismiss the panel,
+       which is the reason this path exists at all. */
+    if (!this._armOverlay) {
+      this._armOverlay = createOverlay();
+      document.body.appendChild(this._armOverlay);
+    }
+    this._armMove = (ev) => {
+      const el = document.elementFromPoint(ev.clientX, ev.clientY);
+      if (!el || el === this._armOverlay) return;
+      if (el.closest && (el.closest("#css-picker-launcher") || el.closest("#css-picker-capture"))) return;
+      this._armHovered = el;
+      positionOverlayOnElement({ overlay: this._armOverlay, el });
+    };
+    document.addEventListener("mousemove", this._armMove, true);
+
+    const clearArmOverlay = () => {
+      if (this._armMove) {
+        document.removeEventListener("mousemove", this._armMove, true);
+        this._armMove = null;
+      }
+      this._armOverlay?.remove();
+      this._armOverlay = null;
+    };
+
     const btn = this._captureBtn;
     const restore = () => {
       if (this._armTick) { clearInterval(this._armTick); this._armTick = null; }
@@ -498,6 +533,7 @@ module.exports = class CSSPicker {
     this._armTimer = setTimeout(() => {
       this._armTimer = null;
       restore();
+      clearArmOverlay();
       const got = typeof this._capturePopouts === "function" && this._capturePopouts();
       if (btn) {
         /* Say what happened ON THE BUTTON too: the capture toast can land behind the
