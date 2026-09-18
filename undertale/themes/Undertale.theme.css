@@ -2549,6 +2549,44 @@ input:checked + div[class*="checkboxIndicator_"] {
   border-color: var(--ut-hover) !important;
   color: var(--ut-hover) !important;
 }
+/* The notice bar across the top (update ready, reconnecting, and friends).
+
+   Measured GREEN: rgb(0,43,14) fill with rgb(153,224,173) text, border and button --
+   Discord colours a notice by its kind, and this theme has one palette. It also ships
+   asymmetric: borders on the top and left only, radius 8px 0 0 0, so it reads as a
+   torn-off corner rather than a bar.
+
+   Black with one frame, white text, and the action button boxed like every other
+   button in the theme.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="notice_"] {
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
+  background-image: none !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+div[class^="notice_"] * {
+  color: var(--ut-white) !important;
+  font-family: var(--ut-font) !important;
+}
+div[class^="notice_"] button[class^="button_"] {
+  background: transparent !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  color: var(--ut-white) !important;
+}
+div[class^="notice_"] button[class^="button_"]:hover,
+div[class^="notice_"] div[class^="closeButton_"]:hover,
+div[class^="notice_"] div[class^="closeButton_"]:hover * {
+  border-color: var(--ut-hover) !important;
+  color: var(--ut-hover) !important;
+  background: transparent !important;
+}
+
 /* The hover popout in a call (Apps, and anything else Discord floats there).
 
    Captured: a popout_ layer whose direct child container_ paints at oklab(0.1457),
