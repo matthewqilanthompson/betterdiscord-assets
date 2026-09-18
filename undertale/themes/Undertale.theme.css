@@ -2136,7 +2136,7 @@ form[class^="form_"] [class*="placeholder_"] {
    invisible box.
 
    "The layer's direct child" needs no class at all, which is why it is used here. */
-div[class*="expressionPickerPositionLayer" i]:not(#\9):not(#\8) > *,
+div[class*="expressionPickerPositionLayer" i]:not(#\9):not(#\8) > *:has([id$="-picker-tab"]),
 div[id="expression-picker"],
 div[class*="expressionPicker" i]:not([class*="Layer" i]):not([class*="position" i]),
 div[class*="emojiPicker" i],
@@ -2232,7 +2232,18 @@ div[class*="expressionPicker" i] *::after {
    three rounds because of that tie, not because the selector was wrong.
 
    The negations make it (2,1,2), which nothing here can beat. */
-div[class*="expressionPickerPositionLayer" i]:not(#\9):not(#\8) > * {
+/* REVERTED from "> *" to "> div:not(...)" and then to this.
+
+   "> *" painted a 1616x486 black slab across the whole window: the layer is FULL WIDTH
+   (measured x:86 w:1616) and its direct child is a full-width wrapper, not the 500px
+   panel. That is the third time a container match has produced a slab -- layer_,
+   contentWrapper_, and now this -- always because the element that CONTAINS the panel
+   is not the panel.
+
+   So the paint is scoped by :has() to the child that actually holds a picker tab, and
+   width is left alone. If that still lands on a full-width wrapper, the answer is a
+   capture that names the panel, not another guess. */
+div[class*="expressionPickerPositionLayer" i]:not(#\9):not(#\8) > *:has([id$="-picker-tab"]) {
   background: var(--ut-black-solid) !important;
   background-color: var(--ut-black-solid) !important;
   background-image: none !important;
