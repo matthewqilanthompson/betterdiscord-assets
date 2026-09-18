@@ -2085,6 +2085,7 @@ div[class*="stickerPicker" i],
    paints is contentWrapper_ inside it -- measured 70% black, radius 8px, on a section
    that paints nothing. My earlier selector was wrong twice over: div instead of
    section, and "Apps" (the BUTTON's label) instead of the panel's own. */
+section[role="dialog"][aria-label="Application Launcher"],
 section[role="dialog"][aria-label="Application Launcher"] > div[class*="contentWrapper_"],
 div[role="dialog"][aria-label*="Apps" i],
 div[class*="applicationLauncher" i] {
@@ -2218,20 +2219,36 @@ div[class*="expressionPicker" i] [role="tab"][aria-selected="true"] {
    a resting field, the same way it reached the tag pills and the mention slab. Yellow
    means "look here" in this theme, and a search box at rest is not that.
    ══════════════════════════════════════════════════════════════════════════ */
-button[class*="emojiItem_"],
+/* App cards and rows: BOXED, on solid black. In Undertale a thing you can choose is
+   a bordered box with text in it, so the app tiles and rows get the frame. */
 div[class*="container_cb32c7"],
 div[class*="rowContainer_"],
 div[class*="iconCard_"] {
-  background: transparent !important;
-  background-color: transparent !important;
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: 0 !important;
   box-shadow: none !important;
 }
-button[class*="emojiItem_"]:hover,
-div[class*="container_cb32c7"]:hover,
-div[class*="container_cb32c7"]:hover *:not(img) {
+/* Emoji and sticker cells are NOT boxed: forty framed squares in a grid is a
+   spreadsheet, not a menu. They mark themselves in yellow like every other row. */
+button[class*="emojiItem_"] {
   background: transparent !important;
   background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+button[class*="emojiItem_"]:hover {
+  background: transparent !important;
+  border: var(--ut-line) solid var(--ut-hover) !important;
+}
+div[class*="container_cb32c7"]:hover,
+div[class*="rowContainer_"]:hover,
+div[class*="container_cb32c7"]:hover *:not(img),
+div[class*="rowContainer_"]:hover *:not(img) {
+  background: var(--ut-black-solid) !important;
+  border-color: var(--ut-hover) !important;
   color: var(--ut-hover) !important;
 }
 button[class*="emojiItem_"][class*="Selected_"],
