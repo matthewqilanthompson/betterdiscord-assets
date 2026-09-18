@@ -2842,6 +2842,70 @@ div[class^="channelChatWrapper_"]:not(#\9) form[class^="form_"] {
   background-image: none !important;
   border-radius: 0 !important;
 }
+/* The call's control bar: one box, square, on solid black.
+
+   Measured: the two buttonSection_ groups ship at 80% black with a 4px radius, floating
+   over the video. Translucent is wrong here for the same reason it was wrong for every
+   other floating surface -- it sits ON the tiles, so it has to hide what is under it.
+
+   The bar is one box rather than two: Discord splits the controls into two rounded
+   groups with a gap, which reads as two toolbars for one set of actions.
+   ══════════════════════════════════════════════════════════════════════════ */
+div[class^="videoControls_"] div[class^="wrapper_"]:not(#\9) {
+  background: var(--ut-black-solid) !important;
+  border: var(--ut-line) solid var(--ut-white) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  gap: 0 !important;
+}
+div[class^="videoControls_"] div[class*="buttonSection_"]:not(#\9) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+div[class^="videoControls_"] button,
+div[class^="videoControls_"] div[role="button"] {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--ut-white) !important;
+}
+div[class^="videoControls_"] button:hover,
+div[class^="videoControls_"] button:hover svg,
+div[class^="videoControls_"] div[role="button"]:hover,
+div[class^="videoControls_"] div[role="button"]:hover svg {
+  background: transparent !important;
+  color: var(--ut-hover) !important;
+}
+/* Leaving the call is the destructive one, and shows the SOUL only on hover --
+   the same rule the BetterDiscord delete button follows. */
+div[class^="videoControls_"] button[aria-label*="Disconnect" i]:hover,
+div[class^="videoControls_"] button[aria-label*="Disconnect" i]:hover svg,
+div[class^="videoControls_"] [aria-label*="Leave" i]:hover,
+div[class^="videoControls_"] [aria-label*="Leave" i]:hover svg {
+  color: var(--ut-soul) !important;
+}
+
+/* The divider between the video and the chat: gone while in a call.
+   Taken from Solo Leveling §9j, which zeroes the handle's width rather than hiding it
+   -- display:none on a resize handle can leave the panes unresizable in some builds,
+   while a zero-width handle still exists. */
+div[class^="callContainer_"] div[class^="resizeHandle_"],
+div[class^="chatLayerWrapper_"] div[class^="resizeHandle_"] {
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 /* The channel sidebar, but ONLY while in a call. */
 div[class^="base_"]:has(div[class^="callContainer_"]) div[aria-label="Channels"]:not(#\9),
 div[class^="base_"]:has(div[class^="callContainer_"]) nav[aria-label="Channels"]:not(#\9),
