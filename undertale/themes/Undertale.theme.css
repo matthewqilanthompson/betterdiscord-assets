@@ -345,7 +345,18 @@ nav[aria-label="Private channels"] [class*="selected_"],
 div[class^="tabBar_"] [class*="selected_"],
 div[class^="topPill_"] [class*="selected_"],
 li[class^="channel_"] [class*="selected_"] {
-  background: var(--ut-black) !important;
+  /* --ut-black-SOLID here, not --ut-black.
+
+     This rule was written when --ut-black was #000 and it masked whatever ClearVision
+     paints behind a selected row -- which is --main-color, i.e. this theme's YELLOW.
+     The moment --ut-black became rgba(0,0,0,0.78) for the wallpaper, 22% of that
+     yellow came through and the selected channel turned olive. Nothing about this
+     rule changed; the token underneath it did.
+
+     A row that must HIDE something cannot use the translucent token. Opaque, and the
+     yellow stays where the theme puts it: in the text. */
+  background: var(--ut-black-solid) !important;
+  background-color: var(--ut-black-solid) !important;
   border: var(--ut-line) solid var(--ut-white) !important;
   border-radius: var(--ut-radius) !important;
   color: var(--ut-hover) !important;
