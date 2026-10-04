@@ -41,9 +41,12 @@ function shouldType(ctx, opts = DEFAULTS) {
 
   if (ctx.msSinceMount <= opts.mountGraceMs) return false;
 
-  // Belt and braces with the grace window: a message that predates the plugin starting
-  // is history, however it arrived in the DOM.
-  if (ctx.messageTimestamp < ctx.pageLoadTimestamp) return false;
+  // The real history gate, now that messageTimestamp is a message's own snowflake time
+  // rather than a copy of the page-load clock: anything created before the plugin
+  // started is history, however it arrived in the DOM -- backlog page, virtualisation
+  // re-mount or reconnect. Written as a positive test so a null or NaN timestamp (an id
+  // we could not read) fails closed instead of comparing as 0.
+  if (!(ctx.messageTimestamp >= ctx.pageLoadTimestamp)) return false;
 
   return true;
 }

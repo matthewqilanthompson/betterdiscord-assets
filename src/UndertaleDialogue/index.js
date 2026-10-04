@@ -3,6 +3,7 @@ const { shouldType, DEFAULTS: POLICY } = require("./typing-policy");
 const { mergesUp } = require("./grouping");
 const { sliceCounts } = require("./reveal-plan");
 const { authorIdFromAvatarSrc } = require("./author-id");
+const { messageTimeFromId } = require("./message-time");
 const { typeOut } = require("./typewriter");
 const { createTrackedTimers } = require("../shared/tracked-timers");
 const { loadSettings, saveSettings } = require("../shared/settings");
@@ -36,6 +37,9 @@ module.exports = class UndertaleDialogue {
     this._startedAt = 0;
     this._currentUserId = null;
     this._active = new Map(); // content element -> typewriter handle
+    // Message ids already revealed this session. Discord virtualises the list, so a row
+    // that scrolls out and back arrives as a NEW node -- without this it would re-type.
+    this._typed = new Set();
     this._onClick = null;
     this._regroupQueued = false;
   }
@@ -81,6 +85,7 @@ module.exports = class UndertaleDialogue {
       this._onClick = null;
     }
     this._timers.clearAll();
+    this._typed.clear();
 
     // Anything mid-reveal is holding blanked text. Restoring is not optional.
     for (const handle of this._active.values()) {
@@ -172,15 +177,20 @@ module.exports = class UndertaleDialogue {
     const content = row.querySelector('div[id^="message-content-"]');
     if (!content || this._active.has(content)) return;
 
+    const messageId = content.id;
+    if (this._typed.has(messageId)) return;
+
     const ctx = {
       isOwnMessage: this._currentUserId != null && this._authorOf(row) === this._currentUserId,
       textLength: content.textContent.length,
       reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
       documentHidden: document.hidden,
       msSinceMount: Date.now() - this._mountAt,
-      // The row carries no timestamp we can trust cheaply; the mount clock above is the
-      // real gate, so page-load is compared against itself here and stays inert.
-      messageTimestamp: this._startedAt,
+      // The snowflake, not the mount clock, is what distinguishes a live message from
+      // history: scrollback and virtualisation both append nodes to the same list long
+      // after the grace window has closed. Unreadable ids come back null and the policy
+      // fails closed on them.
+      messageTimestamp: messageTimeFromId(messageId),
       pageLoadTimestamp: this._startedAt,
     };
 
@@ -200,6 +210,7 @@ module.exports = class UndertaleDialogue {
 
     content.setAttribute("data-ut-typing", "");
     this._active.set(content, handle);
+    this._typed.add(messageId);
 
     const finish = () => {
       handle.complete();

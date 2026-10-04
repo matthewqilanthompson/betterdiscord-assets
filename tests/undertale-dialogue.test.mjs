@@ -169,3 +169,43 @@ test("when the author cannot be read, NOTHING merges and the theme is left alone
 test("the first row never merges upward — there is nothing above it", () => {
   assert.deepEqual(mergesUp([{ id: "a", authorId: "1" }]), [false]);
 });
+
+// ── message-time ─────────────────────────────────────────────────────────────
+//
+// The 500ms mount grace cannot tell a backlog page from a live message: infinite
+// scroll and virtualisation both append nodes to the SAME <ol>, long after the mount
+// clock has run out. The snowflake is the only per-message "when" the DOM carries.
+
+const { messageTimeFromId, DISCORD_EPOCH } = require("../src/UndertaleDialogue/message-time.js");
+
+test("a snowflake decodes to its creation time", () => {
+  assert.equal(messageTimeFromId("1234567890123456789"), 1714414322167);
+});
+
+test("the first millisecond of Discord's epoch decodes exactly", () => {
+  assert.equal(messageTimeFromId(String(1 << 22)), DISCORD_EPOCH + 1);
+});
+
+test("the element id Discord actually writes is accepted whole", () => {
+  assert.equal(
+    messageTimeFromId("message-content-1234567890123456789"),
+    1714414322167,
+  );
+  assert.equal(
+    messageTimeFromId("chat-messages-99999999999999999-1234567890123456789"),
+    1714414322167,
+  );
+});
+
+test("anything we cannot read returns null, never a number", () => {
+  // null must stay distinguishable from a timestamp: a wrong number would silently
+  // classify history as live, which is the whole bug this module exists to fix.
+  for (const bad of [null, undefined, "", "message-content-", "abc", 1234, {}]) {
+    assert.equal(messageTimeFromId(bad), null);
+  }
+});
+
+test("an unreadable id is treated as history, not as live", () => {
+  // Fail closed: no animation beats animating a thousand backlog rows.
+  assert.equal(shouldType({ ...live, messageTimestamp: null }, withOpts()), false);
+});
